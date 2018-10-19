@@ -6,10 +6,10 @@ import it.modello.Attivita;
 
 public interface IDAOAttivita {
 	
-	public void add(Attivita attivita) throws DAOException;
-	public List<Attivita> findAll() throws DAOException;
-	public Attivita findById(Long id) throws DAOException;
-	public void update(Attivita attivita) throws DAOException;
-	public void delete (Long id) throws DAOException;
+	public void add(Attivita attivita) throws IDAOException;
+	public List<Attivita> findAll() throws IDAOException;
+	public Attivita findById(Long id) throws IDAOException;
+	public void update(Attivita attivita) throws IDAOException;
+	public void delete (Long id) throws IDAOException;
 
 }

@@ -33,12 +33,12 @@ public class DataSource {
 		return instance;
 	}
 	
-	public Connection getConnection() throws DAOException {
+	public Connection getConnection() throws IDAOException {
 		try {
 			return DriverManager.getConnection(URL,USER,PASSWORD);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			throw new DAOException(e.getMessage(),e);
+			throw new IDAOException(e.getMessage(),e);
 		}
 	}
 	
