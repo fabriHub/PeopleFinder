@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-
 import it.modello.Utente;
 import it.persistenza.interfaccia.IDAOUtente;
 
@@ -59,7 +59,34 @@ public class DAOUtente implements IDAOUtente {
 
 	@Override
 	public List<Utente> findAll() throws DAOException {
-		return null;
+		List <Utente> utenti = new ArrayList<Utente>(0);
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			statement = connection.prepareStatement("SELECT * FROM UTENTE ORDER BY NICKNAME");
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				Utente utente = new Utente();
+				utente.setId(resultSet.getLong("ID"));
+				utente.setMail(resultSet.getString("MAIL"));
+				utente.setNickname(resultSet.getString("NICKNAME"));
+				utente.setAbilitato(resultSet.getInt("ABILITATO"));
+				utente.setAmministratore(resultSet.getInt("AMMINISTRATORE"));
+				utente.setTelefono(resultSet.getString("TELEFONO"));
+				
+				utenti.add(utente);						
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return utenti;
+	
 	}
 
 	@Override
