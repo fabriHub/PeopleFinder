@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.modello.Gruppo;
 import it.modello.IscrizioneGruppo;
 import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
 
@@ -72,20 +71,70 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 
 	@Override
 	public IscrizioneGruppo findById(Long id) throws DAOException {
-		// TODO Auto-generated method stub
-		return null;
+		IscrizioneGruppo iscrizioneGruppo = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT * FROM ISCRIZIONE_GRUPPO WHERE ISCRIZIONE_GRUPPO.ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				iscrizioneGruppo = new IscrizioneGruppo ();
+				iscrizioneGruppo.setId(resultSet.getLong("ID"));
+				iscrizioneGruppo.setIdUtente(resultSet.getLong("ID_UTENTE"));
+				iscrizioneGruppo.setIdGruppo(resultSet.getLong("ID_GRUPPO"));
+				
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return iscrizioneGruppo;
 	}
 
 	@Override
 	public void update(IscrizioneGruppo iscrizioneGruppo) throws DAOException {
-		// TODO Auto-generated method stub
-
+		Connection connection = null;
+		PreparedStatement statement = null;		
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("UPDATE ISCRIZIONE_GRUPPO SET ID_UTENTE = ?, ID_GRUPPO = ? WHERE ID = ?");
+			statement.setLong(1, iscrizioneGruppo.getIdUtente());
+			statement.setLong(2, iscrizioneGruppo.getIdGruppo());
+			statement.setLong(3, iscrizioneGruppo.getId());
+			statement.executeUpdate();  
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}		
 	}
 
 	@Override
 	public void delete(Long id) throws DAOException {
-		// TODO Auto-generated method stub
-
+		Connection connection = null;
+		PreparedStatement statement = null;		
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("DELETE FROM ISCRIZIONE_GRUPPO WHERE ID = ?");
+			statement.setLong(1, id);
+			statement.executeUpdate();  
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}			
 	}
 
 }

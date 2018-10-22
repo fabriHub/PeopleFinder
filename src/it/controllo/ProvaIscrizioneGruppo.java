@@ -12,7 +12,11 @@ public class ProvaIscrizioneGruppo {
 	public static void main(String[] args) {
 		
 //		addIscrizioneGruppo();
-		findAllIscrizioneGruppo();
+//		findAllIscrizioneGruppo();
+//		findByIdIscrizioneGruppo(1L);
+//		updateIscrizioneGruppo(2L);
+		deleteIscrizioneGruppo(2L);
+		
 
 	}
 	
@@ -21,7 +25,7 @@ public class ProvaIscrizioneGruppo {
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
 		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo();
 		
-		iscrizioneGruppo.setIdUtente(41L);
+		iscrizioneGruppo.setIdUtente(1L);
 		iscrizioneGruppo.setIdGruppo(1L);
 		
 		try {
@@ -40,6 +44,40 @@ public class ProvaIscrizioneGruppo {
 				System.out.println(iscrizioneGruppo);
 			}
 			
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void findByIdIscrizioneGruppo (Long id) {
+		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
+		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo ();
+		try {
+			iscrizioneGruppo = daoIscrizioneGruppo.findById(id);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(iscrizioneGruppo);
+	}
+	
+	public static void updateIscrizioneGruppo (Long id) {
+		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
+		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo ();
+		iscrizioneGruppo.setId(id);
+		iscrizioneGruppo.setIdUtente(2L);
+		iscrizioneGruppo.setIdGruppo(2L);
+		try {
+			daoIscrizioneGruppo.update(iscrizioneGruppo);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void deleteIscrizioneGruppo (Long id) {
+		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
+		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo ();
+		try {
+			daoIscrizioneGruppo.delete(id);					
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
 		}
