@@ -11,8 +11,8 @@ public class Utente {
 	private String mail;
 	private String telefono;
 	private String nickname;
-	private boolean abilitato;
-	private boolean amministratore;
+	private Integer abilitato;
+	private Integer amministratore;
 	private String password;
 	
 	public Long getId() {
@@ -31,26 +31,13 @@ public class Utente {
 		return password;
 	}
 	
-	public boolean isAbilitato() {
+	public Integer getAbilitato() {
 		return abilitato;
 	}
-	public int abilitatoToInt() {
-		
-		if (this.isAbilitato()) {
-			return 1;
-		}
-		return 0;
-	}
-	public boolean isAmministratore() {
+	public Integer getAmministratore() {
 		return amministratore;
 	}
-	public int amministratoreToInt() {
-		
-		if (this.isAmministratore()) {
-			return 1;
-		}
-		return 0;
-	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -79,11 +66,15 @@ public class Utente {
 		return;
 	}
 	
-	public void setAbilitato(boolean abilitato) {
-		this.abilitato = abilitato;
+	public void setAbilitato(Integer abilitato) {
+		if(abilitato == 0 || abilitato == 1) {
+			this.abilitato = abilitato;
+		}
 	}
-	public void setAmministratore(boolean amministratore) {
-		this.amministratore = amministratore;
+	public void setAmministratore(Integer amministratore) {
+		if(amministratore == 0 || amministratore == 1) {
+			this.amministratore = amministratore;
+		}
 	}
 	@Override
 	public String toString() {

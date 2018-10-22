@@ -23,7 +23,7 @@ public class DAOGruppo implements IDAOGruppo {
 			
 			statement.setLong(1, gruppo.getIdUtente());
 			statement.setLong(2, gruppo.getIdAttivita());
-			statement.setString(3, String.valueOf(gruppo.completoToInt()));
+			statement.setInt(3, gruppo.getCompleto());
 			statement.setDate(4, new java.sql.Date(gruppo.getData().getTime()));
 			statement.setString(5, gruppo.getDescrizione());
 			

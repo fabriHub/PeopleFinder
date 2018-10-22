@@ -27,8 +27,8 @@ public class DAOUtente implements IDAOUtente {
 			statement.setString(1,utente.getMail());
 			statement.setString(2,utente.getTelefono());
 			statement.setString(3, utente.getNickname());
-			statement.setString(4, String.valueOf(utente.abilitatoToInt()));
-			statement.setString(5, String.valueOf(utente.amministratoreToInt()));
+			statement.setInt(4, utente.getAbilitato());
+			statement.setInt(5, utente.getAmministratore());
 			statement.setString(6, utente.getPassword());
 			
 			statement.executeUpdate();

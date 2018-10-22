@@ -25,7 +25,7 @@ public class ProvaGruppo {
 		
 		gruppo.setIdUtente(41L);
 		gruppo.setIdAttivita(1L);
-		gruppo.setCompleto(true);
+		gruppo.setCompleto(0);
 		gruppo.setData(new Date());
 		gruppo.setDescrizione("ho voglia di amici");
 		try {

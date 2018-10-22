@@ -21,8 +21,8 @@ public class ProvaUtente {
 		utente.setMail("provaMail");
 		utente.setNickname("utente1");
 		utente.setTelefono("+3912345");
-		utente.setAbilitato(true);
-		utente.setAmministratore(false);
+		utente.setAbilitato(1);
+		utente.setAmministratore(0);
 		utente.setPassword("password");
 		
 		

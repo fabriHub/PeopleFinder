@@ -21,8 +21,8 @@ public class DAOAttivita implements IDAOAttivita {
 			statement = connection.prepareStatement("INSERT INTO ATTIVITA VALUES (SEQ_ATTIVITA.NEXTVAL, ?, ?, ?)", new String [] {"ID"});
 			
 			statement.setString(1, attivita.getNome());
-			statement.setLong(2, attivita.getNumeroPartecipanti();
-			statement.setString(3, String.valueOf(attivita.completoToInt()));
+			statement.setLong(2, attivita.getNumeroPartecipanti());
+			statement.setString(3, String.valueOf(attivita.getAbilitata()));
 			
 			
 			statement.executeUpdate();

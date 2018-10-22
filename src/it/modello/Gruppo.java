@@ -7,7 +7,7 @@ public class Gruppo {
 	private Long id;
 	private Long idUtente;
 	private Long idAttivita;
-	private boolean completo;
+	private Integer completo;
 	private Date data;
 	private String descrizione;
 	public Long getId() {
@@ -19,21 +19,9 @@ public class Gruppo {
 	public Long getIdAttivita() {
 		return idAttivita;
 	}
-	public boolean isCompleto() {
+	public Integer getCompleto() {
 		return completo;
 	}
-	
-	
-	
-	public int completoToInt() {
-		
-		if (this.isCompleto()) {
-			return 1;
-		}
-		return 0;
-	}
-	
-	
 	
 	public Date getData() {
 		return data;
@@ -50,8 +38,10 @@ public class Gruppo {
 	public void setIdAttivita(Long idAttivita) {
 		this.idAttivita = idAttivita;
 	}
-	public void setCompleto(boolean completo) {
-		this.completo = completo;
+	public void setCompleto(Integer completo) {
+		if(completo == 0 || completo == 1) {
+			this.completo = completo;
+		}
 	}
 	public void setData(Date data) {
 		this.data = data;

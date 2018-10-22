@@ -5,7 +5,7 @@ public class Attivita {
 	private Long id;
 	private String nome;
 	private Integer numeroPartecipanti;
-	private boolean abilitata;
+	private Integer abilitata;
 	public Long getId() {
 		return id;
 	}
@@ -15,7 +15,7 @@ public class Attivita {
 	public Integer getNumeroPartecipanti() {
 		return numeroPartecipanti;
 	}
-	public boolean isAbilitata() {
+	public Integer getAbilitata() {
 		return abilitata;
 	}
 	public void setId(Long id) {
@@ -27,7 +27,7 @@ public class Attivita {
 	public void setNumeroPartecipanti(Integer numeroPartecipanti) {
 		this.numeroPartecipanti = numeroPartecipanti;
 	}
-	public void setAbilitata(boolean abilitata) {
+	public void setAbilitata(Integer abilitata) {
 		this.abilitata = abilitata;
 	}
 	
