@@ -25,6 +25,13 @@ public class DAOUtente implements IDAOUtente {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
+			
+		} finally {
+			
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+			
 		}
 		
 		
