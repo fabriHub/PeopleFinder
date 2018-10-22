@@ -34,6 +34,7 @@ public class Utente {
 	public boolean isAbilitato() {
 		return abilitato;
 	}
+	
 	public int abilitatoToInt() {
 		
 		if (this.isAbilitato()) {
@@ -41,9 +42,11 @@ public class Utente {
 		}
 		return 0;
 	}
+	
 	public boolean isAmministratore() {
 		return amministratore;
 	}
+	
 	public int amministratoreToInt() {
 		
 		if (this.isAmministratore()) {
@@ -82,6 +85,11 @@ public class Utente {
 	public void setAbilitato(boolean abilitato) {
 		this.abilitato = abilitato;
 	}
+	
+	public void intToAbilitato(int i) {
+		
+	}
+	
 	public void setAmministratore(boolean amministratore) {
 		this.amministratore = amministratore;
 	}
