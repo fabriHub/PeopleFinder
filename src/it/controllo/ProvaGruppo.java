@@ -13,8 +13,8 @@ public class ProvaGruppo {
 
 	public static void main(String[] args) {
 		
-		addGruppo();
-//		findAllGruppo();
+//		addGruppo();
+		findAllGruppo();
 		
 	}
 
@@ -39,9 +39,12 @@ public class ProvaGruppo {
 	
 	public static void findAllGruppo () {
 		IDAOGruppo daoGruppo = new DAOGruppo();
-		List<Gruppo> gruppi = new ArrayList<Gruppo>();
 		try {
-			gruppi = daoGruppo.findAll();
+			List<Gruppo> gruppi = daoGruppo.findAll();
+			for (Gruppo gruppo : gruppi) {
+				System.out.println(gruppo);
+			}
+			
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
 		}

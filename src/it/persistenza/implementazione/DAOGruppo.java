@@ -59,8 +59,8 @@ public class DAOGruppo implements IDAOGruppo {
 				gruppo.setId(resultSet.getLong("ID"));
 				gruppo.setIdUtente(resultSet.getLong("ID_UTENTE"));
 				gruppo.setIdAttivita(resultSet.getLong("ID_ATTIVITA"));
-				gruppo.setData(resultSet.getDate("DATA"));
-				gruppo.setCompleto(resultSet.getBoolean("COMPLETO"));
+				gruppo.setData(resultSet.getDate("DATA_EVENTO"));
+				gruppo.setCompleto(resultSet.getInt("COMPLETO"));
 				gruppo.setDescrizione(resultSet.getString("DESCRIZIONE"));
 
 				gruppi.add(gruppo);						
