@@ -1,6 +1,5 @@
 package it.controllo;
 
-import it.modello.Login;
 import it.modello.Utente;
 import it.persistenza.implementazione.DAOException;
 import it.persistenza.implementazione.DAOUtente;
@@ -10,14 +9,21 @@ public class ProvaUtente {
 
 	public static void main(String[] args) {
 
+		addUtente();
+		
+		
+	}
+	
+	private static void addUtente() {
 		IDAOUtente mioUtente = new DAOUtente();
 		
 		Utente utente = new Utente();
-		utente.setMail("");
-		
-		Login login = new Login();
-		
-		login.setPassword("password");
+		utente.setMail("provaMail");
+		utente.setNickname("utente1");
+		utente.setTelefono("+3912345");
+		utente.setAbilitato(true);
+		utente.setAmministratore(false);
+		utente.setPassword("password");
 		
 		
 		try {
@@ -25,11 +31,8 @@ public class ProvaUtente {
 			
 			
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 }

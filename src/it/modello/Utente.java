@@ -11,9 +11,9 @@ public class Utente {
 	private String mail;
 	private String telefono;
 	private String nickname;
-	private String password;
 	private boolean abilitato;
 	private boolean amministratore;
+	private String password;
 	
 	public Long getId() {
 		return id;
@@ -30,11 +30,26 @@ public class Utente {
 	public String getPassword() {
 		return password;
 	}
+	
 	public boolean isAbilitato() {
 		return abilitato;
 	}
+	public int abilitatoToInt() {
+		
+		if (this.isAbilitato()) {
+			return 1;
+		}
+		return 0;
+	}
 	public boolean isAmministratore() {
 		return amministratore;
+	}
+	public int amministratoreToInt() {
+		
+		if (this.isAmministratore()) {
+			return 1;
+		}
+		return 0;
 	}
 	public void setId(Long id) {
 		this.id = id;
@@ -48,14 +63,22 @@ public class Utente {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public void setPassword(String password) throws NoSuchAlgorithmException {
-		MessageDigest md = MessageDigest.getInstance("MD5");
+	
+	public void setPassword(String password){
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println(e.getMessage());
+			System.out.println("impossibile trovare l'algoritmo");
+		}
 		md.update(password.getBytes());
 		byte[] digest = md.digest();
 		this.password = DatatypeConverter.printHexBinary(digest).toUpperCase();
 		
 		return;
 	}
+	
 	public void setAbilitato(boolean abilitato) {
 		this.abilitato = abilitato;
 	}

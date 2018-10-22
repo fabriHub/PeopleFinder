@@ -2,7 +2,6 @@ package it.persistenza.interfaccia;
 
 import java.util.List;
 
-import it.modello.Login;
 import it.modello.Utente;
 import it.persistenza.implementazione.DAOException;
 
