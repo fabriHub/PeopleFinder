@@ -1,0 +1,96 @@
+package it.persistenza.implementazione;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import it.modello.Gruppo;
+import it.persistenza.interfaccia.IDAOGruppo;
+
+public class DAOGruppo implements IDAOGruppo {
+
+	@Override
+	public void add(Gruppo gruppo) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement= null;
+		ResultSet resultSet = null;
+		
+		try {
+			statement = connection.prepareStatement("INSERT INTO GRUPPO VALUES (SEQ_GRUPPO.NEXTVAL, ?, ?, ?, ?, ?)", new String [] {"ID"});
+			
+			statement.setLong(1, gruppo.getIdUtente());
+			statement.setLong(2, gruppo.getIdAttivita());
+			statement.setString(3, String.valueOf(gruppo.completoToInt()));
+			statement.setDate(4, new java.sql.Date(gruppo.getData().getTime()));
+			statement.setString(5, gruppo.getDescrizione());
+			resultSet = statement.getGeneratedKeys();
+			
+			statement.executeUpdate();
+			
+			resultSet = statement.getGeneratedKeys();
+			if (resultSet.next()) {
+				gruppo.setId(resultSet.getLong(1));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+
+	}
+
+	@Override
+	public List<Gruppo> findAll() throws DAOException {
+		List <Gruppo> gruppi = new ArrayList<Gruppo>(0);
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		
+		try {
+			statement = connection.prepareStatement("SELECT * FROM GRUPPO ORDER BY ID");
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Gruppo gruppo = new Gruppo();
+				gruppo.setId(resultSet.getLong("ID"));
+				gruppo.setIdUtente(resultSet.getLong("ID_UTENTE"));
+				gruppo.setIdAttivita(resultSet.getLong("ID_ATTIVITA"));
+				gruppo.setData(resultSet.getDate("DATA"));
+				gruppo.setCompleto(resultSet.getBoolean("COMPLETO"));
+				gruppo.setDescrizione(resultSet.getString("DESCRIZIONE"));
+				
+				gruppi.add(gruppo);
+								
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return gruppi;
+	}
+
+	@Override
+	public Gruppo findById(Long id) throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update(Gruppo gruppo) throws DAOException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Long id) throws DAOException {
+		// TODO Auto-generated method stub
+
+	}
+
+}

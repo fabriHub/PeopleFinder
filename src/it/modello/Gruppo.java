@@ -22,6 +22,16 @@ public class Gruppo {
 	public boolean isCompleto() {
 		return completo;
 	}
+	public int completoToInt() {
+		
+		if (this.isCompleto()) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	
+	
 	public Date getData() {
 		return data;
 	}

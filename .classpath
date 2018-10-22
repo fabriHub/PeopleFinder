@@ -8,7 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/Academy/ojdbc6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/Academy/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/apache-tomcat-8.0.52/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/ojdbc6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
