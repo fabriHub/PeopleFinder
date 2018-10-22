@@ -1,11 +1,17 @@
 package it.modello;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.xml.bind.DatatypeConverter;
+
 public class Utente {
 	
 	private Long id;
 	private String mail;
 	private String telefono;
 	private String nickname;
+	private String password;
 	private boolean abilitato;
 	private boolean amministratore;
 	
@@ -20,6 +26,9 @@ public class Utente {
 	}
 	public String getNickname() {
 		return nickname;
+	}
+	public String getPassword() {
+		return password;
 	}
 	public boolean isAbilitato() {
 		return abilitato;
@@ -38,6 +47,14 @@ public class Utente {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public void setPassword(String password) throws NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(password.getBytes());
+		byte[] digest = md.digest();
+		this.password = DatatypeConverter.printHexBinary(digest).toUpperCase();
+		
+		return;
 	}
 	public void setAbilitato(boolean abilitato) {
 		this.abilitato = abilitato;
