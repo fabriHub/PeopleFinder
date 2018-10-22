@@ -19,7 +19,7 @@ public class DAOUtente implements IDAOUtente {
 		ResultSet resultSet = null;
 		
 		try {
-			statement = connection.prepareStatement("INSERT INTO UTENTE VALUES (SEQ_UTENTE.NEXTVAL, 'MAIL1', '12345', 'PIPPO','1','1')");
+			statement = connection.prepareStatement("INSERT INTO UTENTE VALUES (SEQ_UTENTE.NEXTVAL, 'MAIL12', '12345', 'PIPPO','1','1')");
 			resultSet = statement.executeQuery();
 			
 		} catch (SQLException e) {
