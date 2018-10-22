@@ -1,4 +1,4 @@
-package it.persistenza.interfaccia;
+package it.persistenza.implementazione;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,12 +33,12 @@ public class DataSource {
 		return instance;
 	}
 	
-	public Connection getConnection() throws IDAOException {
+	public Connection getConnection() throws DAOException {
 		try {
 			return DriverManager.getConnection(URL,USER,PASSWORD);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			throw new IDAOException(e.getMessage(),e);
+			throw new DAOException(e.getMessage(),e);
 		}
 	}
 	

@@ -1,8 +1,8 @@
 package it.controllo;
 
 import it.modello.Utente;
+import it.persistenza.implementazione.DAOException;
 import it.persistenza.implementazione.DAOUtente;
-import it.persistenza.interfaccia.IDAOException;
 import it.persistenza.interfaccia.IDAOUtente;
 
 public class ProvaUtente {
@@ -16,7 +16,7 @@ public class ProvaUtente {
 		
 		try {
 			mioUtente.add(utente);
-		} catch (IDAOException e) {
+		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

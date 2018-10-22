@@ -7,14 +7,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import it.modello.Utente;
-import it.persistenza.interfaccia.DataSource;
-import it.persistenza.interfaccia.IDAOException;
 import it.persistenza.interfaccia.IDAOUtente;
 
 public class DAOUtente implements IDAOUtente {
 
 	@Override
-	public void add(Utente utente) throws IDAOException {
+	public void add(Utente utente) throws DAOException {
 		
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -34,26 +32,27 @@ public class DAOUtente implements IDAOUtente {
 	}
 
 	@Override
-	public List<Utente> findAll() throws IDAOException {
+	public List<Utente> findAll() throws DAOException {
 		return null;
 	}
 
 	@Override
-	public Utente findById(Long id) throws IDAOException {
+	public Utente findById(Long id) throws DAOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void update(Utente utente) throws IDAOException {
+	public void update(Utente utente) throws DAOException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(Long id) throws IDAOException {
+	public void delete(Long id) throws DAOException {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }
