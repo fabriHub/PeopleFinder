@@ -26,11 +26,10 @@ public class DAOGruppo implements IDAOGruppo {
 			statement.setString(3, String.valueOf(gruppo.completoToInt()));
 			statement.setDate(4, new java.sql.Date(gruppo.getData().getTime()));
 			statement.setString(5, gruppo.getDescrizione());
-			resultSet = statement.getGeneratedKeys();
 			
 			statement.executeUpdate();
-			
 			resultSet = statement.getGeneratedKeys();
+			
 			if (resultSet.next()) {
 				gruppo.setId(resultSet.getLong(1));
 			}
@@ -50,8 +49,8 @@ public class DAOGruppo implements IDAOGruppo {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		
-		
+
+
 		try {
 			statement = connection.prepareStatement("SELECT * FROM GRUPPO ORDER BY ID");
 			resultSet = statement.executeQuery();
@@ -63,15 +62,18 @@ public class DAOGruppo implements IDAOGruppo {
 				gruppo.setData(resultSet.getDate("DATA"));
 				gruppo.setCompleto(resultSet.getBoolean("COMPLETO"));
 				gruppo.setDescrizione(resultSet.getString("DESCRIZIONE"));
-				
-				gruppi.add(gruppo);
-								
+
+				gruppi.add(gruppo);						
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
 		}
-		
 		return gruppi;
 	}
 
