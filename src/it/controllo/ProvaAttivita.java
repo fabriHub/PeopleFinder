@@ -1,6 +1,5 @@
 package it.controllo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,10 +8,10 @@ import it.persistenza.implementazione.DAOException;
 import it.persistenza.implementazione.DAOGruppo;
 import it.persistenza.interfaccia.IDAOGruppo;
 
-public class ProvaGruppo {
+public class ProvaAttivita {
 
 	public static void main(String[] args) {
-		
+
 //		addGruppo();
 		findAllGruppo();
 		
@@ -33,7 +32,7 @@ public class ProvaGruppo {
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
 		}
-		return;
+		
 	}
 	
 	
@@ -51,5 +50,6 @@ public class ProvaGruppo {
 	}
 
 
-}
+	}
+
 
