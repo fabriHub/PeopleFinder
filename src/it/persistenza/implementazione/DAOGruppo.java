@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import it.modello.Gruppo;
@@ -24,7 +25,7 @@ public class DAOGruppo implements IDAOGruppo {
 			statement.setLong(1, gruppo.getIdUtente());
 			statement.setLong(2, gruppo.getIdAttivita());
 			statement.setInt(3, gruppo.getCompleto());
-			statement.setDate(4, new java.sql.Date(gruppo.getData().getTime()));
+			statement.setLong(4, gruppo.getData().getTime());
 			statement.setString(5, gruppo.getDescrizione());
 			
 			statement.executeUpdate();
@@ -34,7 +35,10 @@ public class DAOGruppo implements IDAOGruppo {
 				gruppo.setId(resultSet.getLong(1));
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -59,7 +63,7 @@ public class DAOGruppo implements IDAOGruppo {
 				gruppo.setId(resultSet.getLong("ID"));
 				gruppo.setIdUtente(resultSet.getLong("ID_UTENTE"));
 				gruppo.setIdAttivita(resultSet.getLong("ID_ATTIVITA"));
-				gruppo.setData(resultSet.getDate("DATA_EVENTO"));
+				gruppo.setData(new Date(resultSet.getLong("DATA_EVENTO")));
 				gruppo.setCompleto(resultSet.getInt("COMPLETO"));
 				gruppo.setDescrizione(resultSet.getString("DESCRIZIONE"));
 
@@ -67,8 +71,10 @@ public class DAOGruppo implements IDAOGruppo {
 			}
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);

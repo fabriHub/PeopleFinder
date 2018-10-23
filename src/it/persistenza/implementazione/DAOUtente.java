@@ -42,6 +42,7 @@ public class DAOUtente implements IDAOUtente {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
 			
 		} finally {
 			
@@ -78,7 +79,10 @@ public class DAOUtente implements IDAOUtente {
 				utenti.add(utente);						
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -112,7 +116,10 @@ public class DAOUtente implements IDAOUtente {
 				
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
