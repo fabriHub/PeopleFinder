@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import it.modello.Gruppo;
 import it.persistenza.interfaccia.IDAOGruppo;
 
@@ -85,19 +84,94 @@ public class DAOGruppo implements IDAOGruppo {
 
 	@Override
 	public Gruppo findById(Long id) throws DAOException {
-		// TODO Auto-generated method stub
-		return null;
+		Gruppo gruppo = null;
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			statement = connection.prepareStatement("SELECT * FROM GRUPPO WHERE ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				gruppo = new Gruppo();
+				gruppo.setId(resultSet.getLong("ID"));
+				gruppo.setIdUtente(resultSet.getLong("ID_UTENTE"));
+				gruppo.setIdAttivita(resultSet.getLong("ID_ATTIVITA"));
+				gruppo.setCompleto(resultSet.getInt("COMPLETO"));
+				gruppo.setData(new Date(resultSet.getLong("DATA_EVENTO")));
+				gruppo.setDescrizione(resultSet.getString("DESCRIZIONE"));
+				
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return gruppo;
+	
 	}
 
 	@Override
 	public void update(Gruppo gruppo) throws DAOException {
-		// TODO Auto-generated method stub
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		
+		try {
+			
+			statement = connection.prepareStatement("UPDATE GRUPPO SET DATA_EVENTO = ?, DESCRIZIONE = ? WHERE ID = ?");
+			
+			statement.setLong(1, gruppo.getData().getTime());
+			statement.setString(2, gruppo.getDescrizione());
+			statement.setLong(3, gruppo.getId());
+			statement.executeUpdate();
+						
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
+		} finally {
+			
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+			
+		}
+		
 
 	}
 
 	@Override
 	public void delete(Long id) throws DAOException {
-		// TODO Auto-generated method stub
+		
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		
+		try {
+			
+			statement = connection.prepareStatement("DELETE GRUPPO WHERE ID = ?");
+			statement.setLong(1, id);
+			statement.executeUpdate();
+						
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
+		} finally {
+			
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+			
+		}
+
+	
 
 	}
 

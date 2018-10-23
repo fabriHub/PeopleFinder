@@ -1,6 +1,5 @@
 package it.controllo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +13,10 @@ public class ProvaGruppo {
 	public static void main(String[] args) {
 		
 		addGruppo();
+		findAllGruppo();
+		findGruppoById();
+		updateGruppo();
+		deleteGruppo();
 		findAllGruppo();
 		
 	}
@@ -51,5 +54,49 @@ public class ProvaGruppo {
 	}
 
 
+	private static void findGruppoById () {
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		
+		try {
+			Gruppo gruppo= daoGruppo.findById(23L);
+			System.out.println(gruppo);
+			
+			
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void updateGruppo () {
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		
+		Gruppo gruppo = new Gruppo();
+		
+		gruppo.setId(25L);
+		gruppo.setIdUtente(61L);
+		gruppo.setIdAttivita(4L);
+		gruppo.setCompleto(0);
+		gruppo.setData(new Date(2091, 10, 11, 23, 11));
+		gruppo.setDescrizione("ho voglia");
+		
+		try {
+			daoGruppo.update(gruppo);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	private static void deleteGruppo () {
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		
+		try {
+			
+			daoGruppo.delete(23L);
+			
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+	}
 }
 
