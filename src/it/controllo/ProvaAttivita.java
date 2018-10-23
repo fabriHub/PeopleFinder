@@ -11,11 +11,11 @@ public class ProvaAttivita {
 
 	public static void main(String[] args) {
 
-//		addAttivita();
-//		findAllAttivita();
+		addAttivita();
+		findAllAttivita();
 //		findByIdAttivita(2L);
 //		updateAttivita(2L);
-		deleteAttivita(2L);
+//		deleteAttivita(2L);
 		
 	}
 
