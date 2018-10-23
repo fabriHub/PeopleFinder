@@ -1,55 +1,87 @@
 package it.controllo;
 
-import java.util.Date;
 import java.util.List;
 
-import it.modello.Gruppo;
+import it.modello.Attivita;
+import it.persistenza.implementazione.DAOAttivita;
 import it.persistenza.implementazione.DAOException;
-import it.persistenza.implementazione.DAOGruppo;
-import it.persistenza.interfaccia.IDAOGruppo;
+import it.persistenza.interfaccia.IDAOAttivita;
 
 public class ProvaAttivita {
 
 	public static void main(String[] args) {
 
-//		addGruppo();
-		findAllGruppo();
+//		addAttivita();
+//		findAllAttivita();
+//		findByIdAttivita(2L);
+//		updateAttivita(2L);
+		deleteAttivita(2L);
 		
 	}
 
 	
-	public static void addGruppo () {
-		IDAOGruppo daoGruppo = new DAOGruppo();
-		Gruppo gruppo = new Gruppo();
+	public static void addAttivita () {
+		IDAOAttivita daoAttivita = new DAOAttivita();
+		Attivita attivita = new Attivita();
 		
-		gruppo.setIdUtente(41L);
-		gruppo.setIdAttivita(1L);
-		gruppo.setCompleto(0);
-		gruppo.setData(new Date());
-		gruppo.setDescrizione("ho voglia di amici");
+		attivita.setNome("Calcetto");
+		attivita.setNumeroPartecipanti(10);
+		attivita.setAbilitata(1);
+		
 		try {
-			daoGruppo.add(gruppo);
+			daoAttivita.add(attivita);
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
 		}
 		
 	}
 	
-	
-	public static void findAllGruppo () {
-		IDAOGruppo daoGruppo = new DAOGruppo();
+	public static void findAllAttivita () {
+		IDAOAttivita daoAttivita = new DAOAttivita();		
 		try {
-			List<Gruppo> gruppi = daoGruppo.findAll();
-			for (Gruppo gruppo : gruppi) {
-				System.out.println(gruppo);
+			List<Attivita> allAttivita = daoAttivita.findAll();
+			for (Attivita attivita : allAttivita) {
+				System.out.println(attivita);
 			}
 			
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-
-
+	
+	public static void findByIdAttivita (Long id) {
+		IDAOAttivita daoAttivita = new DAOAttivita();		
+		Attivita attivita = new Attivita();
+		try {
+			attivita = daoAttivita.findById(id);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(attivita);
+	}
+	
+	public static void updateAttivita (Long id) {
+		IDAOAttivita daoAttivita = new DAOAttivita();		
+		Attivita attivita = new Attivita();
+		attivita.setId(id);
+		attivita.setNome("sumo");
+		attivita.setNumeroPartecipanti(3);
+		attivita.setAbilitata(1);
+		try {
+			daoAttivita.update(attivita);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void deleteAttivita(Long id) {
+		IDAOAttivita daoAttivita = new DAOAttivita();
+		try {
+			daoAttivita.delete(id);					
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	}
 
 

@@ -75,7 +75,6 @@ public class ProvaIscrizioneGruppo {
 	
 	public static void deleteIscrizioneGruppo (Long id) {
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
-		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo ();
 		try {
 			daoIscrizioneGruppo.delete(id);					
 		} catch (DAOException e) {
