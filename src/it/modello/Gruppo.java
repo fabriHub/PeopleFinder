@@ -10,6 +10,13 @@ public class Gruppo {
 	private Integer completo;
 	private Date data;
 	private String descrizione;
+	private Long componentiGruppo;
+	public Long getComponentiGruppo() {
+		return componentiGruppo;
+	}
+	public void setComponentiGruppo(Long componentiGruppo) {
+		this.componentiGruppo = componentiGruppo;
+	}
 	public Long getId() {
 		return id;
 	}

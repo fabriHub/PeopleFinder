@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import it.modello.Attivita;
 
 public class DAOUtenteAdmin extends DAOUtente {
 	
@@ -132,19 +136,24 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 	
 	
-	public int contaGruppiAttivita(Long id) {
+	public Map<Integer,Attivita> popolaritaAttivitaNonCompleto() {
+		
+		Map<Integer,Attivita> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		int numeroGruppiAttivita = 0;
+		Attivita attivita = null;
+		
 		try {
+			risultato = new LinkedHashMap<Integer, Attivita>();
+			attivita = new Attivita();
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ID) FROM GRUPPO WHERE ID_ATTIVITA = ?");
-			statement.setLong(1, id);
+			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 0  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
-			if (resultSet.next()) {
-				numeroGruppiAttivita = resultSet.getInt(1);
-				System.out.println(numeroGruppiAttivita);
+			while (resultSet.next()) {
+				attivita.setId(resultSet.getLong(3));
+				attivita.setNome(resultSet.getString(2));
+				risultato.put(resultSet.getInt(1), attivita);
 			}
 		} catch (SQLException | DAOException e) {
 			System.out.println(e.getMessage());
@@ -153,6 +162,38 @@ public class DAOUtenteAdmin extends DAOUtente {
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
 		}
-		return numeroGruppiAttivita;
+		
+		return risultato;
+		
 	}
+	
+	
+public Map<Integer,Long> partecipazioneUtentiAiGruppi() {
+		
+		Map<Integer,Long> risultato = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			risultato = new LinkedHashMap<Integer, Long>();
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE) AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO FROM ISCRIZIONE_GRUPPO GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO) ORDER BY PARTECIPAZIONE DESC");
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				risultato.put(resultSet.getInt(1), resultSet.getLong(2));
+			}
+		} catch (SQLException | DAOException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		
+		return risultato;
+		
+	}
+
+	
 }

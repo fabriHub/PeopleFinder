@@ -1,5 +1,9 @@
 package it.controllo;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
+import it.modello.Attivita;
 import it.modello.Utente;
 import it.persistenza.implementazione.DAOException;
 import it.persistenza.implementazione.DAOUtenteAdmin;
@@ -18,6 +22,8 @@ public class ProvaUtenteAdmin {
 //		abilitaUtente(22L);
 //		disabilitaUtente(22L);
 //		daoUtenteAdmin.contaGruppiAttivita(2L);
+//		statistiche1();
+		statistiche2();
 		
 	}
 	
@@ -43,6 +49,25 @@ public class ProvaUtenteAdmin {
 		}
 	}
 	
+	public static void statistiche1() {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Map<Integer,Attivita> mappa = daoUtenteAdmin.popolaritaAttivitaNonCompleto();
+		
+		for(Entry<Integer, Attivita> e : mappa.entrySet()) {
+			System.out.println(e.getKey() + " - " + e.getValue());
+		}
+		
+	}
+	
+	public static void statistiche2() {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Map<Integer,Long> mappa = daoUtenteAdmin.partecipazioneUtentiAiGruppi();
+		
+		for(Entry<Integer, Long> e : mappa.entrySet()) {
+			System.out.println(e.getKey() + " - " + e.getValue());
+		}
+		
+	}
 	
 
 }
