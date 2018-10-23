@@ -14,5 +14,7 @@ public interface IDAOUtente {
 	public Utente findById (Long id) throws DAOException;
 	public void update (Utente utente) throws DAOException;
 	public void delete (Long id) throws DAOException;
+	public void verificaPassword (Utente utente) throws DAOException;
+	public void cambiaPassword (Utente utente) throws DAOException;
 
 }

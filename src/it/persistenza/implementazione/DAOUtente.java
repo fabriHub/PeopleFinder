@@ -188,4 +188,42 @@ public class DAOUtente implements IDAOUtente {
 	}
 
 
+	@Override
+	public void verificaPassword(Utente utente) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			statement = connection.prepareStatement("SELECT PASSWORD FROM UTENTE WHERE ID = ?");
+			statement.setLong(1, utente.getId());
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				utente = new Utente();
+				utente.setId(resultSet.getLong("ID"));
+				utente.setPassword(resultSet.getString("PASSWORD"));
+				
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+	}
+	
+	
+	@Override
+	public void cambiaPassword(Utente utente) throws DAOException {
+		
+		
+	}
+	
+
+
 }
