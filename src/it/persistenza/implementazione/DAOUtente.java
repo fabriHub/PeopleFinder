@@ -39,8 +39,6 @@ public class DAOUtente implements IDAOUtente {
 				utente.setId(resultSet.getLong(1));
 			}
 			
-			
-			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -53,22 +51,23 @@ public class DAOUtente implements IDAOUtente {
 			
 		}
 		
-		
-
 	}
 
 	@Override
 	public List<Utente> findAll() throws DAOException {
+		
 		List <Utente> utenti = new ArrayList<Utente>(0);
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
+		Utente utente = null;
+		
 		try {
 			statement = connection.prepareStatement("SELECT * FROM UTENTE ORDER BY NICKNAME");
 			resultSet = statement.executeQuery();
 			
 			while (resultSet.next()) {
-				Utente utente = new Utente();
+				utente = new Utente();
 				utente.setId(resultSet.getLong("ID"));
 				utente.setMail(resultSet.getString("MAIL"));
 				utente.setNickname(resultSet.getString("NICKNAME"));
@@ -91,19 +90,93 @@ public class DAOUtente implements IDAOUtente {
 
 	@Override
 	public Utente findById(Long id) throws DAOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Utente utente = null;
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			statement = connection.prepareStatement("SELECT * FROM UTENTE WHERE ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				utente = new Utente();
+				utente.setId(resultSet.getLong("ID"));
+				utente.setMail(resultSet.getString("MAIL"));
+				utente.setNickname(resultSet.getString("NICKNAME"));
+				utente.setAbilitato(resultSet.getInt("ABILITATO"));
+				utente.setAmministratore(resultSet.getInt("AMMINISTRATORE"));
+				utente.setTelefono(resultSet.getString("TELEFONO"));
+				
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return utente;
+	
 	}
 
 	@Override
 	public void update(Utente utente) throws DAOException {
-		// TODO Auto-generated method stub
-
+		
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		
+		try {
+			
+			statement = connection.prepareStatement("UPDATE UTENTE SET MAIL = ?, TELEFONO = ?, NICKNAME = ?, ABILITATO = ?, AMMINISTRATORE = ? WHERE ID = ?");
+			
+			statement.setString(1,utente.getMail());
+			statement.setString(2,utente.getTelefono());
+			statement.setString(3, utente.getNickname());
+			statement.setInt(4, utente.getAbilitato());
+			statement.setInt(5, utente.getAmministratore());
+			statement.setLong(6, utente.getId());
+			statement.executeUpdate();
+						
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
+		} finally {
+			
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+			
+		}
+		
 	}
 
 	@Override
 	public void delete(Long id) throws DAOException {
-		// TODO Auto-generated method stub
+		
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		
+		try {
+			
+			statement = connection.prepareStatement("DELETE UTENTE WHERE ID = ?");
+			statement.setLong(1, id);
+			statement.executeUpdate();
+						
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e);
+			
+		} finally {
+			
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+			
+		}
 
 	}
 
