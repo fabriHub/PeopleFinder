@@ -12,12 +12,13 @@ public class ProvaGruppo {
 
 	public static void main(String[] args) {
 		
-		addGruppo();
-		findAllGruppo();
-		findGruppoById();
-		updateGruppo();
-		deleteGruppo();
-		findAllGruppo();
+//		addGruppo();
+//		findAllGruppo();
+//		findGruppoById();
+//		updateGruppo();
+//		deleteGruppo();
+//		findAllGruppo();
+		findByIdUtente1();
 		
 	}
 
@@ -44,6 +45,19 @@ public class ProvaGruppo {
 		IDAOGruppo daoGruppo = new DAOGruppo();
 		try {
 			List<Gruppo> gruppi = daoGruppo.findAll();
+			for (Gruppo gruppo : gruppi) {
+				System.out.println(gruppo);
+			}
+			
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void findByIdUtente1 () {
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		try {
+			List<Gruppo> gruppi = daoGruppo.findByIdUtente(61L);
 			for (Gruppo gruppo : gruppi) {
 				System.out.println(gruppo);
 			}

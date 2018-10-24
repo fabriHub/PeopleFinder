@@ -98,6 +98,70 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		}
 		return iscrizioneGruppo;
 	}
+	
+	@Override
+	public List<IscrizioneGruppo> findGruppiByIdUtente(Long id) throws DAOException {
+		List <IscrizioneGruppo> iscrizioneGruppi = new ArrayList<IscrizioneGruppo>(0);
+		IscrizioneGruppo iscrizioneGruppo = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT * FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				iscrizioneGruppo = new IscrizioneGruppo ();
+				iscrizioneGruppo.setId(resultSet.getLong("ID"));
+				iscrizioneGruppo.setIdUtente(id);
+				iscrizioneGruppo.setIdGruppo(resultSet.getLong("ID_GRUPPO"));
+				iscrizioneGruppi.add(iscrizioneGruppo);
+				
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE findGruppiByIdUtente iscrizioneGruppo" + e.getMessage(), e);
+		}
+		finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return iscrizioneGruppi;
+	}
+	
+	@Override
+	public List<IscrizioneGruppo> findUtentiByIdGruppo(Long id) throws DAOException {
+		List <IscrizioneGruppo> iscrizioneGruppi = new ArrayList<IscrizioneGruppo>(0);
+		IscrizioneGruppo iscrizioneGruppo = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT * FROM ISCRIZIONE_GRUPPO WHERE ID_GRUPPO = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				iscrizioneGruppo = new IscrizioneGruppo ();
+				iscrizioneGruppo.setId(resultSet.getLong("ID"));
+				iscrizioneGruppo.setIdUtente(resultSet.getLong("ID_UTENTE"));
+				iscrizioneGruppo.setIdGruppo(id);
+				iscrizioneGruppi.add(iscrizioneGruppo);
+				
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE findUtentiByIdGruppo iscrizioneGruppo" + e.getMessage(), e);
+		}
+		finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return iscrizioneGruppi;
+	}
 
 	@Override
 	public void update(IscrizioneGruppo iscrizioneGruppo) throws DAOException {

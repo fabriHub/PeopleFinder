@@ -113,6 +113,41 @@ public class DAOGruppo implements IDAOGruppo {
 		}
 		return gruppo;
 	}
+	
+	@Override
+	public List<Gruppo> findByIdUtente(Long id) throws DAOException {
+		List <Gruppo> gruppi = new ArrayList<Gruppo>(0);
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			statement = connection.prepareStatement("SELECT * FROM GRUPPO WHERE ID_UTENTE = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				Gruppo gruppo = new Gruppo();
+				gruppo.setId(resultSet.getLong("ID"));
+				gruppo.setIdUtente(id);
+				gruppo.setIdAttivita(resultSet.getLong("ID_ATTIVITA"));
+				gruppo.setData(new Date(resultSet.getLong("DATA_EVENTO")));
+				gruppo.setCompleto(resultSet.getInt("COMPLETO"));
+				gruppo.setDescrizione(resultSet.getString("DESCRIZIONE"));
+
+				gruppi.add(gruppo);						
+			}
+
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE findAll gruppo" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return gruppi;
+	}
 
 	@Override
 	public void update(Gruppo gruppo) throws DAOException {
