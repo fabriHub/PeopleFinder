@@ -11,6 +11,7 @@ import it.persistenza.interfaccia.IDAOUtente;
 
 public class DAOUtente implements IDAOUtente {
 
+	
 	@Override
 	public void add(Utente utente) throws DAOException {
 		
@@ -40,17 +41,12 @@ public class DAOUtente implements IDAOUtente {
 			}
 			
 		} catch (SQLException e) {
-			
 			throw new DAOException("ERRORE add utente" + e.getMessage(), e);
-			
 		} finally {
-			
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
-			
 		}
-		
 	}
 
 	@Override
@@ -61,7 +57,6 @@ public class DAOUtente implements IDAOUtente {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Utente utente = null;
-		
 		try {
 			statement = connection.prepareStatement("SELECT * FROM UTENTE ORDER BY NICKNAME");
 			resultSet = statement.executeQuery();

@@ -12,6 +12,12 @@ import it.modello.Utente;
 
 public class DAOUtenteAdmin extends DAOUtente {
 	
+	/**
+	 * La funzione serve per verificare se l'utente, selezionato tramite ID, è abilitato oppure no.
+	 * @param id
+	 * @return boolean
+	 * @throws DAOException
+	 */
 	public boolean isAbilitato (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -43,6 +49,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 
 	
+	/**
+	 * Il metodo controlla, richiamando il metodo isAbilitato, se l'utente è abilitato, e nel caso non lo fosse lo abilita.
+	 * @param id
+	 * @throws DAOException
+	 */
 	public void abilita (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -61,6 +72,12 @@ public class DAOUtenteAdmin extends DAOUtente {
 		}
 	}
 	
+	
+	/**
+	 * Il metodo controlla, richiamando il metodo isAbilitato, se l'utente è abilitato, e nel caso lo fosse lo disabilita.
+	 * @param id
+	 * @throws DAOException
+	 */
 	public void disabilita (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -79,7 +96,12 @@ public class DAOUtenteAdmin extends DAOUtente {
 		}
 	}
 	
-		
+	
+	/**
+	 * Il metodo restituisce il numero totale di utenti iscritti.
+	 * @return int numeroUtenti
+	 * @throws DAOException
+	 */
 	public int contaUtenti () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -103,6 +125,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 	
 	
+	/**
+	 * Il metodo restituisce il numero totale di gruppi creati.
+	 * @return int numeroGruppi
+	 * @throws DAOException
+	 */
 	public int contaGruppi () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -125,6 +152,12 @@ public class DAOUtenteAdmin extends DAOUtente {
 		return numeroGruppi;
 	}
 	
+	
+	/**
+	 * Il metodo restituisce il numero totale di gruppi completati.
+	 * @return int numeroGruppiCompletati
+	 * @throws DAOException
+	 */
 	public int contaGruppiCompletati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -147,6 +180,12 @@ public class DAOUtenteAdmin extends DAOUtente {
 		return numeroGruppiCompletati;
 	}
 	
+	
+	/**
+	 * Il metodo restituisce il numero totale di gruppi non completati.
+	 * @return int numeroGruppiNonCompletati
+	 * @throws DAOException
+	 */
 	public int contaGruppiNonCompletati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -170,6 +209,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 	
 	
+	/**
+	 * Il metodo restituisce, in ordine decrescente, il numero di gruppi non completati per ogni attivita correlandogli il nome e l'ID dell'attivita. 
+	 * @return Map<Integer, Attivita> risultato
+	 * @throws DAOException
+	 */
 	public Map<Integer,Attivita> popolaritaAttivitaNonCompleto() throws DAOException{
 		
 		Map<Integer,Attivita> risultato = null;
@@ -185,10 +229,10 @@ public class DAOUtenteAdmin extends DAOUtente {
 			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 0  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				attivita.setId(resultSet.getLong(3));
-				attivita.setNome(resultSet.getString(2));
-				risultato.put(resultSet.getInt(1), attivita);
-			}
+				attivita.setId(resultSet.getLong(3));    // scrive nella variabile ID dell'oggetto attivita quello che viene letto dalla query
+				attivita.setNome(resultSet.getString(2));   // scrive nella variabile nome dell'oggetto attivita quello che viene letto dalla query
+				risultato.put(resultSet.getInt(1), attivita);   // dato che la mappa è caratterizzata dal meccanismo chiave-valore, come chiave si usa il conteggio mentre come valore si usa l'oggetto attivita. 
+			}                                                   // il numero 1 indica che è il primo dato richiesto dalla query. Lo stesso discorso vale per i numeri 2 e 3. L'oggetto attivita contiene al suo interno il nome e l'ID dell'attivita 
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE popolaritaAttivitaNonCompleto utenteAdmin" + e.getMessage(), e);
 		} finally {
@@ -201,6 +245,12 @@ public class DAOUtenteAdmin extends DAOUtente {
 		
 	}
 	
+	
+	/**
+	 * Il metodo restituisce, in ordine decrescente, il numero di gruppi completati per ogni attivita correlandogli il nome e l'ID dell'attivita. 
+	 * @return Map<Integer, Attivita> risultato
+	 * @throws DAOException
+	 */
 	public Map<Integer,Attivita> popolaritaAttivitaCompleto() throws DAOException{
 		
 		Map<Integer,Attivita> risultato = null;
@@ -233,6 +283,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 	
 	
+	/**
+	 * Il metodo restituisce il numero di utenti iscritti ad ogni gruppo.
+	 * @return Map<Integer, Long> risultato
+	 * @throws DAOException
+	 */
 	public Map<Integer,Long> partecipazioneUtentiAiGruppi() throws DAOException{
 		
 		Map<Integer,Long> risultato = null;
