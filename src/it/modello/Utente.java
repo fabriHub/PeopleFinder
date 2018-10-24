@@ -52,18 +52,7 @@ public class Utente {
 	}
 	
 	public void setPassword(String password){
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			System.out.println(e.getMessage());
-			System.out.println("impossibile trovare l'algoritmo");
-		}
-		md.update(password.getBytes());
-		byte[] digest = md.digest();
-		this.password = DatatypeConverter.printHexBinary(digest).toUpperCase();
-		
-		return;
+		this.password = password;
 	}
 	
 	public void setAbilitato(Integer abilitato) {
@@ -76,6 +65,24 @@ public class Utente {
 			this.amministratore = amministratore;
 		}
 	}
+	
+	
+	public void hashPassword(String password) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println(e.getMessage());
+			System.out.println("impossibile trovare l'algoritmo");
+		}
+		md.update(password.getBytes());
+		byte[] digest = md.digest();
+		this.setPassword(DatatypeConverter.printHexBinary(digest).toUpperCase());
+		
+		return;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Utente [id=" + id + ", mail=" + mail + ", telefono=" + telefono + ", nickname=" + nickname

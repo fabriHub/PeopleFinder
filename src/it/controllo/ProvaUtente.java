@@ -12,13 +12,12 @@ public class ProvaUtente {
 	public static void main(String[] args) {
 
 //		addUtente();
-		findAll();
-		update();
-		findById();
-		delete();
-		findAll();
-		
-		
+//		findAll();
+//		update();
+//		findById();
+//		delete();
+//		findAll();
+		verificaPasswordUtente();
 	}
 	
 	private static void addUtente() {
@@ -30,7 +29,7 @@ public class ProvaUtente {
 		utente.setTelefono("+3912345");
 		utente.setAbilitato(1);
 		utente.setAmministratore(0);
-		utente.setPassword("password");
+		utente.hashPassword("password");
 		
 		
 		try {
@@ -96,6 +95,25 @@ public class ProvaUtente {
 		try {
 			
 			mioUtente.delete(1L);
+			
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void verificaPasswordUtente () {
+		IDAOUtente mioUtente = new DAOUtente();
+		Utente utente = new Utente();
+		utente.setId(6L);
+		utente.hashPassword("");
+		
+		try {
+			
+			if(mioUtente.verificaPassword(utente)) {
+				System.out.println("sono uguali");
+			}else {
+				System.out.println("sono diversi");
+			}
 			
 		} catch (DAOException e) {
 			e.printStackTrace();

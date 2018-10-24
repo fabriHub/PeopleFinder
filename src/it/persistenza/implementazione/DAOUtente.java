@@ -41,8 +41,7 @@ public class DAOUtente implements IDAOUtente {
 			
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE add utente" + e.getMessage(), e);
 			
 		} finally {
 			
@@ -80,8 +79,7 @@ public class DAOUtente implements IDAOUtente {
 			}
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE findAll utente" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -117,8 +115,7 @@ public class DAOUtente implements IDAOUtente {
 			}
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE findById utente" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -149,8 +146,7 @@ public class DAOUtente implements IDAOUtente {
 						
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE update utente" + e.getMessage(), e);
 			
 		} finally {
 			
@@ -175,8 +171,7 @@ public class DAOUtente implements IDAOUtente {
 						
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE delete utente" + e.getMessage(), e);
 			
 		} finally {
 			
@@ -189,10 +184,11 @@ public class DAOUtente implements IDAOUtente {
 
 
 	@Override
-	public void verificaPassword(Utente utente) throws DAOException {
+	public boolean verificaPassword(Utente utente) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
+		Utente utenteTmp = null;
 		
 		try {
 			statement = connection.prepareStatement("SELECT PASSWORD FROM UTENTE WHERE ID = ?");
@@ -200,30 +196,23 @@ public class DAOUtente implements IDAOUtente {
 			resultSet = statement.executeQuery();
 			
 			if (resultSet.next()) {
-				utente = new Utente();
-				utente.setId(resultSet.getLong("ID"));
-				utente.setPassword(resultSet.getString("PASSWORD"));
-				
-			}
+				utenteTmp = new Utente();
+				utenteTmp.setPassword(resultSet.getString("PASSWORD"));
+			} 
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE verificaPassword utente" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
 		}
+		if (utenteTmp != null && utente.getPassword().equals(utenteTmp.getPassword())){
+			return true;
+		}
+		return false;
 	}
 	
-	
-	@Override
-	public void cambiaPassword(Utente utente) throws DAOException {
-		
-		
-	}
-	
-
 
 }

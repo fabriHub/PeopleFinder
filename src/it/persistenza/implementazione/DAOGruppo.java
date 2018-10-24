@@ -35,8 +35,7 @@ public class DAOGruppo implements IDAOGruppo {
 			}
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE add gruppo" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -71,8 +70,7 @@ public class DAOGruppo implements IDAOGruppo {
 
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE findAll gruppo" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -106,8 +104,7 @@ public class DAOGruppo implements IDAOGruppo {
 			}
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE findById gruppo" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -134,8 +131,7 @@ public class DAOGruppo implements IDAOGruppo {
 						
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE update gruppo" + e.getMessage(), e);
 			
 		} finally {
 			
@@ -161,8 +157,7 @@ public class DAOGruppo implements IDAOGruppo {
 						
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE delete gruppo" + e.getMessage(), e);
 			
 		} finally {
 			

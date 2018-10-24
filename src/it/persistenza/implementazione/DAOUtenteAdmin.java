@@ -21,8 +21,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 			statement.setLong(1, id);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE abilita utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
@@ -37,8 +36,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 			statement.setLong(1, id);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DAOException(e.getMessage(), e);
+			throw new DAOException("ERRORE disabilita utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
@@ -46,7 +44,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 	
 	
-	public int contaUtenti () {
+	public int contaUtenti () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -59,7 +57,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 				numeroUtenti = resultSet.getInt(1);
 			}
 		} catch (SQLException | DAOException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -69,7 +67,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 	
 	
-	public int contaGruppi () {
+	public int contaGruppi () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -82,7 +80,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 				numeroGruppi = resultSet.getInt(1);
 			}
 		} catch (SQLException | DAOException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE contaGruppi utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -91,7 +89,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 		return numeroGruppi;
 	}
 	
-	public int contaGruppiCompletati () {
+	public int contaGruppiCompletati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -104,7 +102,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 				numeroGruppiCompletati = resultSet.getInt(1);
 			}
 		} catch (SQLException | DAOException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE contaGruppiCompletati utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -113,7 +111,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 		return numeroGruppiCompletati;
 	}
 	
-	public int contaGruppiNonCompletati () {
+	public int contaGruppiNonCompletati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -126,7 +124,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 				numeroGruppiNonCompletati = resultSet.getInt(1);
 			}
 		} catch (SQLException | DAOException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE contaGruppiNonCompletati utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -136,7 +134,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 	
 	
-	public Map<Integer,Attivita> popolaritaAttivitaNonCompleto() {
+	public Map<Integer,Attivita> popolaritaAttivitaNonCompleto() throws DAOException{
 		
 		Map<Integer,Attivita> risultato = null;
 		Connection connection = null;
@@ -156,7 +154,38 @@ public class DAOUtenteAdmin extends DAOUtente {
 				risultato.put(resultSet.getInt(1), attivita);
 			}
 		} catch (SQLException | DAOException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE popolaritaAttivitaNonCompleto utenteAdmin" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		
+		return risultato;
+		
+	}
+	
+	public Map<Integer,Attivita> popolaritaAttivitaCompleto() throws DAOException{
+		
+		Map<Integer,Attivita> risultato = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Attivita attivita = null;
+		
+		try {
+			risultato = new LinkedHashMap<Integer, Attivita>();
+			attivita = new Attivita();
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				attivita.setId(resultSet.getLong(3));
+				attivita.setNome(resultSet.getString(2));
+				risultato.put(resultSet.getInt(1), attivita);
+			}
+		} catch (SQLException | DAOException e) {
+			throw new DAOException("ERRORE popolaritaAttivitaCompleto utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -168,7 +197,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	}
 	
 	
-public Map<Integer,Long> partecipazioneUtentiAiGruppi() {
+	public Map<Integer,Long> partecipazioneUtentiAiGruppi() throws DAOException{
 		
 		Map<Integer,Long> risultato = null;
 		Connection connection = null;
@@ -184,7 +213,7 @@ public Map<Integer,Long> partecipazioneUtentiAiGruppi() {
 				risultato.put(resultSet.getInt(1), resultSet.getLong(2));
 			}
 		} catch (SQLException | DAOException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE partecipazioneUtentiAiGruppi utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);

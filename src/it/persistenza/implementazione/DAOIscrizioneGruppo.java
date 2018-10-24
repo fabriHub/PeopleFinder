@@ -32,7 +32,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 				iscrizioneGruppo.setId(resultSet.getLong(1));
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE add iscrizioneGruppo" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -59,7 +59,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 				iscrizioneGruppi.add(iscrizioneGruppo);						
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE findAll iscrizioneGruppo" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -89,7 +89,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 				
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE findById iscrizioneGruppo" + e.getMessage(), e);
 		}
 		finally {
 			DataSource.getInstance().close(resultSet);
@@ -111,7 +111,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 			statement.setLong(3, iscrizioneGruppo.getId());
 			statement.executeUpdate();  
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE update iscrizioneGruppo" + e.getMessage(), e);
 		}
 		finally {
 			DataSource.getInstance().close(statement);
@@ -129,7 +129,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 			statement.setLong(1, id);
 			statement.executeUpdate();  
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE delete iscrizioneGruppo" + e.getMessage(), e);
 		}
 		finally {
 			DataSource.getInstance().close(statement);

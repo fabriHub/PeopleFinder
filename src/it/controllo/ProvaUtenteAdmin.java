@@ -51,21 +51,31 @@ public class ProvaUtenteAdmin {
 	
 	public static void statistiche1() {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
-		Map<Integer,Attivita> mappa = daoUtenteAdmin.popolaritaAttivitaNonCompleto();
-		
-		for(Entry<Integer, Attivita> e : mappa.entrySet()) {
-			System.out.println(e.getKey() + " - " + e.getValue());
+		Map<Integer, Attivita> mappa;
+		try {
+			mappa = daoUtenteAdmin.popolaritaAttivitaNonCompleto();
+			for(Entry<Integer, Attivita> e : mappa.entrySet()) {
+				System.out.println(e.getKey() + " - " + e.getValue());
+			}
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
 		}
+		
 		
 	}
 	
 	public static void statistiche2() {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
-		Map<Integer,Long> mappa = daoUtenteAdmin.partecipazioneUtentiAiGruppi();
-		
-		for(Entry<Integer, Long> e : mappa.entrySet()) {
-			System.out.println(e.getKey() + " - " + e.getValue());
+		Map<Integer, Long> mappa;
+		try {
+			mappa = daoUtenteAdmin.partecipazioneUtentiAiGruppi();
+			for(Entry<Integer, Long> e : mappa.entrySet()) {
+				System.out.println(e.getKey() + " - " + e.getValue());
+			}
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
 		}
+		
 		
 	}
 	

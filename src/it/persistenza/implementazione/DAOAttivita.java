@@ -34,7 +34,7 @@ public class DAOAttivita implements IDAOAttivita {
 				attivita.setId(resultSet.getLong(1));
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE add attività" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -62,7 +62,7 @@ public class DAOAttivita implements IDAOAttivita {
 				allAttivita.add(attivita);						
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE findAll attività" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -91,7 +91,7 @@ public class DAOAttivita implements IDAOAttivita {
 				attivita.setAbilitata(resultSet.getInt("ABILITATA"));
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE findById attività" + e.getMessage(), e);
 		}
 		finally {
 			DataSource.getInstance().close(resultSet);
@@ -114,7 +114,7 @@ public class DAOAttivita implements IDAOAttivita {
 			statement.setLong(4, attivita.getId());
 			statement.executeUpdate();  
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE update attività" + e.getMessage(), e);
 		}
 		finally {
 			DataSource.getInstance().close(statement);
@@ -133,7 +133,7 @@ public class DAOAttivita implements IDAOAttivita {
 			statement.setLong(1, id);
 			statement.executeUpdate();  
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			throw new DAOException("ERRORE delete attività" + e.getMessage(), e);
 		}
 		finally {
 			DataSource.getInstance().close(statement);
