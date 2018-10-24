@@ -8,18 +8,51 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import it.modello.Attivita;
+import it.modello.Utente;
 
 public class DAOUtenteAdmin extends DAOUtente {
 	
-	
+	public boolean isAbilitato (Long id) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Utente utente = null;
+		
+		try {
+			statement = connection.prepareStatement("SELECT ABILITATO FROM UTENTE WHERE ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				utente = new Utente();
+				utente.setAbilitato(resultSet.getInt("ABILITATO"));
+			} 
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE isAbilitato utente" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		if (utente.getAbilitato() == 1){
+			return true;
+		}
+		return false;
+	}
+
 	
 	public void abilita (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
+		Utente utente = new Utente();
 		try {
-			statement = connection.prepareStatement("UPDATE UTENTE SET ABILITATO = 1 WHERE ID = ?");
-			statement.setLong(1, id);
-			statement.executeUpdate();
+			if(!isAbilitato(id)) {
+				statement = connection.prepareStatement("UPDATE UTENTE SET ABILITATO = 1 WHERE ID = ?");
+				statement.setLong(1, id);
+				statement.executeUpdate();
+			}
 		} catch (SQLException e) {
 			throw new DAOException("ERRORE abilita utenteAdmin" + e.getMessage(), e);
 		} finally {
@@ -32,9 +65,12 @@ public class DAOUtenteAdmin extends DAOUtente {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
 		try {
+			if(isAbilitato(id)) {
 			statement = connection.prepareStatement("UPDATE UTENTE SET ABILITATO = 0 WHERE ID = ?");
 			statement.setLong(1, id);
 			statement.executeUpdate();
+			System.out.println("é disabilitato");
+			}
 		} catch (SQLException e) {
 			throw new DAOException("ERRORE disabilita utenteAdmin" + e.getMessage(), e);
 		} finally {
@@ -43,7 +79,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 		}
 	}
 	
-	
+		
 	public int contaUtenti () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;

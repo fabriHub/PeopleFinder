@@ -23,8 +23,20 @@ public class ProvaUtenteAdmin {
 //		disabilitaUtente(22L);
 //		daoUtenteAdmin.contaGruppiAttivita(2L);
 //		statistiche1();
-		statistiche2();
+//		statistiche2();
+//		isAbilitatoUtente();
 		
+	}
+	
+	public static void isAbilitatoUtente () {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Utente utente = new Utente();
+		utente.setId(utente.getId());
+		try {
+			daoUtenteAdmin.isAbilitato(22L);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static void abilitaUtente (Long id) {
