@@ -17,19 +17,17 @@ public class ProvaUtente {
 //		findById();
 //		delete();
 //		findAll();
-		verificaPasswordUtente();
+//		verificaPasswordUtente();
 	}
 	
 	private static void addUtente() {
 		IDAOUtente mioUtente = new DAOUtente();
 		
 		Utente utente = new Utente();
-		utente.setMail("provaMail");
-		utente.setNickname("utente1");
-		utente.setTelefono("+3912345");
-		utente.setAbilitato(1);
-		utente.setAmministratore(0);
-		utente.hashPassword("password");
+		utente.setMail("provaMail2");
+		utente.setNickname("utente12");
+		utente.setTelefono("+39123456");
+		utente.hashPassword("password1");
 		
 		
 		try {

@@ -11,7 +11,7 @@ import it.persistenza.interfaccia.IDAOUtente;
 
 public class DAOUtente implements IDAOUtente {
 
-	
+	// Il metodo è strutturato in modo tale che gli utenti di default siano abilitati e non amministratori.
 	@Override
 	public void add(Utente utente) throws DAOException {
 		
@@ -23,13 +23,13 @@ public class DAOUtente implements IDAOUtente {
 		
 		try {
 			
-			statement = connection.prepareStatement("INSERT INTO UTENTE VALUES (SEQ_UTENTE.NEXTVAL, ?, ?, ?,?,?,?)", generatedId);
+			statement = connection.prepareStatement("INSERT INTO UTENTE VALUES (SEQ_UTENTE.NEXTVAL, ?, ?, ?, ?, ?, ?)", generatedId);
 			
 			statement.setString(1,utente.getMail());
 			statement.setString(2,utente.getTelefono());
 			statement.setString(3, utente.getNickname());
-			statement.setInt(4, utente.getAbilitato());
-			statement.setInt(5, utente.getAmministratore());
+			statement.setInt(4, 1);
+			statement.setInt(5, 0);
 			statement.setString(6, utente.getPassword());
 			
 			statement.executeUpdate();
@@ -120,7 +120,8 @@ public class DAOUtente implements IDAOUtente {
 		return utente;
 	
 	}
-
+	
+	// In questo metodo l'utente può modificare solo mail, telefono e nickname. 
 	@Override
 	public void update(Utente utente) throws DAOException {
 		
@@ -129,14 +130,12 @@ public class DAOUtente implements IDAOUtente {
 		
 		try {
 			
-			statement = connection.prepareStatement("UPDATE UTENTE SET MAIL = ?, TELEFONO = ?, NICKNAME = ?, ABILITATO = ?, AMMINISTRATORE = ? WHERE ID = ?");
+			statement = connection.prepareStatement("UPDATE UTENTE SET MAIL = ?, TELEFONO = ?, NICKNAME = ? WHERE ID = ?");
 			
 			statement.setString(1,utente.getMail());
 			statement.setString(2,utente.getTelefono());
 			statement.setString(3, utente.getNickname());
-			statement.setInt(4, utente.getAbilitato());
-			statement.setInt(5, utente.getAmministratore());
-			statement.setLong(6, utente.getId());
+			statement.setLong(4, utente.getId());
 			statement.executeUpdate();
 						
 		} catch (SQLException e) {
@@ -177,7 +176,13 @@ public class DAOUtente implements IDAOUtente {
 
 	}
 
-
+	
+	/**
+	 * Il metodo confronta la password inserita dall'utente con quella memorizzata nel database e resituisce un booleano.
+	 * @param Utente utente
+	 * @return boolean
+	 * @throws DAOException
+	 */
 	@Override
 	public boolean verificaPassword(Utente utente) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
@@ -208,6 +213,4 @@ public class DAOUtente implements IDAOUtente {
 		}
 		return false;
 	}
-	
-
 }

@@ -13,7 +13,7 @@ import it.modello.Utente;
 public class DAOUtenteAdmin extends DAOUtente {
 	
 	/**
-	 * La funzione serve per verificare se l'utente, selezionato tramite ID, è abilitato oppure no.
+	 * Il metodo serve per verificare se l'utente, selezionato tramite ID, è abilitato oppure no.
 	 * @param id
 	 * @return boolean
 	 * @throws DAOException
@@ -47,6 +47,8 @@ public class DAOUtenteAdmin extends DAOUtente {
 		}
 		return false;
 	}
+	
+	
 
 	
 	/**
@@ -57,7 +59,6 @@ public class DAOUtenteAdmin extends DAOUtente {
 	public void abilita (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
-		Utente utente = new Utente();
 		try {
 			if(!isAbilitato(id)) {
 				statement = connection.prepareStatement("UPDATE UTENTE SET ABILITATO = 1 WHERE ID = ?");
@@ -86,7 +87,170 @@ public class DAOUtenteAdmin extends DAOUtente {
 			statement = connection.prepareStatement("UPDATE UTENTE SET ABILITATO = 0 WHERE ID = ?");
 			statement.setLong(1, id);
 			statement.executeUpdate();
-			System.out.println("é disabilitato");
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE disabilita utenteAdmin" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+	}
+	
+	/**
+	 * Il metodo serve per verificare se l'utente, selezionato tramite ID, è amministratore oppure no.
+	 * @param id
+	 * @return
+	 * @throws DAOException
+	 */
+	public boolean isAmministratore (Long id) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Utente utente = null;
+		
+		try {
+			statement = connection.prepareStatement("SELECT AMMINISTRATORE FROM UTENTE WHERE ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				utente = new Utente();
+				utente.setAmministratore(resultSet.getInt("AMMINISTRATORE"));
+			} 
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE isAmministratore utente" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		if (utente.getAmministratore() == 1){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/**
+	 * Il metodo controlla, richiamando il metodo isAmministratore, se l'utente è amministratore, e nel caso non lo fosse lo promuove ad amministratore.
+	 * @param id
+	 * @throws DAOException
+	 */
+	public void rendiAmministratore (Long id) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		try {
+			if(!isAmministratore(id)) {
+				statement = connection.prepareStatement("UPDATE UTENTE SET AMMINISTRATORE = 1 WHERE ID = ?");
+				statement.setLong(1, id);
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE rendiAmministratore utenteAdmin" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+	}
+	
+	
+	/**
+	 * Il metodo controlla, richiamando il metodo isAmministratore, se l'utente è amministratore, e nel caso gli revoca la qualifica.
+	 * @param id
+	 * @throws DAOException
+	 */
+	public void escludiAmministratore (Long id) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		try {
+			if(isAmministratore(id)) {
+				statement = connection.prepareStatement("UPDATE UTENTE SET AMMINISTRATORE = 0 WHERE ID = ?");
+				statement.setLong(1, id);
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE rendiAmministratore utenteAdmin" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+	}
+	
+	
+	/**
+	 *  Il metodo serve per verificare se l'attivita, selezionata tramite ID, è abilitata oppure no.
+	 * @param id
+	 * @throws DAOException
+	 */
+	public boolean isAbilitata (Long id) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Attivita attivita = null;
+		
+		try {
+			statement = connection.prepareStatement("SELECT ABILITATA FROM ATTIVITA WHERE ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				attivita = new Attivita();
+				attivita.setAbilitata(resultSet.getInt("ABILITATA"));
+			} 
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE isAbilitata attivita" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		if (attivita.getAbilitata() == 1){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/**
+	 * Il metodo controlla, richiamando il metodo isAbilitata, se l'attivita è abilitata, e nel caso non lo fosse l'abilita.
+	 * @param id
+	 * @throws DAOException
+	 */
+	public void abilitaAttivita (Long id) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		try {
+			if(!isAbilitata(id)) {
+				statement = connection.prepareStatement("UPDATE ATTIVITA SET ABILITATA = 1 WHERE ID = ?");
+				statement.setLong(1, id);
+				statement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE abilita attivita" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+	}
+	
+	
+	/**
+	 * Il metodo controlla, richiamando il metodo isAbilitata, se l'attivita è abilitata, e nel caso lo fosse la disabilita.
+	 * @param id
+	 * @throws DAOException
+	 */
+	public void disabilitaAttivita (Long id) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		try {
+			if(isAbilitata(id)) {
+			statement = connection.prepareStatement("UPDATE ATTIVITA SET ABILITATA = 0 WHERE ID = ?");
+			statement.setLong(1, id);
+			statement.executeUpdate();
 			}
 		} catch (SQLException e) {
 			throw new DAOException("ERRORE disabilita utenteAdmin" + e.getMessage(), e);
@@ -240,9 +404,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
 		}
-		
 		return risultato;
-		
 	}
 	
 	
@@ -294,7 +456,6 @@ public class DAOUtenteAdmin extends DAOUtente {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		
 		try {
 			risultato = new LinkedHashMap<Integer, Long>();
 			connection = DataSource.getInstance().getConnection();
@@ -310,9 +471,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
 		}
-		
 		return risultato;
-		
 	}
 
 	

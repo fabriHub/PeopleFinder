@@ -25,7 +25,7 @@ public class DAOAttivita implements IDAOAttivita {
 			
 			statement.setString(1, attivita.getNome());
 			statement.setInt(2, attivita.getNumeroPartecipanti());
-			statement.setInt(3, attivita.getAbilitata());
+			statement.setInt(3, 1);
 		
 			statement.executeUpdate();
 			
@@ -107,11 +107,10 @@ public class DAOAttivita implements IDAOAttivita {
 		PreparedStatement statement = null;		
 		try {
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("UPDATE ATTIVITA SET NOME = ?, NUMERO_PARTECIPANTI = ?, ABILITATA = ? WHERE ID = ?");
+			statement = connection.prepareStatement("UPDATE ATTIVITA SET NOME = ?, NUMERO_PARTECIPANTI = ? WHERE ID = ?");
 			statement.setString(1, attivita.getNome());
 			statement.setInt(2, attivita.getNumeroPartecipanti());
-			statement.setInt(3, attivita.getAbilitata());
-			statement.setLong(4, attivita.getId());
+			statement.setLong(3, attivita.getId());
 			statement.executeUpdate();  
 		} catch (SQLException e) {
 			throw new DAOException("ERRORE update attività" + e.getMessage(), e);

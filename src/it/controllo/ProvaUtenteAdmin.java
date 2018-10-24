@@ -25,7 +25,46 @@ public class ProvaUtenteAdmin {
 //		statistiche1();
 //		statistiche2();
 //		isAbilitatoUtente();
+//		isAmministratore1();
+//		rendiAmministratore1(22L);
+//		escludiAmministratore1(22L);
+//		isAbilitataAttivita();
+//		disabilitaAttivita1(21L);
+//		abilitaAttivita1(21L);
 		
+	}
+	
+	public static void isAbilitataAttivita () {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Attivita attivita = new Attivita();
+		attivita.setId(attivita.getId());
+		try {
+			daoUtenteAdmin.isAbilitata(21L);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void disabilitaAttivita1 (Long id) {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Attivita attivita = new Attivita();
+		attivita.setId(id);
+		try {
+			daoUtenteAdmin.disabilitaAttivita(id);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void abilitaAttivita1 (Long id) {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Attivita attivita = new Attivita();
+		attivita.setId(id);
+		try {
+			daoUtenteAdmin.abilitaAttivita(id);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static void isAbilitatoUtente () {
@@ -34,6 +73,17 @@ public class ProvaUtenteAdmin {
 		utente.setId(utente.getId());
 		try {
 			daoUtenteAdmin.isAbilitato(22L);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void isAmministratore1 () {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Utente utente = new Utente();
+		utente.setId(utente.getId());
+		try {
+			daoUtenteAdmin.isAmministratore(22L);
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -50,12 +100,34 @@ public class ProvaUtenteAdmin {
 		}
 	}
 	
+	public static void rendiAmministratore1 (Long id) {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Utente utente = new Utente();
+		utente.setId(id);
+		try {
+			daoUtenteAdmin.rendiAmministratore(id);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	public static void disabilitaUtente (Long id) {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
 		Utente utente = new Utente();
 		utente.setId(id);
 		try {
 			daoUtenteAdmin.disabilita(id);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void escludiAmministratore1 (Long id) {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		Utente utente = new Utente();
+		utente.setId(id);
+		try {
+			daoUtenteAdmin.escludiAmministratore(id);
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
 		}

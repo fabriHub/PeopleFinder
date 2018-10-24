@@ -112,7 +112,6 @@ public class DAOGruppo implements IDAOGruppo {
 			DataSource.getInstance().close(connection);
 		}
 		return gruppo;
-	
 	}
 
 	@Override
@@ -165,9 +164,5 @@ public class DAOGruppo implements IDAOGruppo {
 			DataSource.getInstance().close(connection);
 			
 		}
-
-	
-
 	}
-
 }

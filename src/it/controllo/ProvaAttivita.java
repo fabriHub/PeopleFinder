@@ -11,10 +11,10 @@ public class ProvaAttivita {
 
 	public static void main(String[] args) {
 
-		addAttivita();
-		findAllAttivita();
+//		addAttivita();
+//		findAllAttivita();
 //		findByIdAttivita(2L);
-//		updateAttivita(2L);
+//		updateAttivita(21L);
 //		deleteAttivita(2L);
 		
 	}
@@ -24,9 +24,8 @@ public class ProvaAttivita {
 		IDAOAttivita daoAttivita = new DAOAttivita();
 		Attivita attivita = new Attivita();
 		
-		attivita.setNome("Calcetto");
-		attivita.setNumeroPartecipanti(10);
-		attivita.setAbilitata(1);
+		attivita.setNome("Scacchi");
+		attivita.setNumeroPartecipanti(2);
 		
 		try {
 			daoAttivita.add(attivita);
@@ -64,9 +63,8 @@ public class ProvaAttivita {
 		IDAOAttivita daoAttivita = new DAOAttivita();		
 		Attivita attivita = new Attivita();
 		attivita.setId(id);
-		attivita.setNome("sumo");
-		attivita.setNumeroPartecipanti(3);
-		attivita.setAbilitata(1);
+		attivita.setNome("Equitazione");
+		attivita.setNumeroPartecipanti(8);
 		try {
 			daoAttivita.update(attivita);
 		} catch (DAOException e) {
