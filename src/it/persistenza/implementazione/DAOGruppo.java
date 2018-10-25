@@ -204,4 +204,74 @@ public class DAOGruppo implements IDAOGruppo {
 			
 		}
 	}
+
+	@Override
+	public boolean isScaduto(Long id) throws DAOException {
+		
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Long dataDB = null;
+		try {
+			statement = connection.prepareStatement("SELECT DATA_EVENTO FROM GRUPPO WHERE ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				dataDB = resultSet.getLong("DATA_EVENTO");
+			}
+
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE isScaduto gruppo" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		
+		Date dataAttuale = new Date();
+		
+		if (dataDB < dataAttuale.getTime()) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean isCompleto (Long id) throws DAOException {
+		
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		boolean risultato = false;
+		
+		try {
+			statement = connection.prepareStatement("SELECT COMPLETO FROM GRUPPO WHERE ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				if (resultSet.getInt("COMPLETO") == 1) {
+					risultato = true;
+				}
+				
+			}
+
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE isCompleto gruppo" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		
+		return risultato;
+	}
+	
+	
 }

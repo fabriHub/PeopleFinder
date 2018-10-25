@@ -18,6 +18,7 @@ public class ProvaUtente {
 //		delete();
 //		findAll();
 //		verificaPasswordUtente();
+//		loginUtente();
 	}
 	
 	private static void addUtente() {
@@ -71,8 +72,8 @@ public class ProvaUtente {
 		IDAOUtente mioUtente = new DAOUtente();
 		
 		Utente utente = new Utente();
-		utente.setId(1L);
-		utente.setMail("provaMail2");
+		utente.setId(61L);
+		utente.setMail("prova@mail.it");
 		utente.setNickname("utente2");
 		utente.setTelefono("+39123455");
 		utente.setAbilitato(1);
@@ -99,16 +100,21 @@ public class ProvaUtente {
 		}
 	}
 	
-	private static void verificaPasswordUtente () {
+	
+	
+	private static void loginUtente () {
 		IDAOUtente mioUtente = new DAOUtente();
-		Utente utente = new Utente();
-		utente.setId(6L);
-		utente.hashPassword("");
+		Utente utenteTmp = new Utente();
+		utenteTmp.setMail("provaMail");
+		utenteTmp.hashPassword("Password");
+		
+		Utente utente = null;
 		
 		try {
-			
-			if(mioUtente.verificaPassword(utente)) {
+			utente = mioUtente.loginUtente(utenteTmp);
+			if(utente != null) {
 				System.out.println("sono uguali");
+				System.out.println(utente);
 			}else {
 				System.out.println("sono diversi");
 			}
@@ -117,6 +123,7 @@ public class ProvaUtente {
 			e.printStackTrace();
 		}
 	}
+	
 	
 }
 

@@ -176,41 +176,101 @@ public class DAOUtente implements IDAOUtente {
 
 	}
 
-	
-	/**
-	 * Il metodo confronta la password inserita dall'utente con quella memorizzata nel database e resituisce un booleano.
-	 * @param Utente utente
-	 * @return boolean
-	 * @throws DAOException
-	 */
+
 	@Override
-	public boolean verificaPassword(Utente utente) throws DAOException {
+	public Utente loginUtente(Utente utente) throws DAOException {
+		
+		Utente utenteTmp = null;
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		Utente utenteTmp = null;
 		
 		try {
-			statement = connection.prepareStatement("SELECT PASSWORD FROM UTENTE WHERE ID = ?");
-			statement.setLong(1, utente.getId());
+			statement = connection.prepareStatement("SELECT * FROM UTENTE WHERE MAIL = ? AND PASSWORD = ?");
+			statement.setString(1, utente.getMail());
+			statement.setString(2, utente.getPassword());
 			resultSet = statement.executeQuery();
 			
 			if (resultSet.next()) {
 				utenteTmp = new Utente();
-				utenteTmp.setPassword(resultSet.getString("PASSWORD"));
-			} 
+				utenteTmp.setId(resultSet.getLong("ID"));
+				utenteTmp.setMail(resultSet.getString("MAIL"));
+				utenteTmp.setNickname(resultSet.getString("NICKNAME"));
+				utenteTmp.setAbilitato(resultSet.getInt("ABILITATO"));
+				utenteTmp.setAmministratore(resultSet.getInt("AMMINISTRATORE"));
+				utenteTmp.setTelefono(resultSet.getString("TELEFONO"));
+				
+			}
 		} catch (SQLException e) {
 			
-			throw new DAOException("ERRORE verificaPassword utente" + e.getMessage(), e);
+			throw new DAOException("ERRORE loginUtente utente" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
 		}
-		if (utenteTmp != null && utente.getPassword().equals(utenteTmp.getPassword())){
-			return true;
+		return utenteTmp;
+	}
+
+	
+	private boolean writePassword(Utente utente) throws DAOException {
+		
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		boolean risultato = true;
+		
+		try {
+			
+			statement = connection.prepareStatement("UPDATE UTENTE SET PASSWORD = ? WHERE ID = ?");
+			
+			statement.setString(1,utente.getPassword());
+			statement.setLong(2, utente.getId());
+			statement.executeUpdate();
+						
+		} catch (SQLException e) {
+			risultato = false;
+			throw new DAOException("ERRORE writePassword utente" + e.getMessage(), e);
+			
+		} finally {
+			
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+			
 		}
-		return false;
+		
+		return risultato;
+	}
+	
+	
+	@Override
+	public boolean updatePassword(Utente oldPwd, Utente newPwd) throws DAOException {
+		newPwd.setId(oldPwd.getId());
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		boolean risultato = false;
+		
+		try {
+			statement = connection.prepareStatement("SELECT * FROM UTENTE WHERE ID = ? AND PASSWORD = ?");
+			statement.setLong(1, oldPwd.getId());
+			statement.setString(2, oldPwd.getPassword());
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				if(this.writePassword(newPwd)) {
+					risultato = true;
+				}
+			}
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE updateUtente utente" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return risultato;
 	}
 }

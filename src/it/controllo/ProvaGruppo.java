@@ -12,13 +12,16 @@ public class ProvaGruppo {
 
 	public static void main(String[] args) {
 		
-//		addGruppo();
-//		findAllGruppo();
+		addGruppo();
+		findAllGruppo();
 //		findGruppoById();
 //		updateGruppo();
 //		deleteGruppo();
 //		findAllGruppo();
 //		findByIdUtente1();
+//		isCompleto();
+		isScaduto();
+		
 		
 	}
 
@@ -29,7 +32,7 @@ public class ProvaGruppo {
 		
 		gruppo.setIdUtente(22L);
 		gruppo.setIdAttivita(4L);
-		gruppo.setData(new Date(2011, 11, 11, 11, 11));
+		gruppo.setData(new Date(117, 0, 1));
 		gruppo.setDescrizione("mi sono rotto di stare da solo");
 		try {
 			daoGruppo.add(gruppo);
@@ -108,6 +111,36 @@ public class ProvaGruppo {
 			daoGruppo.delete(23L);
 			
 		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void isCompleto () {
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		
+		try {
+			if (daoGruppo.isCompleto(26L)) {
+				System.out.println("Il gruppo è completo");
+			} else {
+				System.out.println("Il gruppo non è completo");
+			}
+		} catch (DAOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public static void isScaduto () {
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		
+		try {
+			if (daoGruppo.isScaduto(42L)) {
+				System.out.println("Il gruppo è scaduto");
+			} else {
+				System.out.println("Il gruppo non è scaduto");
+			}
+		} catch (DAOException e) {
+			
 			e.printStackTrace();
 		}
 	}

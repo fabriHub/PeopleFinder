@@ -13,6 +13,8 @@ public interface IDAOGruppo {
 		public Gruppo findById (Long id) throws DAOException;
 		public void update (Gruppo gruppo) throws DAOException;
 		public void delete (Long id) throws DAOException;
+		public boolean isScaduto (Long id) throws DAOException;
+		public boolean isCompleto (Long id) throws DAOException;
 		
 
 }
