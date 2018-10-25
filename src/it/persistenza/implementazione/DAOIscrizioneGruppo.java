@@ -11,7 +11,11 @@ import it.modello.IscrizioneGruppo;
 import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
 
 public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
-
+	
+	/**
+	 * Il metodo consente ad un un utente di iscriversi ad un gruppo.
+	 * @throws DAOException
+	 */
 	@Override
 	public void add(IscrizioneGruppo iscrizioneGruppo) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
@@ -41,7 +45,13 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		}
 
 	}
-
+	
+	
+	/**
+	 * Il metodo restituisce la lista di tutti gli utenti iscritti ad ogni gruppo.
+	 * @return List<IscrizioneGruppo> iscrizioneGruppi
+	 * @throws DAOException
+	 */
 	@Override
 	public List<IscrizioneGruppo> findAll() throws DAOException {
 		List <IscrizioneGruppo> iscrizioneGruppi = new ArrayList<IscrizioneGruppo>(0);
@@ -68,7 +78,9 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		return iscrizioneGruppi;
 	
 	}
-
+	
+	
+	// Metodo non utilizzato
 	@Override
 	public IscrizioneGruppo findById(Long id) throws DAOException {
 		IscrizioneGruppo iscrizioneGruppo = null;
@@ -99,6 +111,12 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		return iscrizioneGruppo;
 	}
 	
+	
+	/**
+	 * Il metodo restituisce la lista di tutti i gruppi a cui è iscritto un determinato utente.
+	 * @return List<IscrizioneGruppo> iscrizioneGruppi
+	 * @throws DAOException
+	 */
 	@Override
 	public List<IscrizioneGruppo> findGruppiByIdUtente(Long id) throws DAOException {
 		List <IscrizioneGruppo> iscrizioneGruppi = new ArrayList<IscrizioneGruppo>(0);
@@ -131,6 +149,12 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		return iscrizioneGruppi;
 	}
 	
+	
+	/**
+	 * Il metodo restituisce la lista di tutti gli utenti iscritti ad un determinato gruppo.
+	 * @return List<IscrizioneGruppo> iscrizioneGruppi
+	 * @throws DAOException
+	 */
 	@Override
 	public List<IscrizioneGruppo> findUtentiByIdGruppo(Long id) throws DAOException {
 		List <IscrizioneGruppo> iscrizioneGruppi = new ArrayList<IscrizioneGruppo>(0);
@@ -162,7 +186,9 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		}
 		return iscrizioneGruppi;
 	}
-
+	
+	
+	// Metodo non utilizzato
 	@Override
 	public void update(IscrizioneGruppo iscrizioneGruppo) throws DAOException {
 		Connection connection = null;
@@ -182,7 +208,12 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 			DataSource.getInstance().close(connection);
 		}		
 	}
-
+	
+	
+	/**
+	 * Il metodo consente ad un un utente di uscire da un gruppo.
+	 * @throws DAOException
+	 */
 	@Override
 	public void delete(Long id) throws DAOException {
 		Connection connection = null;

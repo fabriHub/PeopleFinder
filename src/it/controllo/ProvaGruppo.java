@@ -18,7 +18,7 @@ public class ProvaGruppo {
 //		updateGruppo();
 //		deleteGruppo();
 //		findAllGruppo();
-		findByIdUtente1();
+//		findByIdUtente1();
 		
 	}
 
@@ -27,11 +27,10 @@ public class ProvaGruppo {
 		IDAOGruppo daoGruppo = new DAOGruppo();
 		Gruppo gruppo = new Gruppo();
 		
-		gruppo.setIdUtente(61L);
+		gruppo.setIdUtente(22L);
 		gruppo.setIdAttivita(4L);
-		gruppo.setCompleto(0);
 		gruppo.setData(new Date(2011, 11, 11, 11, 11));
-		gruppo.setDescrizione("ho voglia di amici");
+		gruppo.setDescrizione("mi sono rotto di stare da solo");
 		try {
 			daoGruppo.add(gruppo);
 		} catch (DAOException e) {
