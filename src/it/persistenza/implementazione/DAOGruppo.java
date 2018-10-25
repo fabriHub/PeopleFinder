@@ -114,6 +114,13 @@ public class DAOGruppo implements IDAOGruppo {
 		return gruppo;
 	}
 	
+	
+	/**
+	 * Il metodo restituisce tutti i gruppi creati da quel determinato utente.
+	 * @param id
+	 * @return List <Gruppo> gruppi
+	 * @throws DAOException
+	 */
 	@Override
 	public List<Gruppo> findByIdUtente(Long id) throws DAOException {
 		List <Gruppo> gruppi = new ArrayList<Gruppo>(0);
@@ -171,10 +178,7 @@ public class DAOGruppo implements IDAOGruppo {
 			
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
-			
 		}
-		
-
 	}
 
 	@Override
