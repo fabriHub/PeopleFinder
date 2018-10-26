@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List" %>
-<%@ page import="it.modello.Attivita" %>
+<%@ page import="it.modello.IscrizioneGruppo" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,26 +14,24 @@
 
 <p>Output</p>
 
-	<% List<Attivita> allAttivita = (List<Attivita>)request.getAttribute("listaAttivita");
+	 <% //List<IscrizioneGruppo> gruppi = (List<IscrizioneGruppo>)request.getAttribute("listaUtentiIscrizioneGruppi");
 		//for (Utente utente: utenti){
 		//	out.println(utente);
 		//}
-		out.println("provaAggiuntaAttivita");
-		if(allAttivita != null){
-			out.println(allAttivita.toString());
-		}
-		out.println(request.getParameter("xxx"));
-	%>
+		//out.println("provaUtentiByIdGruppo");
+		//if(gruppi != null){
+		//	out.println(gruppi.toString());
+		//}
+	%> 
 
-<form method="POST" action="aggiungiAttivita">
+<form method="GET" action="abilitaUtente">
 	
-	<input type="text" name="nome" placeholder="inserisci nome"/>
-	<input type="text" name="numero_partecipanti" placeholder="inserisci numero_partecipanti"/>
+	<input type="text" name="id_utente" placeholder="inserisci id utente"/>
 	
 	<input type="submit" value="submit"/>
 </form>
 
-<a href="findAllAttivita">link servlet</a>
+<a href="findAllUtenti">link servlet</a>
 
 </body>
 </html>

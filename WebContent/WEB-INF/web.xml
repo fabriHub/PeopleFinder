@@ -60,12 +60,44 @@
     <servlet-name>AggiungiGruppoServlet</servlet-name>
     <url-pattern>/aggiungiGruppo</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>AggiungiAttivitaServlet</servlet-name>
     <servlet-class>it.controllo.AggiungiAttivitaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AggiungiAttivitaServlet</servlet-name>
     <url-pattern>/aggiungiAttivita</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FindByIdUtenteServlet</servlet-name>
+    <servlet-class>it.controllo.FindByIdUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindByIdUtenteServlet</servlet-name>
+    <url-pattern>/findByIdUtente</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FindGruppiByIdUtenteServlet</servlet-name>
+    <servlet-class>it.controllo.FindGruppiByIdUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindGruppiByIdUtenteServlet</servlet-name>
+    <url-pattern>/findGruppiByIdUtente</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FindUtentiByIdGruppoServlet</servlet-name>
+    <servlet-class>it.controllo.FindUtentiByIdGruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindUtentiByIdGruppoServlet</servlet-name>
+    <url-pattern>/findUtentiByIdGruppo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AbilitaUtenteServlet</servlet-name>
+    <servlet-class>it.controllo.AbilitaUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AbilitaUtenteServlet</servlet-name>
+    <url-pattern>/abilitaUtente</url-pattern>
   </servlet-mapping>
 </web-app>
