@@ -1,36 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	id="WebApp_ID" version="3.0">
-	<display-name>PeopleFinder</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
-
-	<servlet>
-		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>it.controllo.LoginServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>RegistratiServlet</servlet-name>
-		<servlet-class>it.controllo.RegistratiServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>RegistratiServlet</servlet-name>
-		<url-pattern>/registrati</url-pattern>
-	</servlet-mapping>
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>PeopleFinder</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>it.controllo.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegistratiServlet</servlet-name>
+    <servlet-class>it.controllo.RegistratiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistratiServlet</servlet-name>
+    <url-pattern>/registrati</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>it.controllo.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FindAllUtentiServlet</servlet-name>
+    <servlet-class>it.controllo.FindAllUtentiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindAllUtentiServlet</servlet-name>
+    <url-pattern>/findAllUtenti</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FindAllGruppoServlet</servlet-name>
+    <servlet-class>it.controllo.FindAllGruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindAllGruppoServlet</servlet-name>
+    <url-pattern>/findAllGruppo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FindAllAttivitaServlet</servlet-name>
+    <servlet-class>it.controllo.FindAllAttivitaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindAllAttivitaServlet</servlet-name>
+    <url-pattern>/findAllAttivita</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AggiungiGruppoServlet</servlet-name>
+    <servlet-class>it.controllo.AggiungiGruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiungiGruppoServlet</servlet-name>
+    <url-pattern>/aggiungiGruppo</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>AggiungiAttivitaServlet</servlet-name>
+    <servlet-class>it.controllo.AggiungiAttivitaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiungiAttivitaServlet</servlet-name>
+    <url-pattern>/aggiungiAttivita</url-pattern>
+  </servlet-mapping>
 </web-app>

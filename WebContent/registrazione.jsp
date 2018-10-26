@@ -39,7 +39,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Inserisci un'email valida: 12345@mail.com">
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input class="input100" type="text" name="email" placeholder="Email" value="<% if(request.getParameter("email")!= null){ out.println(request.getParameter("email")); } %>">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -47,7 +47,7 @@
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate = "Inserisci un nickname">
-						<input class="input100" type="text" name="nickname" placeholder="Nickname">
+						<input class="input100" type="text" name="nickname" placeholder="Nickname" value="<% if(request.getParameter("nickname")!= null){ out.println(request.getParameter("nickname")); } %>">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -55,7 +55,7 @@
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate = "Inserisci un numero di telefono">
-						<input class="input100" type="text" name="telefono" placeholder="Telefono">
+						<input class="input100" type="text" name="telefono" placeholder="Telefono" value="<% if(request.getParameter("telefono")!= null){ out.println(request.getParameter("telefono")); } %>">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-phone" aria-hidden="true"></i>
@@ -78,7 +78,18 @@
 						</span>
 					</div>
 					
-
+					<%	if(request.getParameter("errore") != null && Integer.parseInt(request.getParameter("errore")) == 1 ){ %>
+						<div class="text-center p-t-20 errore" >
+							le password devono essere uguali
+						</div>
+					<%	} %>
+					
+					<%	if(request.getParameter("errore") != null && Integer.parseInt(request.getParameter("errore")) == 2 ){ %>
+						<div class="text-center p-t-20" style="color: red; background-color: rgba(0,0,0,0);">
+							utente già esistente
+						</div>
+					<%	} %>
+					
 					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">

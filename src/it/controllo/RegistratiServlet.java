@@ -1,8 +1,8 @@
 package it.controllo;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +14,9 @@ import it.persistenza.implementazione.DAOUtente;
 import it.persistenza.interfaccia.IDAOUtente;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class RegistratiServlet
  */
-
+//@WebServlet("/RegistratiServlet")
 public class RegistratiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,26 +39,35 @@ public class RegistratiServlet extends HttpServlet {
 		}
 		
 		IDAOUtente daoUtente = new DAOUtente();
-		Utente utente = null;
 		
-////		utenteTmp.setMail(request.getParameter("email"));
-////		utenteTmp.hashPassword(request.getParameter("password"));
-//		
-//		try {
-////			utente = daoUtente.loginUtente(utenteTmp);
-//			
-//		} catch (DAOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		if(utente != null) {
-//			HttpSession session = request.getSession();
-//			session.setAttribute("idUtente", utente.getId());
-//			session.setAttribute("isAmministratore", utente.getAmministratore());
-//			request.getRequestDispatcher("prova.html").forward(request, response);
-//		}
-		response.sendRedirect("./index.jsp?errore=1");
+		Utente utente = new Utente();
+		utente.setMail(request.getParameter("email"));
+		utente.setTelefono(request.getParameter("telefono"));
+		utente.setNickname(request.getParameter("nickname"));
+		
+		try {
+			if(daoUtente.existsUtente(utente)) {
+				request.getRequestDispatcher("registrazione.jsp?errore=2").forward(request, response);
+			}
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		
+		utente.hashPassword(request.getParameter("password1"));
+
+		try {
+			daoUtente.add(utente);
+			
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		
+		response.sendRedirect("./prova.html?registrazione=1");
+
+		/*request.setAttribute("prova", "attributo");
+		
+		request.getRequestDispatcher("./provaServlet.jsp?prova=1").forward(request, response);*/
+		
 	}
 
 }

@@ -273,4 +273,35 @@ public class DAOUtente implements IDAOUtente {
 		}
 		return risultato;
 	}
+
+	@Override
+	public boolean existsUtente(Utente utente) throws DAOException {
+		
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		boolean risultato = false;
+		
+		try {
+			statement = connection.prepareStatement("SELECT * FROM UTENTE WHERE MAIL = ? OR TELEFONO = ? OR NICKNAME = ?");
+			statement.setString(1, utente.getMail());
+			statement.setString(2, utente.getTelefono());
+			statement.setString(3, utente.getNickname());
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				risultato = true;
+			}
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE existsUtente utente" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return risultato;
+	
+	}
 }
