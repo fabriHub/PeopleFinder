@@ -29,7 +29,7 @@ public class DeleteIscrizioneGruppoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
 		Long id = Long.parseLong(request.getParameter("id"));

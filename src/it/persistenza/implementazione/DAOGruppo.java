@@ -275,6 +275,4 @@ public class DAOGruppo implements IDAOGruppo {
 		
 		return risultato;
 	}
-	
-	
 }

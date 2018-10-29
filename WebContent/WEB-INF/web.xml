@@ -140,4 +140,52 @@
     <servlet-name>UpdateGruppoServlet</servlet-name>
     <url-pattern>/updateGruppo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateUtenteServlet</servlet-name>
+    <servlet-class>it.controllo.UpdateUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateUtenteServlet</servlet-name>
+    <url-pattern>/updateUtente</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AbilitaAttivitaServlet</servlet-name>
+    <servlet-class>it.controllo.AbilitaAttivitaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AbilitaAttivitaServlet</servlet-name>
+    <url-pattern>/abilitaAttivita</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DisabilitaAttivitaServlet</servlet-name>
+    <servlet-class>it.controllo.DisabilitaAttivitaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisabilitaAttivitaServlet</servlet-name>
+    <url-pattern>/disabilitaAttivita</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AggiungiIscrizioneGruppoServlet</servlet-name>
+    <servlet-class>it.controllo.AggiungiIscrizioneGruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiungiIscrizioneGruppoServlet</servlet-name>
+    <url-pattern>/aggiungiIscrizioneGruppo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdatePasswordServlet</servlet-name>
+    <servlet-class>it.controllo.UpdatePasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdatePasswordServlet</servlet-name>
+    <url-pattern>/updatePassword</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>StatisticheServlet</servlet-name>
+    <servlet-class>it.controllo.StatisticheServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StatisticheServlet</servlet-name>
+    <url-pattern>/statistiche</url-pattern>
+  </servlet-mapping>
 </web-app>

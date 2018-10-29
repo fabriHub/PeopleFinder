@@ -266,17 +266,75 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return int numeroUtenti
 	 * @throws DAOException
 	 */
-	public int contaUtenti () throws DAOException{
+	public double contaUtenti () throws DAOException{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		double numeroUtenti = 0.0;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT COUNT(ID) FROM UTENTE");
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				numeroUtenti = resultSet.getDouble(1);
+			}
+		} catch (SQLException | DAOException e) {
+			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return numeroUtenti;
+	}
+	
+	
+	/**
+	 * Il metodo restituisce il numero totale di utenti iscritti abilitati.
+	 * @return int numeroUtenti
+	 * @throws DAOException
+	 */
+	public double contaUtentiAbilitati () throws DAOException{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		double numeroUtenti = 0.0;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT COUNT(ID) FROM UTENTE WHERE ABILITATO = 1");
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				numeroUtenti = resultSet.getDouble(1);
+			}
+		} catch (SQLException | DAOException e) {
+			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return numeroUtenti;
+	}
+	
+	
+	/**
+	 * Il metodo restituisce il numero totale di utenti iscritti disabilitati.
+	 * @return int numeroUtenti
+	 * @throws DAOException
+	 */
+	public int contaUtentiDisabilitati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		int numeroUtenti = 0;
 		try {
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT(ID) FROM UTENTE");
+			statement = connection.prepareStatement("SELECT COUNT(ID) FROM UTENTE WHERE ABILITATO = 0");
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				numeroUtenti = resultSet.getInt(1);
+				
+				System.out.println(numeroUtenti);
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);

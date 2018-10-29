@@ -11,7 +11,7 @@ import it.persistenza.implementazione.DAOUtenteAdmin;
 public class ProvaUtenteAdmin {
 
 	public static void main(String[] args) {
-		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		
 
 		
 //		daoUtenteAdmin.contaUtenti();
@@ -31,8 +31,10 @@ public class ProvaUtenteAdmin {
 //		isAbilitataAttivita();
 //		disabilitaAttivita1(21L);
 //		abilitaAttivita1(21L);
-		
+//		contaUtentiDis();
+	
 	}
+	
 	
 	public static void isAbilitataAttivita () {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
@@ -44,6 +46,18 @@ public class ProvaUtenteAdmin {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
+	public static void contaUtentiDis () {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		try {
+			daoUtenteAdmin.contaUtentiDisabilitati();
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
 	
 	public static void disabilitaAttivita1 (Long id) {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
