@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List" %>
-<%@ page import="it.modello.IscrizioneGruppo" %>
+<%@ page import="it.modello.Gruppo" %>
+<%@ page import="it.persistenza.interfaccia.IDAOGruppo" %>
+<%@ page import="it.persistenza.implementazione.DAOGruppo" %>
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,21 +16,29 @@
 
 <p>Output</p>
 
-	 <% //List<IscrizioneGruppo> gruppi = (List<IscrizioneGruppo>)request.getAttribute("listaUtentiIscrizioneGruppi");
-		//for (Utente utente: utenti){
-		//	out.println(utente);
-		//}
-		//out.println("provaUtentiByIdGruppo");
-		//if(gruppi != null){
-		//	out.println(gruppi.toString());
-		//}
-	%> 
+	<% 
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		out.println = request.getParameter("id");
+		Long id = Long.parseLong(request.getParameter("id"));
+		Gruppo gruppo = new Gruppo();
+		gruppo = daoGruppo.findById(id);
+		Integer anno = gruppo.getData().getYear() + 1900;
+		Integer mese = gruppo.getData().getMonth() + 1;
+	%>
+	
 
-<form method="GET" action="abilitaUtente">
+<form method="POST" action="updateGruppo">
 	
-	<input type="text" name="id_utente" placeholder="inserisci id utente"/>
+	<input type="text" name="id" value="<%= gruppo.getId() %>"/>
+	<input type="text" name="anno_evento" value="<%= anno %>"/>
+	<input type="text" name="mese_evento" value="<%= mese %>"/>
+	<input type="text" name="giorno_evento" value="<%= gruppo.getData().getDate() %>"/>
+	<input type="text" name="ora_evento" value="<%= gruppo.getData().getHours() %>"/>
+	<input type="text" name="minuti_evento" value="<%= gruppo.getData().getMinutes() %>"/>
+	<input type="text" name="descrizione" value="<%= gruppo.getDescrizione() %>"/>
 	
-	<input type="submit" value="submit"/>
+	
+	<input type="submit" value="modifica"/>
 </form>
 
 <a href="findAllUtenti">link servlet</a>

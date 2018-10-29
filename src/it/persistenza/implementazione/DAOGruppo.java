@@ -156,6 +156,9 @@ public class DAOGruppo implements IDAOGruppo {
 		return gruppi;
 	}
 
+	/**
+	 * Il metodo modifica solo data e descrizione
+	 */
 	@Override
 	public void update(Gruppo gruppo) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();

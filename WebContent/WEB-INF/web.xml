@@ -100,4 +100,44 @@
     <servlet-name>AbilitaUtenteServlet</servlet-name>
     <url-pattern>/abilitaUtente</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DisabilitaUtenteServlet</servlet-name>
+    <servlet-class>it.controllo.DisabilitaUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisabilitaUtenteServlet</servlet-name>
+    <url-pattern>/disabilitaUtente</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RendiAmministratoreServlet</servlet-name>
+    <servlet-class>it.controllo.RendiAmministratoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RendiAmministratoreServlet</servlet-name>
+    <url-pattern>/rendiAmministratore</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EscludiAmministratoreServlet</servlet-name>
+    <servlet-class>it.controllo.EscludiAmministratoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EscludiAmministratoreServlet</servlet-name>
+    <url-pattern>/escludiAmministratore</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteIscrizioneGruppoServlet</servlet-name>
+    <servlet-class>it.controllo.DeleteIscrizioneGruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteIscrizioneGruppoServlet</servlet-name>
+    <url-pattern>/deleteIscrizioneGruppo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateGruppoServlet</servlet-name>
+    <servlet-class>it.controllo.UpdateGruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateGruppoServlet</servlet-name>
+    <url-pattern>/updateGruppo</url-pattern>
+  </servlet-mapping>
 </web-app>
