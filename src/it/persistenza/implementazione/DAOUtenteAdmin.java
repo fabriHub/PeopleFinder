@@ -511,19 +511,19 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return Map<Integer, Long> risultato
 	 * @throws DAOException
 	 */
-	public Map<Long,Integer> partecipazioneUtentiAiGruppi() throws DAOException{
+	public Map<Long,Double> partecipazioneUtentiAiGruppi() throws DAOException{
 		
-		Map<Long,Integer> risultato = null;
+		Map<Long,Double> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			risultato = new LinkedHashMap<Long,Integer>();
+			risultato = new LinkedHashMap<Long,Double>();
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE) AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO, ATTIVITA.NUMERO_PARTECIPANTI FROM ISCRIZIONE_GRUPPO JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.ID_ATTIVITA, ATTIVITA.NUMERO_PARTECIPANTI) ORDER BY PARTECIPAZIONE DESC;");
+			statement = connection.prepareStatement("SELECT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE)*100/ATTIVITA.NUMERO_PARTECIPANTI AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO FROM ISCRIZIONE_GRUPPO JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.ID_ATTIVITA, ATTIVITA.NUMERO_PARTECIPANTI) ORDER BY PARTECIPAZIONE DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				risultato.put(resultSet.getLong(2),resultSet.getInt(1));
+				risultato.put(resultSet.getLong(2), resultSet.getDouble(1));
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE partecipazioneUtentiAiGruppi utenteAdmin" + e.getMessage(), e);

@@ -1,5 +1,7 @@
 package it.controllo;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -11,8 +13,6 @@ import it.persistenza.implementazione.DAOUtenteAdmin;
 public class ProvaUtenteAdmin {
 
 	public static void main(String[] args) {
-		
-
 		
 //		daoUtenteAdmin.contaUtenti();
 //		daoUtenteAdmin.contaGruppi();
@@ -164,11 +164,13 @@ public class ProvaUtenteAdmin {
 	
 	public static void statistiche2() {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
-		Map<Long, Integer> mappa;
+		Map<Long, Double> mappa;
 		try {
 			mappa = daoUtenteAdmin.partecipazioneUtentiAiGruppi();
-			for(Entry<Long, Integer> e : mappa.entrySet()) {
-				System.out.println(e.getKey() + " - " + e.getValue());
+			for(Entry<Long, Double> e : mappa.entrySet()) {
+				System.out.println(e.getKey() + " - " + BigDecimal.valueOf(e.getValue()).setScale(2, RoundingMode.HALF_UP).doubleValue() + "%");
+				
+				
 			}
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
