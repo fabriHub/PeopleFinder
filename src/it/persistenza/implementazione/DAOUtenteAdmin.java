@@ -322,11 +322,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return int numeroUtenti
 	 * @throws DAOException
 	 */
-	public int contaUtentiDisabilitati () throws DAOException{
+	public double contaUtentiDisabilitati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		int numeroUtenti = 0;
+		double numeroUtenti = 0.0;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT(ID) FROM UTENTE WHERE ABILITATO = 0");
@@ -356,7 +356,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		double numeroGruppi = 0;
+		double numeroGruppi = 0.0;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT(ID) FROM GRUPPO");
@@ -384,7 +384,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		double numeroGruppiCompletati = 0;
+		double numeroGruppiCompletati = 0.0;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 1");
@@ -408,11 +408,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return int numeroGruppiNonCompletati
 	 * @throws DAOException
 	 */
-	public int contaGruppiNonCompletati () throws DAOException{
+	public double contaGruppiNonCompletati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		int numeroGruppiNonCompletati = 0;
+		double numeroGruppiNonCompletati = 0.0;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 0");
@@ -484,12 +484,13 @@ public class DAOUtenteAdmin extends DAOUtente {
 			risultato = new LinkedHashMap<Attivita, Integer>();
 			attivita = null;
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
+			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID, NUMERO_PARTECIPANTI FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME, NUMERO_PARTECIPANTI) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				attivita = new Attivita();
 				attivita.setId(resultSet.getLong(3));
 				attivita.setNome(resultSet.getString(2));
+				attivita.setNumeroPartecipanti(resultSet.getInt(3));
 				risultato.put(attivita, resultSet.getInt(1));
 			}
 		} catch (SQLException | DAOException e) {

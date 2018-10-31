@@ -26,6 +26,12 @@
 
 <% out.println(request.getAttribute("percentualeGruppiCompletati")+"%"); %>
 
+<% out.println(request.getAttribute("popolaritaAttivitaCompleto")); %>
+
+<% out.println(request.getAttribute("popolaritaAttivitaNonCompleto")); %>
+
+<% out.println(request.getAttribute("percentualePartecipazioneUtentiAiGruppi")); %>
+
 <a href="findAllUtenti">link servlet</a>
 
 </body>
