@@ -352,11 +352,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return int numeroGruppi
 	 * @throws DAOException
 	 */
-	public int contaGruppi () throws DAOException{
+	public double contaGruppi () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		int numeroGruppi = 0;
+		double numeroGruppi = 0;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT(ID) FROM GRUPPO");
@@ -380,11 +380,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return int numeroGruppiCompletati
 	 * @throws DAOException
 	 */
-	public int contaGruppiCompletati () throws DAOException{
+	public double contaGruppiCompletati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		int numeroGruppiCompletati = 0;
+		double numeroGruppiCompletati = 0;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 1");
@@ -436,24 +436,25 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return Map<Integer, Attivita> risultato
 	 * @throws DAOException
 	 */
-	public Map<Integer,Attivita> popolaritaAttivitaNonCompleto() throws DAOException{
+	public Map<Attivita, Integer> popolaritaAttivitaNonCompleto() throws DAOException{
 		
-		Map<Integer,Attivita> risultato = null;
+		Map<Attivita,Integer> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Attivita attivita = null;
 		
 		try {
-			risultato = new LinkedHashMap<Integer, Attivita>();
-			attivita = new Attivita();
+			risultato = new LinkedHashMap<Attivita,Integer>();
+			attivita = null;
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 0  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
+				attivita = new Attivita();
 				attivita.setId(resultSet.getLong(3));    // scrive nella variabile ID dell'oggetto attivita quello che viene letto dalla query
 				attivita.setNome(resultSet.getString(2));   // scrive nella variabile nome dell'oggetto attivita quello che viene letto dalla query
-				risultato.put(resultSet.getInt(1), attivita);   // dato che la mappa è caratterizzata dal meccanismo chiave-valore, come chiave si usa il conteggio mentre come valore si usa l'oggetto attivita. 
+				risultato.put(attivita, resultSet.getInt(1));   // dato che la mappa è caratterizzata dal meccanismo chiave-valore, come chiave si usa il conteggio mentre come valore si usa l'oggetto attivita. 
 			}                                                   // il numero 1 indica che è il primo dato richiesto dalla query. Lo stesso discorso vale per i numeri 2 e 3. L'oggetto attivita contiene al suo interno il nome e l'ID dell'attivita 
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE popolaritaAttivitaNonCompleto utenteAdmin" + e.getMessage(), e);
@@ -471,24 +472,25 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return Map<Integer, Attivita> risultato
 	 * @throws DAOException
 	 */
-	public Map<Integer,Attivita> popolaritaAttivitaCompleto() throws DAOException{
+	public Map<Attivita, Integer> popolaritaAttivitaCompleto() throws DAOException{
 		
-		Map<Integer,Attivita> risultato = null;
+		Map<Attivita, Integer> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Attivita attivita = null;
 		
 		try {
-			risultato = new LinkedHashMap<Integer, Attivita>();
-			attivita = new Attivita();
+			risultato = new LinkedHashMap<Attivita, Integer>();
+			attivita = null;
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
+				attivita = new Attivita();
 				attivita.setId(resultSet.getLong(3));
 				attivita.setNome(resultSet.getString(2));
-				risultato.put(resultSet.getInt(1), attivita);
+				risultato.put(attivita, resultSet.getInt(1));
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE popolaritaAttivitaCompleto utenteAdmin" + e.getMessage(), e);
@@ -508,19 +510,19 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return Map<Integer, Long> risultato
 	 * @throws DAOException
 	 */
-	public Map<Integer,Long> partecipazioneUtentiAiGruppi() throws DAOException{
+	public Map<Long,Integer> partecipazioneUtentiAiGruppi() throws DAOException{
 		
-		Map<Integer,Long> risultato = null;
+		Map<Long,Integer> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			risultato = new LinkedHashMap<Integer, Long>();
+			risultato = new LinkedHashMap<Long,Integer>();
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE) AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO FROM ISCRIZIONE_GRUPPO GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO) ORDER BY PARTECIPAZIONE DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				risultato.put(resultSet.getInt(1), resultSet.getLong(2));
+				risultato.put(resultSet.getLong(2),resultSet.getInt(1));
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE partecipazioneUtentiAiGruppi utenteAdmin" + e.getMessage(), e);

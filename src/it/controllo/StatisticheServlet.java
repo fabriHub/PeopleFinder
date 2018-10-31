@@ -31,29 +31,43 @@ public class StatisticheServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		// Per visualizzare la percentuale di utenti abilitati
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
-		Double utenti = 0.0;
+
+		// Per visualizzare la percentuale di utenti abilitati
+		Double utentiRegistrati = 0.0;
 		Double utentiAbilitati = 0.0;
-		Double percentuale = 0.0;
-		
+		Double percentualeUtentiAbilitati = 0.0;
 		try {
-			utenti = daoUtenteAdmin.contaUtenti();
+			utentiRegistrati = daoUtenteAdmin.contaUtenti();
 			utentiAbilitati = daoUtenteAdmin.contaUtentiAbilitati();
-			percentuale = (100*utentiAbilitati)/utenti;
-			
-			
+			percentualeUtentiAbilitati = (100*utentiAbilitati)/utentiRegistrati;
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
+		request.setAttribute("percentualeUtentiAbilitati", percentualeUtentiAbilitati);
 		
 		
 		// Per visualizzare la percentuale di gruppi completati
+		Double gruppiCreati = 0.0;
+		Double gruppiCompletati = 0.0;
+		Double percentualeGruppiCompletati = 0.0;
+		try {
+			gruppiCreati = daoUtenteAdmin.contaGruppi();
+			gruppiCompletati = daoUtenteAdmin.contaGruppiCompletati();
+			percentualeGruppiCompletati = (100*gruppiCompletati)/gruppiCreati;
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("percentualeGruppiCompletati", percentualeGruppiCompletati);
 		
 		
-		request.setAttribute("percentualeUtentiAbilitati", percentuale);
+		// Per visualizzare la classifica di popolarità delle attività 
+		
+		
+		
+		
 		request.getRequestDispatcher("provaServlet.jsp?xxx=1").forward(request, response);
+		
 	
 	}
-
 }
