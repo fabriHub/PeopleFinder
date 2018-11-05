@@ -51,7 +51,7 @@ public class ProvaUtenteAdmin {
 	public static void contaUtentiDis () {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
 		try {
-			daoUtenteAdmin.contaUtentiDisabilitati();
+			daoUtenteAdmin.percentualeUtentiDisabilitati();
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -150,14 +150,8 @@ public class ProvaUtenteAdmin {
 	public static void statistiche1() {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
 		Map<Attivita, Integer> mappa = null;
-		try {
-			mappa = daoUtenteAdmin.popolaritaAttivitaCompleto();
-			for(Entry<Attivita, Integer> e : mappa.entrySet()) {
-				System.out.println(e.getKey() + " - " + e.getValue());
-			}
-		} catch (DAOException e) {
-			System.out.println(e.getMessage());
-		}
+		
+		
 		
 		
 	}

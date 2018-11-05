@@ -1,5 +1,7 @@
 package it.persistenza.implementazione;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +11,9 @@ import java.util.Map;
 
 import it.modello.Attivita;
 import it.modello.Utente;
+import it.persistenza.interfaccia.IDAOUtenteAdmin;
 
-public class DAOUtenteAdmin extends DAOUtente {
+public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 	
 	/**
 	 * Il metodo serve per verificare se l'utente, selezionato tramite ID, è abilitato oppure no.
@@ -18,6 +21,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return boolean
 	 * @throws DAOException
 	 */
+	@Override
 	public boolean isAbilitato (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -56,6 +60,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @param id
 	 * @throws DAOException
 	 */
+	@Override
 	public void abilita (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -79,6 +84,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @param id
 	 * @throws DAOException
 	 */
+	@Override
 	public void disabilita (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -102,6 +108,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return
 	 * @throws DAOException
 	 */
+	@Override
 	public boolean isAmministratore (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -138,6 +145,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @param id
 	 * @throws DAOException
 	 */
+	@Override
 	public void rendiAmministratore (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -161,6 +169,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @param id
 	 * @throws DAOException
 	 */
+	@Override
 	public void escludiAmministratore (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -184,6 +193,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @param id
 	 * @throws DAOException
 	 */
+	@Override
 	public boolean isAbilitata (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -220,6 +230,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @param id
 	 * @throws DAOException
 	 */
+	@Override
 	public void abilitaAttivita (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -243,6 +254,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @param id
 	 * @throws DAOException
 	 */
+	@Override
 	public void disabilitaAttivita (Long id) throws DAOException {
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -266,73 +278,76 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return int numeroUtenti
 	 * @throws DAOException
 	 */
-	public double contaUtenti () throws DAOException{
+	@Override
+	public int contaUtenti () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		double numeroUtenti = 0.0;
+		int numeroUtenti = 0;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT(ID) FROM UTENTE");
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
-				numeroUtenti = resultSet.getDouble(1);
-			}
-		} catch (SQLException | DAOException e) {
-			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
-		} finally {
-			DataSource.getInstance().close(resultSet);
-			DataSource.getInstance().close(statement);
-			DataSource.getInstance().close(connection);
-		}
-		return numeroUtenti;
-	}
-	
-	
-	/**
-	 * Il metodo restituisce il numero totale di utenti iscritti abilitati.
-	 * @return int numeroUtenti
-	 * @throws DAOException
-	 */
-	public double contaUtentiAbilitati () throws DAOException{
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		double numeroUtenti = 0.0;
-		try {
-			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT(ID) FROM UTENTE WHERE ABILITATO = 1");
-			resultSet = statement.executeQuery();
-			if (resultSet.next()) {
-				numeroUtenti = resultSet.getDouble(1);
-			}
-		} catch (SQLException | DAOException e) {
-			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
-		} finally {
-			DataSource.getInstance().close(resultSet);
-			DataSource.getInstance().close(statement);
-			DataSource.getInstance().close(connection);
-		}
-		return numeroUtenti;
-	}
-	
-	
-	/**
-	 * Il metodo restituisce il numero totale di utenti iscritti disabilitati.
-	 * @return int numeroUtenti
-	 * @throws DAOException
-	 */
-	public double contaUtentiDisabilitati () throws DAOException{
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		double numeroUtenti = 0.0;
-		try {
-			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT(ID) FROM UTENTE WHERE ABILITATO = 0");
-			resultSet = statement.executeQuery();
-			if (resultSet.next()) {
 				numeroUtenti = resultSet.getInt(1);
+			}
+		} catch (SQLException | DAOException e) {
+			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return numeroUtenti;
+	}
+	
+	
+	/**
+	 * Il metodo restituisce la percentuale di utenti iscritti abilitati.
+	 * @return int numeroUtenti
+	 * @throws DAOException
+	 */
+	@Override
+	public double percentualeUtentiAbilitati () throws DAOException{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		double numeroUtenti = 0.0;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement(" SELECT COUNT (UTENTE.ID)*100/(SELECT COUNT(ID) FROM UTENTE) FROM UTENTE WHERE ABILITATO = 1 GROUP BY(UTENTE.ABILITATO) ");
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				numeroUtenti = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+			}
+		} catch (SQLException | DAOException e) {
+			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return numeroUtenti;
+	}
+	
+	
+	/**
+	 * Il metodo restituisce la percentuale di utenti iscritti disabilitati.
+	 * @return int numeroUtenti
+	 * @throws DAOException
+	 */
+	@Override
+	public double percentualeUtentiDisabilitati () throws DAOException{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		double numeroUtenti = 0.0;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT COUNT (UTENTE.ID)*100/(SELECT COUNT(ID) FROM UTENTE) FROM UTENTE WHERE ABILITATO = 0 GROUP BY(UTENTE.ABILITATO)");
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				numeroUtenti = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 				
 				System.out.println(numeroUtenti);
 			}
@@ -352,11 +367,12 @@ public class DAOUtenteAdmin extends DAOUtente {
 	 * @return int numeroGruppi
 	 * @throws DAOException
 	 */
-	public double contaGruppi () throws DAOException{
+	@Override
+	public int contaGruppi () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		double numeroGruppi = 0.0;
+		int numeroGruppi = 0;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT(ID) FROM GRUPPO");
@@ -376,21 +392,22 @@ public class DAOUtenteAdmin extends DAOUtente {
 	
 	
 	/**
-	 * Il metodo restituisce il numero totale di gruppi completati.
+	 * Il metodo restituisce la percentuale di gruppi completati.
 	 * @return int numeroGruppiCompletati
 	 * @throws DAOException
 	 */
-	public double contaGruppiCompletati () throws DAOException{
+	@Override
+	public double percentualeGruppiCompletati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		double numeroGruppiCompletati = 0.0;
 		try {
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 1");
+			statement = connection.prepareStatement("SELECT COUNT (GRUPPO.ID)*100/(SELECT COUNT(ID) FROM GRUPPO) FROM GRUPPO WHERE COMPLETO = 1 GROUP BY(GRUPPO.COMPLETO)");
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
-				numeroGruppiCompletati = resultSet.getInt(1);
+				numeroGruppiCompletati = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE contaGruppiCompletati utenteAdmin" + e.getMessage(), e);
@@ -404,21 +421,22 @@ public class DAOUtenteAdmin extends DAOUtente {
 	
 	
 	/**
-	 * Il metodo restituisce il numero totale di gruppi non completati.
+	 * Il metodo restituisce la percentuale di gruppi non completati.
 	 * @return int numeroGruppiNonCompletati
 	 * @throws DAOException
 	 */
-	public double contaGruppiNonCompletati () throws DAOException{
+	@Override
+	public double percentualeGruppiNonCompletati () throws DAOException{
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		double numeroGruppiNonCompletati = 0.0;
 		try {
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 0");
+			statement = connection.prepareStatement("SELECT COUNT (GRUPPO.ID)*100/(SELECT COUNT(ID) FROM GRUPPO) FROM GRUPPO WHERE COMPLETO = 0 GROUP BY(GRUPPO.COMPLETO)");
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
-				numeroGruppiNonCompletati = resultSet.getInt(1);
+				numeroGruppiNonCompletati = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE contaGruppiNonCompletati utenteAdmin" + e.getMessage(), e);
@@ -432,29 +450,30 @@ public class DAOUtenteAdmin extends DAOUtente {
 	
 	
 	/**
-	 * Il metodo restituisce, in ordine decrescente, il numero di gruppi non completati per ogni attivita correlandogli il nome e l'ID dell'attivita. 
+	 * Il metodo restituisce, in ordine decrescente, la percentuale di gruppi non completati per ogni attivita correlandogli il nome e l'ID dell'attivita. 
 	 * @return Map<Integer, Attivita> risultato
 	 * @throws DAOException
 	 */
-	public Map<Attivita, Integer> popolaritaAttivitaNonCompleto() throws DAOException{
+	@Override
+	public Map<Attivita, Double> popolaritaAttivitaNonCompleto() throws DAOException{
 		
-		Map<Attivita,Integer> risultato = null;
+		Map<Attivita,Double> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Attivita attivita = null;
 		
 		try {
-			risultato = new LinkedHashMap<Attivita,Integer>();
+			risultato = new LinkedHashMap<Attivita,Double>();
 			attivita = null;
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 0  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
+			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID)*100/(SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 0) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 0  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				attivita = new Attivita();
 				attivita.setId(resultSet.getLong(3));    // scrive nella variabile ID dell'oggetto attivita quello che viene letto dalla query
 				attivita.setNome(resultSet.getString(2));   // scrive nella variabile nome dell'oggetto attivita quello che viene letto dalla query
-				risultato.put(attivita, resultSet.getInt(1));   // dato che la mappa è caratterizzata dal meccanismo chiave-valore, come chiave si usa il conteggio mentre come valore si usa l'oggetto attivita. 
+				risultato.put(attivita, BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue());   // dato che la mappa è caratterizzata dal meccanismo chiave-valore, come chiave si usa il conteggio mentre come valore si usa l'oggetto attivita. 
 			}                                                   // il numero 1 indica che è il primo dato richiesto dalla query. Lo stesso discorso vale per i numeri 2 e 3. L'oggetto attivita contiene al suo interno il nome e l'ID dell'attivita 
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE popolaritaAttivitaNonCompleto utenteAdmin" + e.getMessage(), e);
@@ -468,30 +487,31 @@ public class DAOUtenteAdmin extends DAOUtente {
 	
 	
 	/**
-	 * Il metodo restituisce, in ordine decrescente, il numero di gruppi completati per ogni attivita correlandogli il nome e l'ID dell'attivita. 
+	 * Il metodo restituisce, in ordine decrescente, la percentuale di gruppi completati per ogni attivita correlandogli il nome e l'ID dell'attivita. 
 	 * @return Map<Integer, Attivita> risultato
 	 * @throws DAOException
 	 */
-	public Map<Attivita, Integer> popolaritaAttivitaCompleto() throws DAOException{
+	@Override
+	public Map<Attivita, Double> popolaritaAttivitaCompleto() throws DAOException{
 		
-		Map<Attivita, Integer> risultato = null;
+		Map<Attivita, Double> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Attivita attivita = null;
 		
 		try {
-			risultato = new LinkedHashMap<Attivita, Integer>();
+			risultato = new LinkedHashMap<Attivita, Double>();
 			attivita = null;
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID, NUMERO_PARTECIPANTI FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME, NUMERO_PARTECIPANTI) ORDER BY POPOLARITA DESC");
+			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID)*100/(SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 1) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID, NUMERO_PARTECIPANTI FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME, NUMERO_PARTECIPANTI) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				attivita = new Attivita();
 				attivita.setId(resultSet.getLong(3));
 				attivita.setNome(resultSet.getString(2));
 				attivita.setNumeroPartecipanti(resultSet.getInt(3));
-				risultato.put(attivita, resultSet.getInt(1));
+				risultato.put(attivita, BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue());
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE popolaritaAttivitaCompleto utenteAdmin" + e.getMessage(), e);
@@ -507,10 +527,11 @@ public class DAOUtenteAdmin extends DAOUtente {
 	
 	
 	/**
-	 * Il metodo restituisce il numero di utenti iscritti ad ogni gruppo.
+	 * Il metodo restituisce la percentuale di utenti iscritti ad ogni gruppo.
 	 * @return Map<Integer, Long> risultato
 	 * @throws DAOException
 	 */
+	@Override
 	public Map<Long,Double> partecipazioneUtentiAiGruppi() throws DAOException{
 		
 		Map<Long,Double> risultato = null;
@@ -523,7 +544,7 @@ public class DAOUtenteAdmin extends DAOUtente {
 			statement = connection.prepareStatement("SELECT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE)*100/ATTIVITA.NUMERO_PARTECIPANTI AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO FROM ISCRIZIONE_GRUPPO JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.ID_ATTIVITA, ATTIVITA.NUMERO_PARTECIPANTI) ORDER BY PARTECIPAZIONE DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				risultato.put(resultSet.getLong(2), resultSet.getDouble(1));
+				risultato.put(resultSet.getLong(2), BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue());
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE partecipazioneUtentiAiGruppi utenteAdmin" + e.getMessage(), e);

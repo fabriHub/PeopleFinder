@@ -22,17 +22,21 @@
 	<input type="submit" value="mostra percentuale"/>
 </form>
 
-<% out.println(request.getAttribute("percentualeUtentiAbilitati")+"%"); %>
+<%
+	out.println("utenti registrati: "+request.getAttribute("utentiRegistrati")+"<br>");
+	out.println("utenti abilitati: "+request.getAttribute("percentualeUtentiAbilitati")+"<br>");
+	out.println("utenti disabilitati: "+request.getAttribute("percentualeUtentiDisabilitati")+"<br>");
+	out.println("gruppi creati: "+request.getAttribute("gruppiCreati")+"<br>");
+	out.println("gruppi completati: "+request.getAttribute("percentualeGruppiCompletati")+"<br>");
+	out.println("gruppi non completati: "+request.getAttribute("percentualeGruppiNonCompletati")+"<br>");
+	out.println("popolarità gruppi completati: "+request.getAttribute("popolaritaAttivitaGruppiCompletati")+"<br>");
+	out.println("popolarità gruppi non completati: "+request.getAttribute("popolaritaAttivitaGruppiNonCompletati")+"<br>");
+	out.println("partecipazione utenti ai gruppi: "+request.getAttribute("partecipazioneUtentiAiGruppi")+"<br>");
+	
+	out.println("<br>");
+%>
 
-<% out.println(request.getAttribute("percentualeGruppiCompletati")+"%"); %>
-
-<% out.println(request.getAttribute("popolaritaAttivitaCompleto")); %>
-
-<% out.println(request.getAttribute("popolaritaAttivitaNonCompleto")); %>
-
-<% out.println(request.getAttribute("percentualePartecipazioneUtentiAiGruppi")); %>
-
-<a href="findAllUtenti">link servlet</a>
+<a href="statistiche">link servlet</a>
 
 </body>
 </html>
