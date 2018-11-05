@@ -1,2 +1,0 @@
-# PeopleFinder
-Progetto finale
