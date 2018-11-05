@@ -11,7 +11,7 @@ public class ProvaUtente {
 
 	public static void main(String[] args) {
 
-//		addUtente();
+		addUtente();
 //		findAll();
 //		update();
 //		findById();

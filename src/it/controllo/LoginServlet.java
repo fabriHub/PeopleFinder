@@ -36,10 +36,12 @@ public class LoginServlet extends HttpServlet {
 		
 		IDAOUtente daoUtente = new DAOUtente();
 		Utente utenteTmp = new Utente();
-		Utente utente = null;
+		Utente utente = new Utente();
 		
-		utenteTmp.setMail(request.getParameter("email"));
+		utenteTmp.setMail(request.getParameter("mail"));
 		utenteTmp.hashPassword(request.getParameter("password"));
+		
+		System.out.println(utenteTmp);
 		
 		try {
 			utente = daoUtente.loginUtente(utenteTmp);
@@ -50,12 +52,15 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		if(utente != null) {
+			System.out.println("utente esistente");
 			HttpSession session = request.getSession();
 			session.setAttribute("idUtente", utente.getId());
 			session.setAttribute("isAmministratore", utente.getAmministratore());
-			request.getRequestDispatcher("prova.jsp").forward(request, response);
+//			request.getRequestDispatcher("homeUtente.jsp").forward(request, response);
+			response.sendRedirect("homeUtente.jsp");
+		} else {
+			response.sendRedirect("./index.jsp?errore=1");
 		}
-		response.sendRedirect("./index.jsp?errore=1");
 	}
 
 }

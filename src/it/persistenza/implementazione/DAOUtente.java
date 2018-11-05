@@ -186,7 +186,7 @@ public class DAOUtente implements IDAOUtente {
 		ResultSet resultSet = null;
 		
 		try {
-			statement = connection.prepareStatement("SELECT * FROM UTENTE WHERE MAIL = ? AND PASSWORD = ?");
+			statement = connection.prepareStatement("SELECT * FROM UTENTE WHERE MAIL = ? AND PASSWORD = ? AND ABILITATO = 1");
 			statement.setString(1, utente.getMail());
 			statement.setString(2, utente.getPassword());
 			resultSet = statement.executeQuery();
