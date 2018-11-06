@@ -27,7 +27,7 @@ body,html {
   height: 100%;
   margin: 0 0;
   font-family: "Montserrat";
-  font-size: 3.5vw;
+  font-size: 2vw;
   z-index: -1;
  }
  
@@ -35,11 +35,36 @@ body,html {
 	text-align: left;
 	justify-content: center;
 	align-content: center;
-	transform: scale(0.6);
-	transform-origin: 0% 50%;
+	/*transform: scale(0.6);
+	transform-origin: 0% 50%;*/
 	font-family: "Montserrat";
+	font-size: 1vw;
  }
  
+a {
+	color: #033d4d;
+}
+
+a:link, a:visited{
+    color: #033d4d;
+}
+
+a:hover{
+	color: white;
+}
+
+a:hover > .fa {
+	color: white;
+}
+
+a:active{
+    color: #033d4d;
+}
+
+a .fa{
+	color: #033d4d;
+	font-size: 1.1vw;
+}
 
 .limiter{
   width: 100%;
@@ -58,7 +83,12 @@ body,html {
  }
  
 .container {
+  max-width: 100%;
+  max-height: 100%;
+  min-width: fit-content;
+  min-height: fit-content;
   grid-area: centro;
+  min-height: fit-content;
   /*background: rgba(255, 255, 255, 0.80);*/
   background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 4%, rgba(255, 255, 255, 0.8), rgba(150, 150, 150, 1) 90%);
   /*border-radius: 25px;*/
@@ -139,7 +169,7 @@ input, textarea {
 	vertical-align: middle; 
 	height: 4vw;
 	background-color: #D7D5D5;
-	font-size: 2vw;
+	font-size: 1.3vw;
 	padding-left: 20%;
 	outline: black;
 	border-style: solid;
@@ -155,6 +185,7 @@ img {
 }
 
 .containerInput{
+	width: 100%;
 	display: grid;
 	align-items: stretch;
 	font-size: 1vw;
@@ -197,15 +228,21 @@ img {
 }
 
 .containerLogin{
+  width: 100%;
+  max-height: 100%;
+  min-height: fit-content;
   grid-area: destra_2;
   display: grid;
   grid-template-columns: 5% 90% 5%;
-  grid-template-rows: 30% 60% 10%;
+  grid-template-rows: 30% 60%;
   grid-template-areas:
   	". titolo ."
-  	". form ."
-  	". registrati .";
+  	". form .";
   font-family: "Montserrat";
+}
+
+.containerLogin button{
+	width: 50%;
 }
 
 
@@ -213,27 +250,20 @@ img {
 .containerTitolo{
 	grid-area: titolo;
 	font-family: "Courgette";
-	font-size: 50px;
+	font-size: 3vw;
 	color: #4F3F2B;
+	display: grid;
+	align-items: start;
 }
 
 
 .titoloRegistrazione {
 	grid-column-start: 2; grid-column-end: 4; grid-row-start: 1; grid-row-end: 2;
 	font-family: "Courgette";
-	font-size: 50px;
+	font-size: 3vw;
 	color: #4F3F2B;
 	position: relative;
 	align-self: end;
-}
-
-.accedi {
-	grid-column-start: 2; grid-column-end: 4; grid-row-start: 3; grid-row-end: 4;
-	font-family: "Montserrat";
-	font-size: 15px;
-	color: #4F3F2B;
-	position: relative;
-	align-self: start;
 }
 
 
@@ -242,7 +272,7 @@ img {
 	display: grid;
 	grid-template-columns: 20% 80%;
 	grid-template-rows: repeat(3, 1fr);
-	justify-items: stretch;
+	justify-items: center;
 	align-items: center;
 	grid-column-gap: 10px;
 	grid-row-gap: 15px;
@@ -287,12 +317,14 @@ img {
 }
 
 .containerRegistrati{
-	grid-area: registrati;
+	grid-area: destra_3;
+	align-self: start;
 	font-family: "Montserrat";
-	font-size: 15px;
-	padding-top: 30px;
+	font-size: 1vw;
+	padding: 0%;
 	color: #4F3F2B;
 }
+
 
 /*#################################### LOGIN ####################################*/
 
@@ -303,7 +335,7 @@ img {
 
 .containerRegistr1{
   grid-area: sinistra_2;
-  
+  width: 85%;
   grid-template-columns: 5% 90% 5%;
   grid-template-rows: 30% 60% 10%;
   grid-template-areas:
@@ -311,12 +343,14 @@ img {
   	". form ."
   	". registrati .";
   font-family: "Montserrat";
-  padding: 0.5vw 2vw;
+  /*padding: 0.5vw 2vw;*/
+  justify-items: center;
+	align-items: center;
 }
 
 .containerRegistr2{
   grid-area: destra_2;
- 
+  width: 85%;
   grid-template-columns: 5% 90% 5%;
   grid-template-rows: 30% 60% 10%;
   grid-template-areas:
@@ -324,7 +358,7 @@ img {
   	". form ."
   	". registrati .";
   font-family: "Montserrat";
-  padding: 0.5vw 2vw;
+  /*padding: 0.5vw 2vw;*/
 }
 
 .containerFormRegistr1{
@@ -347,6 +381,14 @@ img {
 	align-items: center;
 	grid-column-gap: 10px;
 	grid-row-gap: 15px;
+}
+
+.accedi {
+	grid-column-start: 2; grid-column-end: 4; grid-row-start: 3; grid-row-end: 4;
+	font-family: "Montserrat";
+	font-size: 1vw;
+	position: relative;
+	align-self: start;
 }
 
 /*#################################### REGISTRAZIONE ####################################*/

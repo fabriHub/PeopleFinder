@@ -85,7 +85,7 @@
 					</div>
 					
 					<div class="accedi">
-						<a href="#" style="text-decoration: none;">Hai gi√† un account? Accedi <i class="fa fa-long-arrow-right m-l-5" style="font-size: 15px;"></i></a>
+						<a href="#" style="text-decoration: none;">Hai gi‡†un account? Accedi <i class="fa fa-long-arrow-right m-l-5" style="font-size: 15px;"></i></a>
 					</div>	
 			
 			</div>

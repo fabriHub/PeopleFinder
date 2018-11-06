@@ -57,10 +57,12 @@
 						</div>
 					</form>
 					
-					<div class="containerRegistrati">
-						<a href="#" style="text-decoration: none;">Non sei ancora registrato? Registrati <i class="fa fa-long-arrow-right m-l-5" style="font-size: 15px;"></i></a>
-					</div>					
 				</div>
+				
+				<div class="containerRegistrati">
+					<a href="#" style="text-decoration: none;">Non sei ancora registrato? Registrati <i class="fa fa-long-arrow-right m-l-5"></i></a>
+				</div>
+				
 			</div>
 		
 		</div>
