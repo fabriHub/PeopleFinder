@@ -1,4 +1,4 @@
-package it.controllo;
+package it.controllo.amministratore;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class AbilitaAttivitaServlet extends HttpServlet {
 	    	Long id = Long.parseLong(request.getParameter("id_attivita"));
 	    	
 	    	try {
-				daoUtenteAdmin.abilitaAttivita(id);;
+				daoUtenteAdmin.abilitaAttivita(id);
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}

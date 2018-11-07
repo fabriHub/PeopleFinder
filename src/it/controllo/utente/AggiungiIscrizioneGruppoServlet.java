@@ -1,8 +1,6 @@
-package it.controllo;
+package it.controllo.utente;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,36 +13,42 @@ import it.persistenza.implementazione.DAOIscrizioneGruppo;
 import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
 
 /**
- * Servlet implementation class FindGruppiByIdUtenteServlet
+ * Servlet implementation class AggiungiIscrizioneGruppoServlet
  */
-public class FindGruppiByIdUtenteServlet extends HttpServlet {
+
+public class AggiungiIscrizioneGruppoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindGruppiByIdUtenteServlet() {
+    public AggiungiIscrizioneGruppoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
-		List<IscrizioneGruppo> listaIscrizioneGruppi = new ArrayList<IscrizioneGruppo>();
-		Long id = Long.parseLong(request.getParameter("id_utente"));
-		
+		Long idUtente = Long.parseLong(request.getParameter("id_utente"));
+		Long idGruppo = Long.parseLong(request.getParameter("id_gruppo"));
+		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo();
+		iscrizioneGruppo.setIdUtente(idUtente);
+		iscrizioneGruppo.setIdGruppo(idGruppo);
 		
 		try {
-			listaIscrizioneGruppi = daoIscrizioneGruppo.findGruppiByIdUtente(id);
+			
+			daoIscrizioneGruppo.add(iscrizioneGruppo);
 			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("listaIscrizioneGruppi", listaIscrizioneGruppi);
-		request.getRequestDispatcher("provaServlet.jsp?xxx=1").forward(request, response);
+		
+		response.sendRedirect("provaServlet.jsp?xxx=1");
 	}
+
 }

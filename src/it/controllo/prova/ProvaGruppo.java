@@ -1,4 +1,4 @@
-package it.controllo;
+package it.controllo.prova;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,7 @@ public class ProvaGruppo {
 
 	public static void main(String[] args) {
 		
-		addGruppo();
+		//addGruppo();
 		findAllGruppo();
 //		findGruppoById();
 //		updateGruppo();
@@ -20,7 +20,7 @@ public class ProvaGruppo {
 //		findAllGruppo();
 //		findByIdUtente1();
 //		isCompleto();
-		isScaduto();
+	//	isScaduto();
 		
 		
 	}

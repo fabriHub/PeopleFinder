@@ -6,7 +6,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>it.controllo.LoginServlet</servlet-class>
+    <servlet-class>it.controllo.utente.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
@@ -14,7 +14,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>RegistratiServlet</servlet-name>
-    <servlet-class>it.controllo.RegistratiServlet</servlet-class>
+    <servlet-class>it.controllo.utente.RegistratiServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegistratiServlet</servlet-name>
@@ -22,7 +22,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>it.controllo.LogoutServlet</servlet-class>
+    <servlet-class>it.controllo.utente.LogoutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
@@ -30,7 +30,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>FindAllUtentiServlet</servlet-name>
-    <servlet-class>it.controllo.FindAllUtentiServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.FindAllUtentiServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindAllUtentiServlet</servlet-name>
@@ -38,7 +38,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>FindAllGruppoServlet</servlet-name>
-    <servlet-class>it.controllo.FindAllGruppoServlet</servlet-class>
+    <servlet-class>it.controllo.utente.FindAllGruppoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindAllGruppoServlet</servlet-name>
@@ -46,7 +46,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>FindAllAttivitaServlet</servlet-name>
-    <servlet-class>it.controllo.FindAllAttivitaServlet</servlet-class>
+    <servlet-class>it.controllo.utente.FindAllAttivitaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindAllAttivitaServlet</servlet-name>
@@ -54,7 +54,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AggiungiGruppoServlet</servlet-name>
-    <servlet-class>it.controllo.AggiungiGruppoServlet</servlet-class>
+    <servlet-class>it.controllo.utente.AggiungiGruppoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AggiungiGruppoServlet</servlet-name>
@@ -62,7 +62,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AggiungiAttivitaServlet</servlet-name>
-    <servlet-class>it.controllo.AggiungiAttivitaServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.AggiungiAttivitaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AggiungiAttivitaServlet</servlet-name>
@@ -70,7 +70,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>FindByIdUtenteServlet</servlet-name>
-    <servlet-class>it.controllo.FindByIdUtenteServlet</servlet-class>
+    <servlet-class>it.controllo.utente.FindByIdUtenteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindByIdUtenteServlet</servlet-name>
@@ -78,7 +78,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>FindGruppiByIdUtenteServlet</servlet-name>
-    <servlet-class>it.controllo.FindGruppiByIdUtenteServlet</servlet-class>
+    <servlet-class>it.controllo.utente.FindGruppiByIdUtenteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindGruppiByIdUtenteServlet</servlet-name>
@@ -86,7 +86,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>FindUtentiByIdGruppoServlet</servlet-name>
-    <servlet-class>it.controllo.FindUtentiByIdGruppoServlet</servlet-class>
+    <servlet-class>it.controllo.utente.FindUtentiByIdGruppoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindUtentiByIdGruppoServlet</servlet-name>
@@ -94,7 +94,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AbilitaUtenteServlet</servlet-name>
-    <servlet-class>it.controllo.AbilitaUtenteServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.AbilitaUtenteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AbilitaUtenteServlet</servlet-name>
@@ -102,7 +102,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DisabilitaUtenteServlet</servlet-name>
-    <servlet-class>it.controllo.DisabilitaUtenteServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.DisabilitaUtenteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DisabilitaUtenteServlet</servlet-name>
@@ -110,7 +110,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>RendiAmministratoreServlet</servlet-name>
-    <servlet-class>it.controllo.RendiAmministratoreServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.RendiAmministratoreServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RendiAmministratoreServlet</servlet-name>
@@ -118,7 +118,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>EscludiAmministratoreServlet</servlet-name>
-    <servlet-class>it.controllo.EscludiAmministratoreServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.EscludiAmministratoreServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EscludiAmministratoreServlet</servlet-name>
@@ -126,7 +126,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DeleteIscrizioneGruppoServlet</servlet-name>
-    <servlet-class>it.controllo.DeleteIscrizioneGruppoServlet</servlet-class>
+    <servlet-class>it.controllo.utente.DeleteIscrizioneGruppoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteIscrizioneGruppoServlet</servlet-name>
@@ -134,7 +134,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UpdateGruppoServlet</servlet-name>
-    <servlet-class>it.controllo.UpdateGruppoServlet</servlet-class>
+    <servlet-class>it.controllo.utente.UpdateGruppoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateGruppoServlet</servlet-name>
@@ -142,7 +142,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UpdateUtenteServlet</servlet-name>
-    <servlet-class>it.controllo.UpdateUtenteServlet</servlet-class>
+    <servlet-class>it.controllo.utente.UpdateUtenteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateUtenteServlet</servlet-name>
@@ -150,7 +150,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AbilitaAttivitaServlet</servlet-name>
-    <servlet-class>it.controllo.AbilitaAttivitaServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.AbilitaAttivitaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AbilitaAttivitaServlet</servlet-name>
@@ -158,7 +158,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DisabilitaAttivitaServlet</servlet-name>
-    <servlet-class>it.controllo.DisabilitaAttivitaServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.DisabilitaAttivitaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DisabilitaAttivitaServlet</servlet-name>
@@ -166,7 +166,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AggiungiIscrizioneGruppoServlet</servlet-name>
-    <servlet-class>it.controllo.AggiungiIscrizioneGruppoServlet</servlet-class>
+    <servlet-class>it.controllo.utente.AggiungiIscrizioneGruppoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AggiungiIscrizioneGruppoServlet</servlet-name>
@@ -174,7 +174,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UpdatePasswordServlet</servlet-name>
-    <servlet-class>it.controllo.UpdatePasswordServlet</servlet-class>
+    <servlet-class>it.controllo.utente.UpdatePasswordServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdatePasswordServlet</servlet-name>
@@ -182,7 +182,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>StatisticheServlet</servlet-name>
-    <servlet-class>it.controllo.StatisticheServlet</servlet-class>
+    <servlet-class>it.controllo.amministratore.StatisticheServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>StatisticheServlet</servlet-name>

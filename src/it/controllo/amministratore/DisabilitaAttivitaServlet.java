@@ -1,4 +1,4 @@
-package it.controllo;
+package it.controllo.amministratore;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,15 +11,15 @@ import it.persistenza.implementazione.DAOException;
 import it.persistenza.implementazione.DAOUtenteAdmin;
 
 /**
- * Servlet implementation class RendiAmministratoreServlet
+ * Servlet implementation class DisabilitaAttivitaServlet
  */
-public class RendiAmministratoreServlet extends HttpServlet {
+public class DisabilitaAttivitaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RendiAmministratoreServlet() {
+    public DisabilitaAttivitaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,20 +28,18 @@ public class RendiAmministratoreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
 
-    	DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
-
-    	Long id = Long.parseLong(request.getParameter("id_utente"));
+    	Long id = Long.parseLong(request.getParameter("id_attivita"));
     	
     	try {
-			daoUtenteAdmin.rendiAmministratore(id);
+			daoUtenteAdmin.disabilitaAttivita(id);
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
     	
     	response.sendRedirect("provaServlet.jsp?xxx=1");
-	}
-
-	
+    }
 
 }

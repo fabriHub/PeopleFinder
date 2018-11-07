@@ -7,7 +7,7 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	
-	<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	
@@ -19,7 +19,8 @@
 		<div class="limiter">
 		
 			<div class="utente">
-			Ciao nomeUtente
+			<i class="fa fa-user-circle" style="color: #FDF5E6"> <span style="color: #FDF5E6; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-family: Courgette;"> nomeUtente </span> </i>
+			
 			</div>
 
 <!-- ############## MENU ############## MENU ############## MENU ############## MENU ############## MENU ############## MENU ############## -->
@@ -92,8 +93,9 @@
 				
 			</div>
 			
+			
 			<div class="logout">
-				<button class="">
+				<button class="" onclick="location.href='index.jsp'">
 					LOGOUT
 				</button>
 			</div>	

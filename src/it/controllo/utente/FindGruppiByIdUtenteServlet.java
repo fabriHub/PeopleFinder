@@ -1,6 +1,8 @@
-package it.controllo;
+package it.controllo.utente;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,42 +15,36 @@ import it.persistenza.implementazione.DAOIscrizioneGruppo;
 import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
 
 /**
- * Servlet implementation class AggiungiIscrizioneGruppoServlet
+ * Servlet implementation class FindGruppiByIdUtenteServlet
  */
-
-public class AggiungiIscrizioneGruppoServlet extends HttpServlet {
+public class FindGruppiByIdUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AggiungiIscrizioneGruppoServlet() {
+    public FindGruppiByIdUtenteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
-		Long idUtente = Long.parseLong(request.getParameter("id_utente"));
-		Long idGruppo = Long.parseLong(request.getParameter("id_gruppo"));
-		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo();
-		iscrizioneGruppo.setIdUtente(idUtente);
-		iscrizioneGruppo.setIdGruppo(idGruppo);
+		List<IscrizioneGruppo> listaIscrizioneGruppi = new ArrayList<IscrizioneGruppo>();
+		Long id = Long.parseLong(request.getParameter("id_utente"));
+		
 		
 		try {
-			
-			daoIscrizioneGruppo.add(iscrizioneGruppo);
+			listaIscrizioneGruppi = daoIscrizioneGruppo.findGruppiByIdUtente(id);
 			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-		
-		response.sendRedirect("provaServlet.jsp?xxx=1");
+		request.setAttribute("listaIscrizioneGruppi", listaIscrizioneGruppi);
+		request.getRequestDispatcher("provaServlet.jsp?xxx=1").forward(request, response);
 	}
-
 }

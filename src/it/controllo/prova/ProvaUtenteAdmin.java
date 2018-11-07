@@ -1,4 +1,4 @@
-package it.controllo;
+package it.controllo.prova;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

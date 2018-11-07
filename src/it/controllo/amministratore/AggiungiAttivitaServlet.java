@@ -1,4 +1,4 @@
-package it.controllo;
+package it.controllo.amministratore;
 
 import java.io.IOException;
 import java.util.Date;

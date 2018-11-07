@@ -1,4 +1,4 @@
-package it.controllo;
+package it.controllo.utente;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -35,38 +35,35 @@ public class RegistratiServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(!request.getParameter("password1").equals(request.getParameter("password2"))) {
-			request.getRequestDispatcher("registrazione.jsp?errore=1").forward(request, response);
-		}
+			request.getRequestDispatcher("registrati.jsp#ERRORE").forward(request, response);
+		} else {
 		
-		IDAOUtente daoUtente = new DAOUtente();
-		
-		Utente utente = new Utente();
-		utente.setMail(request.getParameter("email"));
-		utente.setTelefono(request.getParameter("telefono"));
-		utente.setNickname(request.getParameter("nickname"));
-		
-		try {
-			if(daoUtente.existsUtente(utente)) {
-				request.getRequestDispatcher("registrazione.jsp?errore=2").forward(request, response);
-			}
-		} catch (DAOException e) {
-			e.printStackTrace();
-		}
-		
-		utente.hashPassword(request.getParameter("password1"));
-
-		try {
-			daoUtente.add(utente);
+			IDAOUtente daoUtente = new DAOUtente();
 			
-		} catch (DAOException e) {
-			e.printStackTrace();
+			Utente utente = new Utente();
+			utente.setMail(request.getParameter("mail"));
+			utente.setTelefono(request.getParameter("telefono"));
+			utente.setNickname(request.getParameter("nickname"));
+			
+			try {
+				if(daoUtente.existsUtente(utente)) {
+					request.getRequestDispatcher("registrati.jsp#ERRORE").forward(request, response);
+				}
+			} catch (DAOException e) {
+				e.printStackTrace();
+			}
+			
+			utente.hashPassword(request.getParameter("password1"));
+	
+			try {
+				daoUtente.add(utente);
+				
+			} catch (DAOException e) {
+				e.printStackTrace();
+			}
+			
+			response.sendRedirect("./homeUtente.jsp");
 		}
-		
-		response.sendRedirect("./prova.html?registrazione=1");
-
-		/*request.setAttribute("prova", "attributo");
-		
-		request.getRequestDispatcher("./provaServlet.jsp?prova=1").forward(request, response);*/
 		
 	}
 

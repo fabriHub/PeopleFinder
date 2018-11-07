@@ -7,7 +7,7 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	
-	<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	
@@ -36,14 +36,14 @@
 					
 					<form class="containerFormLogin" action="login" method="POST">
 						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
-							<input type="text" name="mail" placeholder="Email">
+							<input type="text" name="mail" placeholder="Email" required>
 						</div>
 						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; grid-row-end: 2;">
 							<i class="fa fa-envelope"></i>
 						</div>
 						
 						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
-							<input type="password" name="password" placeholder="Password">
+							<input type="password" name="password" placeholder="Password" required>
 						</div>
 						
 						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3;">
@@ -54,13 +54,28 @@
 							<button class="">
 							LOGIN
 							</button>
+							
+							<div id="ERRORE" class="overlay">
+								<div class="errore">
+									<h2>ERRORE!</h2>
+									<a class="close" href="#">&times;</a>
+									<div class="content">
+										Email o password non corretti
+									</div>
+								</div>
+							</div>
+							
+							
+							
+							
+							
 						</div>
 					</form>
 					
 				</div>
 				
 				<div class="containerRegistrati">
-					<a href="#" style="text-decoration: none;">Non sei ancora registrato? Registrati <i class="fa fa-long-arrow-right m-l-5"></i></a>
+					<a href="registrati.jsp" style="text-decoration: none;">Non sei ancora registrato? Registrati <i class="fa fa-long-arrow-right m-l-5"></i></a>
 				</div>
 				
 			</div>

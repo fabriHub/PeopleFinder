@@ -3,14 +3,9 @@
 
 
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-@import url(https://fonts.googleapis.com/css?family=Raleway:700);
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:700);
-@import url(https://fonts.googleapis.com/css?family=Pattaya);
-@import url(https://fonts.googleapis.com/css?family=Marck+Script);
 @import url(https://fonts.googleapis.com/css?family=Courgette);
-@import url(https://fonts.googleapis.com/css?family=Prosto+One);
+@import url(https://fonts.googleapis.com/css?family=Questrial);
 @import url(https://fonts.googleapis.com/css?family=Satisfy);
-
 
 
 /*#################################### FONT ####################################*/
@@ -412,7 +407,6 @@ img {
 .utente {
   /*grid-area: utente;*/
   height: 60%;
-  font-size: 43%;
   align-self: center;
   text-align: center;
   font-family: "Courgette";
@@ -421,7 +415,8 @@ img {
   justify-items: end;
   align-items: start;
   padding-right: 20px;
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);  
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  
 }
 
 .logout {
@@ -546,4 +541,72 @@ img {
 }
 
 /*#################################### MENU ####################################*/
+
+/*#################################### ERRORE ####################################*/
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.errore {
+  margin: 70px auto;
+  padding: 20px;
+  background: #FDF5E6;
+  border-radius: 15px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+
+
+.errore h2 {
+  margin-top: 0.5vw;
+  color: #e60000;
+  font-family: "Questrial";
+  font-size: 3vw;
+  margin-bottom: 1.2vw;
+}
+.errore .close {
+  position: absolute;
+  top: 3px;
+  right: 15px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+.errore .close:hover {
+  color: #808080;
+}
+.errore .content {
+  max-height: 30%;
+  overflow: auto;
+  color: #e60000;
+  font-family: "Questrial";
+  font-size: 1.5vw;
+  margin-bottom: 0.5vw;
+}
+
+@media screen and (max-width: 700px){
+
+  .errore{
+    width: 70%;
+  }
+}
+
+/*#################################### ERRORE ####################################*/
 

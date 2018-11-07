@@ -1,4 +1,4 @@
-package it.controllo;
+package it.controllo.utente;
 
 import java.io.IOException;
 
@@ -13,46 +13,50 @@ import it.persistenza.implementazione.DAOUtente;
 import it.persistenza.interfaccia.IDAOUtente;
 
 /**
- * Servlet implementation class UpdateUtenteServlet
+ * Servlet implementation class UpdatePasswordServlet
  */
-
-public class UpdateUtenteServlet extends HttpServlet {
+public class UpdatePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateUtenteServlet() {
+    public UpdatePasswordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if(!request.getParameter("newPwd").equals(request.getParameter("newPwd1"))) {
+			request.getRequestDispatcher("#").forward(request, response);
+			return;
+		}
 		
 		IDAOUtente daoUtente = new DAOUtente();
-		Utente utente = new Utente();
-		utente.setId(Long.parseLong(request.getParameter("id")));
-		utente.setMail(request.getParameter("mail"));
-		utente.setTelefono(request.getParameter("telefono"));
-		utente.setNickname(request.getParameter("nickname"));
+		Utente oldPwd = new Utente();
+		Utente newPwd = new Utente();
+		Utente newPwd1 = new Utente();
 		
+		oldPwd.setId(Long.parseLong(request.getParameter("id")));
+		oldPwd.hashPassword(request.getParameter("oldPwd"));
+		newPwd.setId(oldPwd.getId());
+		newPwd.hashPassword(request.getParameter("newPwd"));
+		newPwd1.hashPassword(request.getParameter("newPwd1"));
+
 		
 		try {
-			daoUtente.update(utente);
+			daoUtente.updatePassword(oldPwd, newPwd);
 			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("provaServlet.jsp?id=22");
+		response.sendRedirect("provaServlet.jsp?id="+newPwd.getId().toString());
 	}
 
 }
