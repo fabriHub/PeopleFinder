@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -19,7 +18,8 @@
 		<div class="limiter">
 		
 			<div class="utente">
-			<i class="fa fa-user-circle" style="color: #FDF5E6"> <span style="color: #FDF5E6; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-family: Courgette;"> nomeUtente </span> </i>
+			<i class="fa fa-user-circle" style="color: #FDF5E6"> <span style="color: #FDF5E6; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-family: Courgette;">
+			 nickname </span> </i>
 			
 			</div>
 
@@ -28,7 +28,7 @@
 				<div class="containerMenu" onmouseover="mOver()" onmouseout="mOut()">
 					<div class="elementiMenu sinistra">
 						<div class="linkMenu">
-							admin
+							prova
 						</div>
 						<div class="linkMenu">
 							prova
@@ -95,7 +95,7 @@
 			
 			
 			<div class="logout">
-				<button class="" onclick="location.href='index.jsp'">
+				<button class="" onclick="location.href='../logout'">
 					LOGOUT
 				</button>
 			</div>	

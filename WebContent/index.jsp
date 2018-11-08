@@ -1,4 +1,6 @@
+<%@page import="java.util.Map.Entry"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.HashMap, java.util.Map" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -36,14 +38,14 @@
 					
 					<form class="containerFormLogin" action="login" method="POST">
 						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
-							<input type="text" name="mail" placeholder="Email" required>
+							<input type="text" name="mail" placeholder="Email" >
 						</div>
 						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; grid-row-end: 2;">
 							<i class="fa fa-envelope"></i>
 						</div>
 						
 						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
-							<input type="password" name="password" placeholder="Password" required>
+							<input type="password" name="password" placeholder="Password">
 						</div>
 						
 						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3;">
@@ -60,7 +62,17 @@
 									<h2>ERRORE!</h2>
 									<a class="close" href="#">&times;</a>
 									<div class="content">
-										Email o password non corretti
+										
+										<%
+											if(session.getAttribute("ERRORE") != null){
+												Map<String,String> errore = (HashMap<String,String>) session.getAttribute("ERRORE");
+												out.println("<br>");
+												for(Map.Entry<String, String> entry : errore.entrySet()){
+													out.println(entry.getValue() + "<br>");
+												}
+												session.removeAttribute("ERRORE");
+											}
+										%>
 									</div>
 								</div>
 							</div>

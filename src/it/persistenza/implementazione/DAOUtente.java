@@ -9,6 +9,10 @@ import java.util.List;
 import it.modello.Utente;
 import it.persistenza.interfaccia.IDAOUtente;
 
+import java.util.regex.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 public class DAOUtente implements IDAOUtente {
 
 	// Il metodo è strutturato in modo tale che gli utenti di default siano abilitati e non amministratori.
@@ -303,5 +307,19 @@ public class DAOUtente implements IDAOUtente {
 		}
 		return risultato;
 	
+	}
+	
+	public static boolean validateMail(String email){
+		boolean result = false;
+		
+		try {
+			InternetAddress internetAddress = new InternetAddress(email);
+			internetAddress.validate();
+			result = true;
+		} catch (AddressException e) {
+			System.out.println("ERRORE validateMail utente" + e.getMessage());
+		}
+		
+		return result;
 	}
 }

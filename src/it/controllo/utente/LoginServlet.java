@@ -1,6 +1,8 @@
 package it.controllo.utente;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,24 +43,27 @@ public class LoginServlet extends HttpServlet {
 		utenteTmp.setMail(request.getParameter("mail"));
 		utenteTmp.hashPassword(request.getParameter("password"));
 		
-		System.out.println(utenteTmp);
 		
 		try {
 			utente = daoUtente.loginUtente(utenteTmp);
 			
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		HttpSession session = request.getSession();
 		if(utente != null) {
-			System.out.println("utente esistente");
-			HttpSession session = request.getSession();
 			session.setAttribute("idUtente", utente.getId());
 			session.setAttribute("isAmministratore", utente.getAmministratore());
-//			request.getRequestDispatcher("homeUtente.jsp").forward(request, response);
-			response.sendRedirect("utente/homeUtente.jsp");
+			if (utente.getAmministratore() == 1) {
+				response.sendRedirect("./amministratore/homeAmministratore.jsp");
+			} else {
+				response.sendRedirect("./utente/homeUtente.jsp");
+			}
 		} else {
+			Map<String,String> errore = new HashMap<String,String>();
+			errore.put("login", "email o password errate");
+			session.setAttribute("ERRORE", errore);
 			response.sendRedirect("./index.jsp?#ERRORE");
 		}
 	}
