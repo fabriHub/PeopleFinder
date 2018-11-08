@@ -188,4 +188,24 @@
     <servlet-name>StatisticheServlet</servlet-name>
     <url-pattern>/statistiche</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  
+  <filter>
+    <filter-name>FiltroAccessoUtente</filter-name>
+    <filter-class>it.controllo.filtri.FiltroAccessoUtente</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FiltroAccessoUtente</filter-name>
+    <url-pattern>/utente/*</url-pattern>
+  </filter-mapping>
+   <filter>
+    <filter-name>FiltroAccessoAmministratore</filter-name>
+    <filter-class>it.controllo.filtri.FiltroAccessoAmministratore</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FiltroAccessoAmministratore</filter-name>
+    <url-pattern>/amministratore/*</url-pattern>
+  </filter-mapping>
 </web-app>

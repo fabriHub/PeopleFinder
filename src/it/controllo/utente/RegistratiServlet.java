@@ -34,36 +34,31 @@ public class RegistratiServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(!request.getParameter("password1").equals(request.getParameter("password2"))) {
-			request.getRequestDispatcher("registrati.jsp#ERRORE").forward(request, response);
-		} else {
+		IDAOUtente daoUtente = new DAOUtente();
 		
-			IDAOUtente daoUtente = new DAOUtente();
-			
-			Utente utente = new Utente();
-			utente.setMail(request.getParameter("mail"));
-			utente.setTelefono(request.getParameter("telefono"));
-			utente.setNickname(request.getParameter("nickname"));
-			
-			try {
-				if(daoUtente.existsUtente(utente)) {
-					request.getRequestDispatcher("registrati.jsp#ERRORE").forward(request, response);
-				}
-			} catch (DAOException e) {
-				e.printStackTrace();
+		Utente utente = new Utente();
+		utente.setMail(request.getParameter("mail"));
+		utente.setTelefono(request.getParameter("telefono"));	
+		utente.setNickname(request.getParameter("nickname"));
+		
+		try {
+			if(daoUtente.existsUtente(utente)) {
+				request.getRequestDispatcher("registrati.jsp?#ERRORE").forward(request, response);
 			}
-			
-			utente.hashPassword(request.getParameter("password1"));
-	
-			try {
-				daoUtente.add(utente);
-				
-			} catch (DAOException e) {
-				e.printStackTrace();
-			}
-			
-			response.sendRedirect("./homeUtente.jsp");
+		} catch (DAOException e) {
+			e.printStackTrace();
 		}
+		
+		utente.hashPassword(request.getParameter("password1"));
+
+		try {
+			daoUtente.add(utente);
+			
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+		
+		response.sendRedirect("./homeUtente.jsp");
 		
 	}
 

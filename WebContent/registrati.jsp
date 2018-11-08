@@ -80,14 +80,14 @@
 						<button class="">REGISTRATI</button>
 						
 						<div id="ERRORE" class="overlay">
-								<div class="errore">
-									<h2>ERRORE!</h2>
-									<a class="close" href="#">&times;</a>
-									<div class="content">
-										Le password non coincidono
-									</div>
+							<div class="errore">
+								<h2>ERRORE!</h2>
+								<a class="close" href="#">&times;</a>
+								<div class="content">
+									Le password non coincidono
 								</div>
 							</div>
+						</div>
 						
 					</div>
 

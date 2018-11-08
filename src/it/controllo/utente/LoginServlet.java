@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("idUtente", utente.getId());
 			session.setAttribute("isAmministratore", utente.getAmministratore());
 //			request.getRequestDispatcher("homeUtente.jsp").forward(request, response);
-			response.sendRedirect("homeUtente.jsp");
+			response.sendRedirect("utente/homeUtente.jsp");
 		} else {
 			response.sendRedirect("./index.jsp?#ERRORE");
 		}
