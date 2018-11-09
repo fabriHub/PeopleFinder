@@ -23,9 +23,13 @@
 			
 				<div class="containerImmagine">
 					<img src="images/people3.jpg" class="immagine">
-					<a class="bottoneImmagine" href="#" style="text-decoration: none;">
+					<a class="bottoneImmagine">
 						<div class="testoBottoneImmagine">
-							Chi siamo
+							<b>
+							Il nostro sito è rivolto a chiunque desideri trovare altre persone per svolgere un'attività in comune. <br>
+							Il numero di partecipanti ad un gruppo è prestabilito a seconda dell'attività (per esempio per il calcetto è 10).<br>
+							Tutti gli iscritti ad un gruppo possono visualizzare i contatti degli altri componenti per favorire l'organizzazione dell'evento.</b>
+
 						</div>
 					</a>
 				</div>

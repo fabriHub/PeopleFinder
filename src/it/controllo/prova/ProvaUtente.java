@@ -11,10 +11,10 @@ public class ProvaUtente {
 
 	public static void main(String[] args) {
 
-		addUtente();
+//		addUtente();
 //		findAll();
 //		update();
-//		findById();
+		findById();
 //		delete();
 //		findAll();
 //		verificaPasswordUtente();
@@ -59,7 +59,7 @@ public class ProvaUtente {
 		IDAOUtente mioUtente = new DAOUtente();
 		
 		try {
-			Utente utente = mioUtente.findById(1L);
+			Utente utente = mioUtente.findById(86L);
 			System.out.println(utente);
 			
 			

@@ -19,7 +19,7 @@
 		
 			<div class="utente">
 			<i class="fa fa-user-circle" style="color: #FDF5E6"> <span style="color: #FDF5E6; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-family: Courgette;">
-			 nickname </span> </i>
+			 <% out.println((String) request.getAttribute("nickname")); %> </span> </i>
 			
 			</div>
 
