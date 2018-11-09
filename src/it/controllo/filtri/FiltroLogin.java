@@ -47,7 +47,7 @@ public class FiltroLogin implements Filter {
 		
 		if (httpRequest.getParameter("mail").isEmpty()) {
 			errore.put("mail", "inserire la mail");
-		} else if(!DAOUtente.validateMail(httpRequest.getParameter("mail"))) {
+		} else if(/* validare email */false) {
 			errore.put("mail", "inserire una mail esistente");
 		}
 		

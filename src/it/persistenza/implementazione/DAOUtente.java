@@ -309,17 +309,29 @@ public class DAOUtente implements IDAOUtente {
 	
 	}
 	
-	public static boolean validateMail(String email){
-		boolean result = false;
+	public static String getNicknameById(Long id) throws DAOException {
+		Utente utente = new Utente();
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
 		
 		try {
-			InternetAddress internetAddress = new InternetAddress(email);
-			internetAddress.validate();
-			result = true;
-		} catch (AddressException e) {
-			System.out.println("ERRORE validateMail utente" + e.getMessage());
+			statement = connection.prepareStatement("SELECT NICKNAME FROM UTENTE WHERE ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				utente.setNickname(resultSet.getString("NICKNAME"));
+			}
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE findById utente" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
 		}
-		
-		return result;
+		return utente.getNickname();
 	}
 }
