@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.modello.Gruppo;
 import it.modello.Utente;
@@ -40,8 +42,12 @@ public class AggiungiGruppoServlet extends HttpServlet {
     	
     	IDAOGruppo daoGruppo = new DAOGruppo();
 
+    	
     	Gruppo gruppo = new Gruppo();
-    	gruppo.setIdUtente(Long.parseLong(request.getParameter("id_utente")));
+//		HttpSession session = request.getSession();
+		
+		Long id = (Long) request.getSession().getAttribute("idUtente");  // abbiamo recuperato l'ID dell'utente dalla sessione che viene creata con il login
+    	gruppo.setIdUtente(id);
     	gruppo.setIdAttivita(Long.parseLong(request.getParameter("id_attivita")));
     	gruppo.setData(new Date(Integer.parseInt(request.getParameter("anno_evento"))-1900, Integer.parseInt(request.getParameter("mese_evento"))-1, Integer.parseInt(request.getParameter("giorno_evento")), Integer.parseInt(request.getParameter("ora_evento")), Integer.parseInt(request.getParameter("minuti_evento"))));
     	gruppo.setDescrizione(request.getParameter("descrizione"));

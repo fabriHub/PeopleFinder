@@ -188,7 +188,22 @@
     <servlet-name>StatisticheServlet</servlet-name>
     <url-pattern>/statistiche</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>DeleteUtenteServlet</servlet-name>
+    <servlet-class>it.controllo.utente.DeleteUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUtenteServlet</servlet-name>
+    <url-pattern>/deleteUtente</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteGruppoServlet</servlet-name>
+    <servlet-class>it.controllo.utente.DeleteGruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteGruppoServlet</servlet-name>
+    <url-pattern>/deleteGruppo</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>FiltroLogin</filter-name>
     <filter-class>it.controllo.filtri.FiltroLogin</filter-class>
@@ -197,7 +212,6 @@
     <filter-name>FiltroLogin</filter-name>
     <url-pattern>/login</url-pattern>
   </filter-mapping>
-  
   <filter>
     <filter-name>FiltroAccessoUtente</filter-name>
     <filter-class>it.controllo.filtri.FiltroAccessoUtente</filter-class>
@@ -214,5 +228,4 @@
     <filter-name>FiltroAccessoAmministratore</filter-name>
     <url-pattern>/amministratore/*</url-pattern>
   </filter-mapping>
-  
 </web-app>

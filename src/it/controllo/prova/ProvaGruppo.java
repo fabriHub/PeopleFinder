@@ -12,15 +12,15 @@ public class ProvaGruppo {
 
 	public static void main(String[] args) {
 		
-		//addGruppo();
-		findAllGruppo();
+		addGruppo();
+//		findAllGruppo();
 //		findGruppoById();
 //		updateGruppo();
 //		deleteGruppo();
 //		findAllGruppo();
 //		findByIdUtente1();
 //		isCompleto();
-	//	isScaduto();
+//		isScaduto();
 		
 		
 	}
@@ -30,7 +30,7 @@ public class ProvaGruppo {
 		IDAOGruppo daoGruppo = new DAOGruppo();
 		Gruppo gruppo = new Gruppo();
 		
-		gruppo.setIdUtente(22L);
+		gruppo.setIdUtente(61L);
 		gruppo.setIdAttivita(4L);
 		gruppo.setData(new Date(117, 0, 1));
 		gruppo.setDescrizione("mi sono rotto di stare da solo");
