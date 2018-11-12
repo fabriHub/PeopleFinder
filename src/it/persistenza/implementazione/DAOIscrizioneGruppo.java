@@ -232,4 +232,37 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		}			
 	}
 
+
+	@Override
+	public List<IscrizioneGruppo> findGruppiHomeByIdUtente(Long id) throws DAOException {
+		List <IscrizioneGruppo> iscrizioneGruppi = new ArrayList<IscrizioneGruppo>(0);
+		IscrizioneGruppo iscrizioneGruppo = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT ISCRIZIONE_GRUPPO.ID_GRUPPO, ATTIVITA.NOME,GRUPPO.COMPLETO, GRUPPO.DATA_EVENTO FROM ISCRIZIONE_GRUPPO INNER JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID INNER JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID WHERE ISCRIZIONE_GRUPPO.ID_UTENTE = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				iscrizioneGruppo = new IscrizioneGruppo ();
+				iscrizioneGruppo.setId(resultSet.getLong("ID"));
+				iscrizioneGruppo.setIdUtente(id);
+				iscrizioneGruppo.setIdGruppo(resultSet.getLong("ID_GRUPPO"));
+				iscrizioneGruppi.add(iscrizioneGruppo);
+				
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE findGruppiByIdUtente iscrizioneGruppo" + e.getMessage(), e);
+		}
+		finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return iscrizioneGruppi;
+	}
+
 }

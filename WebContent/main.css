@@ -625,7 +625,7 @@ img {
 	
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: minmax(auto-fit, auto-fit) auto-fit;
+	grid-template-rows: 15% 75%;
 }
 
 .tabellaRighe3Col {

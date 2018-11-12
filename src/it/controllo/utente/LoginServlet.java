@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 			if (utente.getAmministratore() == 1) {
 				response.sendRedirect("./amministratore/homeAmministratore.jsp");
 			} else {
-				response.sendRedirect("./utente/homeUtente.jsp");
+				response.sendRedirect("populateHomeUtente");
 			}
 		} else {
 			Map<String,String> errore = new HashMap<String,String>();

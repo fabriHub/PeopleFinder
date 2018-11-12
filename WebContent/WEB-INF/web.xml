@@ -204,6 +204,14 @@
     <servlet-name>DeleteGruppoServlet</servlet-name>
     <url-pattern>/deleteGruppo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>PopulateHomeUtenteServlet</servlet-name>
+    <servlet-class>it.controllo.utente.PopulateHomeUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PopulateHomeUtenteServlet</servlet-name>
+    <url-pattern>/populateHomeUtente</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>FiltroLogin</filter-name>
     <filter-class>it.controllo.filtri.FiltroLogin</filter-class>
