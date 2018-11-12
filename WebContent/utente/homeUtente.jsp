@@ -21,7 +21,180 @@
 		
 			<div class="container" id="contenitore">
 
-
+				<div class="containerTabella">
+					
+					<div class="tabellaRighe3Col header">
+						<div class="col1 ">
+							col1 r1
+						</div>
+						<div class="col2 ">
+							fabrizio dittatore spietato
+						</div>
+						<div class="col3 ">
+							col3 r1
+						</div>
+					</div>
+					
+					<div class="body">
+						<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+						<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+						<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+							<div class="tabellaRighe3Col riga">
+							<div class="col1 ">
+								col1 r2
+							</div>
+							<div class="col2 ">
+								col2 r2
+							</div>
+							<div class="col3 ">
+								col3 r2
+							</div>
+						</div>
+					
+						
+					</div>
+					
+				</div>
 				
 			</div>
 			

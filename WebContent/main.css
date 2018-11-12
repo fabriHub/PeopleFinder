@@ -24,6 +24,7 @@ body,html {
   font-family: "Montserrat";
   font-size: 2vw;
   z-index: -1;
+  position: fixed;
  }
  
  input::placeholder {
@@ -75,26 +76,24 @@ a .fa{
   background: #FFFFFF url('images/sfondo3.jpg') no-repeat scroll center center;
   background-attachment: fixed;
   background-size: cover;
+  position: fixed;
  }
  
 .container {
-  max-width: 100%;
+  /*max-width: 100%;
   max-height: 100%;
   min-width: fit-content;
-  min-height: fit-content;
+  min-height: fit-content;*/
   grid-area: centro;
   min-height: fit-content;
-  /*background: rgba(255, 255, 255, 0.80);*/
   background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 4%, rgba(255, 255, 255, 0.8), rgba(150, 150, 150, 1) 90%);
-  /*border-radius: 25px;*/
-  border-radius: var(--d) var(--d) 25px 25px;
-  --d: 25px;
+  border-radius: 25px;
   margin: 0 0;
   align-items: center;
   justify-items: center;
   display: grid;
   grid-template-columns: 5% 45% 45% 5%;
-  grid-template-rows: 15% auto 15%;
+  grid-template-rows: 15% 70% 15%;
   grid-template-areas: 
     ". sinistra_1 destra_1 ."
     ". sinistra_2 destra_2 ."
@@ -610,3 +609,87 @@ img {
 
 /*#################################### ERRORE ####################################*/
 
+/*#################################### TABELLA ####################################*/
+
+.containerTabella{
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 4;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	word-break: break-word;
+	font-size: 2.1vw;
+	border-radius: 10px;
+	
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: minmax(auto-fit, auto-fit) auto-fit;
+}
+
+.tabellaRighe3Col {
+	display: grid;
+	grid-template-columns: repeat(3, 33%);
+	grid-template-rows: 100%;
+	width: 100%;
+	align-items: center;
+}
+
+.header {
+	grid-row-start: 1;
+	grid-row-end: span 1;
+	grid-column-start: 1;
+	grid-column-end: -1;
+	background:  #6b82a8;
+	font-size: 2.1vw;
+	color: white;
+	border-radius: 10px 10px 0 0;
+}
+
+.body {
+	grid-row-start: 2;
+	grid-row-end: span 1;
+	grid-column-start: 1;
+	grid-column-end: -1;
+	overflow: auto;
+	width: 100%;
+}
+
+.body::-webkit-scrollbar { 
+    display: none;
+}
+
+.riga{
+	font-size: 1.7vw;
+	
+}
+
+.col1{
+	grid-column-start: 1;
+	grid-column-end: span 1;
+}
+
+.col2{
+	grid-column-start: 2;
+	grid-column-end: span 1;
+}
+
+.col3{
+	grid-column-start: 3;
+	grid-column-end: span 1;
+}
+
+.riga:last-child{
+	border-radius: 0 0 10px 10px;
+}
+
+.riga:nth-child(even){
+	background-color: rgba(255,255,255,0.7);
+}
+
+.riga:nth-child(odd){
+	background-color: rgba(200, 200, 200, 0.7);
+}
+
+/*#################################### TABELLA ####################################*/
