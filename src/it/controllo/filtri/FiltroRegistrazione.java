@@ -14,18 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.persistenza.implementazione.DAOUtente;
-
 /**
- * Servlet Filter implementation class FiltroCampiVuotiLogin
+ * Servlet Filter implementation class FiltroRegistrazione
  */
-
-public class FiltroLogin implements Filter {
+public class FiltroRegistrazione implements Filter {
 
     /**
      * Default constructor. 
      */
-    public FiltroLogin() {
+    public FiltroRegistrazione() {
         // TODO Auto-generated constructor stub
     }
 
@@ -47,6 +44,8 @@ public class FiltroLogin implements Filter {
 		
 		if (httpRequest.getParameter("mail").isEmpty()) {
 			errore.put("mail", "inserire la mail");
+		} else if(/* validare email */false) {
+			errore.put("mail", "inserire una mail esistente");
 		}
 		
 		if (httpRequest.getParameter("password").isEmpty()) {

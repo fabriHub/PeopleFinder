@@ -228,4 +228,12 @@
     <filter-name>FiltroAccessoAmministratore</filter-name>
     <url-pattern>/amministratore/*</url-pattern>
   </filter-mapping>
+  <filter>
+    <filter-name>FiltroRegistrazione</filter-name>
+    <filter-class>it.controllo.filtri.FiltroRegistrazione</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FiltroRegistrazione</filter-name>
+    <url-pattern>/registrati</url-pattern>
+  </filter-mapping>
 </web-app>
