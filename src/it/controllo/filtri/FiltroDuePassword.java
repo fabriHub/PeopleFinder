@@ -10,6 +10,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,14 +18,14 @@ import javax.servlet.http.HttpSession;
 import it.persistenza.implementazione.DAOUtente;
 
 /**
- * Servlet Filter implementation class FiltroRegistrazione
+ * Servlet Filter implementation class FiltroDuePassword
  */
-public class FiltroRegistrazione implements Filter {
+public class FiltroDuePassword implements Filter {
 
     /**
      * Default constructor. 
      */
-    public FiltroRegistrazione() {
+    public FiltroDuePassword() {
         // TODO Auto-generated constructor stub
     }
 
@@ -48,20 +49,8 @@ public class FiltroRegistrazione implements Filter {
 			errore = (HashMap<String,String>) session.getAttribute("ERRORE");
 		}
 		
-		if (httpRequest.getParameter("mail").isEmpty()) {
-			errore.put("mail", "inserire la mail");
-		} else if(!DAOUtente.validateMail(httpRequest.getParameter("mail"))) {
-			errore.put("mail", "inserire una mail valida");
-		}
-		
-		if (httpRequest.getParameter("telefono").isEmpty()) {
-			errore.put("telefono", "inserire il numero di telefono");
-		} else if(!DAOUtente.validateTelefono(httpRequest.getParameter("telefono"))) {
-			errore.put("telefono", "inserire un numero di telefono valido");
-		}
-		
-		if (httpRequest.getParameter("nickname").isEmpty()) {
-			errore.put("nickname", "inserire il nickname");
+		if (!httpRequest.getParameter("password1").equals(httpRequest.getParameter("password2"))) {
+			errore.put("password", "le due password devono coincidere");
 		}
 		
 		if (!errore.isEmpty()) {

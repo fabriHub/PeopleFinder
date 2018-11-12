@@ -42,8 +42,12 @@ public class FiltroLogin implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		
+		HttpSession session = httpRequest.getSession();
 		Map<String,String> errore = new HashMap<String,String>();
+
+		if(session.getAttribute("ERRORE") != null) {
+			errore = (HashMap<String,String>) session.getAttribute("ERRORE");
+		}
 		
 		if (httpRequest.getParameter("mail").isEmpty()) {
 			errore.put("mail", "inserire la mail");
@@ -55,7 +59,6 @@ public class FiltroLogin implements Filter {
 		
 		if (!errore.isEmpty()) {
 			
-			HttpSession session = httpRequest.getSession();
 			session.setAttribute("ERRORE", errore);
 			httpResponse.sendRedirect("./index.jsp?#ERRORE");
 		} else {

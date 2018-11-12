@@ -220,6 +220,10 @@
     <filter-name>FiltroAccessoUtente</filter-name>
     <url-pattern>/utente/*</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>FiltroAccessoUtente</filter-name>
+    <url-pattern>/amministratore/*</url-pattern>
+  </filter-mapping>
   <filter>
     <filter-name>FiltroAccessoAmministratore</filter-name>
     <filter-class>it.controllo.filtri.FiltroAccessoAmministratore</filter-class>
@@ -234,6 +238,14 @@
   </filter>
   <filter-mapping>
     <filter-name>FiltroRegistrazione</filter-name>
+    <url-pattern>/registrati</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>FiltroDuePassword</filter-name>
+    <filter-class>it.controllo.filtri.FiltroDuePassword</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FiltroDuePassword</filter-name>
     <url-pattern>/registrati</url-pattern>
   </filter-mapping>
 </web-app>
