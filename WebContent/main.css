@@ -328,11 +328,32 @@ img {
 
 /*#################################### REGISTRAZIONE ####################################*/
 
+.centro{
+	width: 100%;
+	
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 100%;
+	justify-items: center;
+	align-items: center;
+}
 
+.sinistra_1{
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
 
+.destra_1{
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
 
-.containerRegistr1{
-  grid-area: sinistra_2;
+.containerRegistr{
   width: 85%;
   grid-template-columns: 5% 90% 5%;
   grid-template-rows: 30% 60% 10%;
@@ -343,35 +364,11 @@ img {
   font-family: "Montserrat";
   /*padding: 0.5vw 2vw;*/
   justify-items: center;
-	align-items: center;
+  align-items: center;
 }
 
-.containerRegistr2{
-  grid-area: destra_2;
-  width: 85%;
-  grid-template-columns: 5% 90% 5%;
-  grid-template-rows: 30% 60% 10%;
-  grid-template-areas:
-  	". titolo ."
-  	". form ."
-  	". registrati .";
-  font-family: "Montserrat";
-  /*padding: 0.5vw 2vw;*/
-}
-
-.containerFormRegistr1{
-	grid-area: form;
-	display: grid;
-	grid-template-columns: 20% 80%;
-	grid-template-rows: repeat(3, 1fr);
-	justify-items: stretch;
-	align-items: center;
-	grid-column-gap: 10px;
-	grid-row-gap: 15px;
-}
-
-.containerFormRegistr2{
-	grid-area: form;
+.containerFormRegistr{
+	width: 85%;
 	display: grid;
 	grid-template-columns: 20% 80%;
 	grid-template-rows: repeat(3, 1fr);

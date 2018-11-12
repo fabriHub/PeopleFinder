@@ -28,73 +28,71 @@
 					Registrazione
 				</div>
 
+			<!-- <div > -->
 
-			<div class="containerRegistr1">
-
-				<form class="containerFormRegistr1" action="registrati" method="POST">
-					<div class="containerInput"
-						style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
-						<input type="text" name="mail" placeholder="Email" required>
+				<form class="centro" action="registrati" method="POST">
+					<div class="sinistra_1 containerFormRegistr">
+						<div class="containerInput"
+							style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
+							<input type="text" name="mail" placeholder="Email" required>
+						</div>
+						<div class="containerSymbol"
+							style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; grid-row-end: 2;">
+							<i class="fa fa-envelope"></i>
+						</div>
+	
+						<div class="containerInput"
+							style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
+							<input type="text" name="nickname" placeholder="Nickname" required>
+						</div>
+						<div class="containerSymbol"
+							style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3;">
+							<i class="fa fa-user"></i>
+						</div>
+	
+						<div class="containerInput"
+							style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 3; grid-row-end: 4;">
+							<input type="text" name="telefono" placeholder="Telefono" required>
+						</div>
+						<div class="containerSymbol"
+							style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 3; grid-row-end: 4;">
+							<i class="fa fa-phone"></i>
+						</div>
 					</div>
-					<div class="containerSymbol"
-						style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; grid-row-end: 2;">
-						<i class="fa fa-envelope"></i>
-					</div>
-
-					<div class="containerInput"
-						style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
-						<input type="text" name="nickname" placeholder="Nickname" required>
-					</div>
-					<div class="containerSymbol"
-						style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3;">
-						<i class="fa fa-user"></i>
-					</div>
-
-					<div class="containerInput"
-						style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 3; grid-row-end: 4;">
-						<input type="text" name="telefono" placeholder="Telefono" required>
-					</div>
-					<div class="containerSymbol"
-						style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 3; grid-row-end: 4;">
-						<i class="fa fa-phone"></i>
-					</div>
-			</div>
-
-			<div class="containerRegistr2">
-				<div class="containerFormRegistr2">
-					<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
-						<input type="password" name="password1" placeholder="Password" required>
-					</div>
-					<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; grid-row-end: 2;">
-						<i class="fa fa-lock"></i>
-					</div>
-
-					<div class="containerInput"	style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
-						<input type="password" name="password2"	placeholder="Conferma password" required>
-					</div>
-					<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3;">
-						<i class="fa fa-lock"></i>
-					</div>
-
-					<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 3; grid-row-end: 4;">
-						<button class="">REGISTRATI</button>
-						
-						<div id="ERRORE" class="overlay">
-							<div class="errore">
-								<h2>ERRORE!</h2>
-								<a class="close" href="#">&times;</a>
-								<div class="content">
-									Le password non coincidono
+	
+					<div class="destra_1 containerFormRegistr">
+						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
+							<input type="password" name="password1" placeholder="Password" required>
+						</div>
+						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; grid-row-end: 2;">
+							<i class="fa fa-lock"></i>
+						</div>
+	
+						<div class="containerInput"	style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
+							<input type="password" name="password2"	placeholder="Conferma password" required>
+						</div>
+						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3;">
+							<i class="fa fa-lock"></i>
+						</div>
+	
+						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 3; grid-row-end: 4;">
+							<button class="">REGISTRATI</button>
+							
+							<div id="ERRORE" class="overlay">
+								<div class="errore">
+									<h2>ERRORE!</h2>
+									<a class="close" href="#">&times;</a>
+									<div class="content">
+										Le password non coincidono
+									</div>
 								</div>
 							</div>
+							
 						</div>
-						
 					</div>
-
-				</div>
 				</form>
 
-			</div>
+			<!-- </div> -->
 
 			<div class="accedi">
 						<a href="index.jsp" style="text-decoration: none;">Hai già un account? Accedi <i class="fa fa-long-arrow-right m-l-5" style="font-size: 15px;"></i></a>
