@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import it.modello.Utente;
-import it.persistenza.interfaccia.IDAOUtente;
+import java.util.regex.Pattern;
 
-import java.util.regex.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+
+import it.modello.Utente;
+import it.persistenza.interfaccia.IDAOUtente;
 
 public class DAOUtente implements IDAOUtente {
 
@@ -334,12 +335,25 @@ public class DAOUtente implements IDAOUtente {
 		}
 		return utente.getNickname();
 	}
-	
-	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
-		    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-	public static boolean validateMail(String emailStr) {
-		    Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
-		    return matcher.find();
+	private static final Pattern pattern = Pattern.compile("^[+]{0,1}[0-9]{8,15}$");
+	
+	public static boolean validateTelefono(String telefono) {
+	    return pattern.matcher(telefono).matches();
+	}
+	
+	public static boolean validateMail(String email) {
+		boolean result = true;
+		
+		InternetAddress internetAddress = new InternetAddress();
+		
+		internetAddress.setAddress(email);
+		try {
+			internetAddress.validate();
+		} catch (AddressException e) {
+			result = false;
+		}
+		
+		return result;
 	}
 }

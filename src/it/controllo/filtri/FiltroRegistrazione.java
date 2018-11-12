@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.persistenza.implementazione.DAOUtente;
+
 /**
  * Servlet Filter implementation class FiltroRegistrazione
  */
@@ -44,19 +46,25 @@ public class FiltroRegistrazione implements Filter {
 		
 		if (httpRequest.getParameter("mail").isEmpty()) {
 			errore.put("mail", "inserire la mail");
-		} else if(/* validare email */false) {
-			errore.put("mail", "inserire una mail esistente");
+		} else if(!DAOUtente.validateMail(httpRequest.getParameter("mail"))) {
+			errore.put("mail", "inserire una mail valida");
 		}
 		
-		if (httpRequest.getParameter("password").isEmpty()) {
-			errore.put("password", "inserire la password");
+		if (httpRequest.getParameter("telefono").isEmpty()) {
+			errore.put("telefono", "inserire il numero di telefono");
+		} else if(!DAOUtente.validateTelefono(httpRequest.getParameter("telefono"))) {
+			errore.put("telefono", "inserire un numero di telefono valido");
+		}
+		
+		if (httpRequest.getParameter("nickname").isEmpty()) {
+			errore.put("nickname", "inserire il nickname");
 		}
 		
 		if (!errore.isEmpty()) {
 			
 			HttpSession session = httpRequest.getSession();
 			session.setAttribute("ERRORE", errore);
-			httpResponse.sendRedirect("./index.jsp?#ERRORE");
+			httpResponse.sendRedirect("./registrati.jsp?#ERRORE");
 		} else {
 			chain.doFilter(request, response);
 		}

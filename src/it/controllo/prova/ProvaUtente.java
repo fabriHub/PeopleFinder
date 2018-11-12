@@ -14,11 +14,18 @@ public class ProvaUtente {
 //		addUtente();
 //		findAll();
 //		update();
-		findById();
+//		findById();
 //		delete();
 //		findAll();
 //		verificaPasswordUtente();
 //		loginUtente();
+		
+		if(DAOUtente.validateTelefono("+12345232342+")) {
+			System.out.println("ssssi");
+		}else {
+			System.out.println("no");
+		}
+		
 	}
 	
 	private static void addUtente() {
