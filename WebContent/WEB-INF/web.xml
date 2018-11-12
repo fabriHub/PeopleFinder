@@ -228,16 +228,4 @@
     <filter-name>FiltroAccessoAmministratore</filter-name>
     <url-pattern>/amministratore/*</url-pattern>
   </filter-mapping>
-   <filter>
-    <filter-name>FiltroNickname</filter-name>
-    <filter-class>it.controllo.filtri.FiltroNickname</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FiltroNickname</filter-name>
-    <url-pattern>/utente/*</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>FiltroNickname</filter-name>
-    <url-pattern>/amministratore/*</url-pattern>
-  </filter-mapping>
 </web-app>
