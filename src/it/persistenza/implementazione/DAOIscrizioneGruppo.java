@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import it.modello.Gruppo;
 import it.modello.IscrizioneGruppo;
 import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
 
@@ -239,6 +241,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 	 * string[1] : nome
 	 * string[2] : completo
 	 * string[3] : data
+	 * string[4] : passata
 	 */
 	@Override
 	public List<String[]> findGruppiHomeByIdUtente(Long id) throws DAOException {
@@ -255,12 +258,18 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 			resultSet = statement.executeQuery();
 			
 			while (resultSet.next()) {
-				stringa = new String[4];
+				stringa = new String[5];
 				stringa[0] = String.valueOf(resultSet.getLong("ID_GRUPPO"));
 				stringa[1] = resultSet.getString("NOME");
 				stringa[2] = String.valueOf(resultSet.getInt("COMPLETO"));
 				Date data = new Date(resultSet.getLong("DATA_EVENTO"));
-				stringa[3] = String.valueOf(data.getDate())+"/"+String.valueOf(data.getMonth()+1)+"/"+String.valueOf(data.getYear()+1900)+" "+String.valueOf(data.getHours())+":"+String.valueOf(data.getMinutes());
+				stringa[3] = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(data);
+				
+				if(data.before(new Date())) {
+					stringa[4] = "1";
+				} else {
+					stringa[4] = "0";
+				}
 				
 				gruppi.add(stringa);
 				

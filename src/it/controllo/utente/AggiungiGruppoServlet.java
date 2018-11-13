@@ -52,7 +52,7 @@ public class AggiungiGruppoServlet extends HttpServlet {
     	gruppo.setIdUtente(id);
     	gruppo.setIdAttivita(Long.parseLong(request.getParameter("id_attivita")));
     	try {
-			gruppo.setData(new SimpleDateFormat("dd/MM/YYYY HH:mm").parse(request.getParameter("data")+" "+request.getParameter("ora")));
+			gruppo.setData(new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getParameter("data")+" "+request.getParameter("ora")));
 			
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block

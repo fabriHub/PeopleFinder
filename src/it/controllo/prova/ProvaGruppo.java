@@ -25,18 +25,26 @@ public class ProvaGruppo {
 //		isScaduto();
 		
 		Date data = null;
+		String date = null;
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
 		try {
-			data = new SimpleDateFormat("dd/MM/YYYY HH:mm").parse("21/12/2018 21:39");
+			data = sdf.parse("31/05/2011 21:39");
+			date = df.format(new Date(1542103749530L));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+			
+		System.out.println(date);
 		
-		System.out.println(data);
+		System.out.println(new Date().getTime());
 		
 		
-	}
+		
+}
 
 	
 	public static void addGruppo () {

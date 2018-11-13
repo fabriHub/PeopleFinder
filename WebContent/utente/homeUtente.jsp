@@ -42,8 +42,9 @@
 							List<String[]> listaGruppi = (List<String[]>) request.getAttribute("listaGruppi");
 							listaGruppi.toString();
 							for(String[] stringa : listaGruppi){
-						%>		
-								<div class="tabellaRighe3Col riga">
+						%>	
+						<a href="####?idGruppo=<% out.println(stringa[0]); %>">	
+							<div class="tabellaRighe3Col riga <% if (stringa[4].equals("1")) out.println("eventoPassato"); %>">
 								<div class="col1">
 									<% out.println(stringa[1]); %>
 								</div>
@@ -54,6 +55,7 @@
 									<% out.println(stringa[2]); %>
 								</div>
 							</div>
+						</a>
 						<%		
 							}
 						%>
