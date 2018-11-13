@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.modello.Utente;
 import it.persistenza.implementazione.DAOException;
@@ -36,10 +37,10 @@ public class UpdateUtenteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
 		IDAOUtente daoUtente = new DAOUtente();
 		Utente utente = new Utente();
-		utente.setId(Long.parseLong(request.getParameter("id")));
+		utente.setId((Long) session.getAttribute("idUtente"));
 		utente.setMail(request.getParameter("mail"));
 		utente.setTelefono(request.getParameter("telefono"));
 		utente.setNickname(request.getParameter("nickname"));

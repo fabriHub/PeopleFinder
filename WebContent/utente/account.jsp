@@ -20,11 +20,11 @@
 		
 			<%@ include file="menuUtente.jsp" %>
 					
-			<div class="container2">
+			<div class="container2" id="contenitore">
 			
 					
 			
-				<div class="titoloRegistrazione">
+				<div class="titoloRegistrazione" style="align-self: center;">
 					Modifica account
 				</div>
 
@@ -119,10 +119,10 @@
 
 			<!-- </div> -->
 
-			<div class="accedi">
-						<a href="index.jsp" style="text-decoration: none;">Hai già un account? Accedi <i class="fa fa-long-arrow-right m-l-5" style="font-size: 15px;"></i></a>
-					</div>	
-			
+				<div class="cancellati containerInput" style="">
+								<button class="">CANCELLATI</button>	
+				
+				</div>
 			</div>
 		</div>
 				
