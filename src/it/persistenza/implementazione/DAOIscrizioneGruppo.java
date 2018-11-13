@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import it.modello.IscrizioneGruppo;
@@ -232,26 +233,36 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		}			
 	}
 
-
+	/**
+	 * Restituisce una lista di array di stringhe string[];
+	 * string[0] : id gruppo
+	 * string[1] : nome
+	 * string[2] : completo
+	 * string[3] : data
+	 */
 	@Override
-	public List<IscrizioneGruppo> findGruppiHomeByIdUtente(Long id) throws DAOException {
-		List <IscrizioneGruppo> iscrizioneGruppi = new ArrayList<IscrizioneGruppo>(0);
-		IscrizioneGruppo iscrizioneGruppo = null;
+	public List<String[]> findGruppiHomeByIdUtente(Long id) throws DAOException {
+		List <String[]> gruppi = new ArrayList<String[]>(0);
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
+		String[] stringa = null;
+		
 		try {
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT ISCRIZIONE_GRUPPO.ID_GRUPPO, ATTIVITA.NOME,GRUPPO.COMPLETO, GRUPPO.DATA_EVENTO FROM ISCRIZIONE_GRUPPO INNER JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID INNER JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID WHERE ISCRIZIONE_GRUPPO.ID_UTENTE = ?");
+			statement = connection.prepareStatement("SELECT ISCRIZIONE_GRUPPO.ID_GRUPPO, ATTIVITA.NOME,GRUPPO.COMPLETO, GRUPPO.DATA_EVENTO FROM ISCRIZIONE_GRUPPO INNER JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID INNER JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID WHERE ISCRIZIONE_GRUPPO.ID_UTENTE = ? ORDER BY GRUPPO.DATA_EVENTO ASC");
 			statement.setLong(1, id);
 			resultSet = statement.executeQuery();
 			
 			while (resultSet.next()) {
-				iscrizioneGruppo = new IscrizioneGruppo ();
-				iscrizioneGruppo.setId(resultSet.getLong("ID"));
-				iscrizioneGruppo.setIdUtente(id);
-				iscrizioneGruppo.setIdGruppo(resultSet.getLong("ID_GRUPPO"));
-				iscrizioneGruppi.add(iscrizioneGruppo);
+				stringa = new String[4];
+				stringa[0] = String.valueOf(resultSet.getLong("ID_GRUPPO"));
+				stringa[1] = resultSet.getString("NOME");
+				stringa[2] = String.valueOf(resultSet.getInt("COMPLETO"));
+				Date data = new Date(resultSet.getLong("DATA_EVENTO"));
+				stringa[3] = String.valueOf(data.getDate())+"/"+String.valueOf(data.getMonth()+1)+"/"+String.valueOf(data.getYear()+1900)+" "+String.valueOf(data.getHours())+":"+String.valueOf(data.getMinutes());
+				
+				gruppi.add(stringa);
 				
 			}
 		} catch (SQLException e) {
@@ -262,7 +273,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
 		}
-		return iscrizioneGruppi;
+		return gruppi;
 	}
 
 }

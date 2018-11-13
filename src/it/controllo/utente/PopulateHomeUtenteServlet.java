@@ -9,12 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.modello.Gruppo;
-import it.modello.IscrizioneGruppo;
 import it.persistenza.implementazione.DAOException;
-import it.persistenza.implementazione.DAOGruppo;
 import it.persistenza.implementazione.DAOIscrizioneGruppo;
-import it.persistenza.interfaccia.IDAOGruppo;
 import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
 
 /**
@@ -37,23 +33,16 @@ public class PopulateHomeUtenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
-		List<IscrizioneGruppo> listaIscrizioneGruppi = new ArrayList<IscrizioneGruppo>();
-		List<Gruppo> listaGruppi = new ArrayList<Gruppo>();
-		IDAOGruppo daoGruppo = new DAOGruppo();
+		List<String[]> listaGruppi = new ArrayList<String[]>();
 		
 		Long id = (Long) request.getSession().getAttribute("idUtente");
 		
 		try {
-			listaIscrizioneGruppi = daoIscrizioneGruppo.findGruppiByIdUtente(id);
-			
-			for(IscrizioneGruppo iscrizione : listaIscrizioneGruppi) {
-				listaGruppi.add(daoGruppo.findById(iscrizione.getId()));
-			}
+			listaGruppi = daoIscrizioneGruppo.findGruppiHomeByIdUtente(id);
 			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-		
 		
 		request.setAttribute("listaGruppi", listaGruppi);
 		request.getRequestDispatcher("/utente/homeUtente.jsp").forward(request, response);

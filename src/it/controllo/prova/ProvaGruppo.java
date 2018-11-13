@@ -1,5 +1,7 @@
 package it.controllo.prova;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class ProvaGruppo {
 
 	public static void main(String[] args) {
 		
-		addGruppo();
+//		addGruppo();
 //		findAllGruppo();
 //		findGruppoById();
 //		updateGruppo();
@@ -21,6 +23,17 @@ public class ProvaGruppo {
 //		findByIdUtente1();
 //		isCompleto();
 //		isScaduto();
+		
+		Date data = null;
+		
+		try {
+			data = new SimpleDateFormat("dd/MM/YYYY HH:mm").parse("21/12/2018 21:39");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(data);
 		
 		
 	}

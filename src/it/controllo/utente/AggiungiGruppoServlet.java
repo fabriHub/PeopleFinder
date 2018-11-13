@@ -1,6 +1,8 @@
 package it.controllo.utente;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -49,7 +51,13 @@ public class AggiungiGruppoServlet extends HttpServlet {
 		Long id = (Long) request.getSession().getAttribute("idUtente");  // abbiamo recuperato l'ID dell'utente dalla sessione che viene creata con il login
     	gruppo.setIdUtente(id);
     	gruppo.setIdAttivita(Long.parseLong(request.getParameter("id_attivita")));
-    	gruppo.setData(new Date(Integer.parseInt(request.getParameter("anno_evento"))-1900, Integer.parseInt(request.getParameter("mese_evento"))-1, Integer.parseInt(request.getParameter("giorno_evento")), Integer.parseInt(request.getParameter("ora_evento")), Integer.parseInt(request.getParameter("minuti_evento"))));
+    	try {
+			gruppo.setData(new SimpleDateFormat("dd/MM/YYYY HH:mm").parse(request.getParameter("data")+" "+request.getParameter("ora")));
+			
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     	gruppo.setDescrizione(request.getParameter("descrizione"));
     	
     	try {
