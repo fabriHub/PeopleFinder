@@ -636,6 +636,14 @@ img {
 	align-items: center;
 }
 
+.tabellaRighe5Col {
+	display: grid;
+	grid-template-columns: repeat(5, 33%);
+	grid-template-rows: 100%;
+	width: 100%;
+	align-items: center;
+}
+
 .header {
 	grid-row-start: 1;
 	grid-row-end: span 1;
@@ -677,6 +685,16 @@ img {
 
 .col3{
 	grid-column-start: 3;
+	grid-column-end: span 1;
+}
+
+.col4{
+	grid-column-start: 4;
+	grid-column-end: span 1;
+}
+
+.col5{
+	grid-column-start: 5;
 	grid-column-end: span 1;
 }
 
