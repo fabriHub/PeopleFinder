@@ -120,8 +120,7 @@
 			<!-- </div> -->
 
 				<div class="cancellati containerInput" style="">
-								<button class="">CANCELLATI</button>	
-				
+					<button class="">CANCELLATI</button>	
 				</div>
 			</div>
 		</div>

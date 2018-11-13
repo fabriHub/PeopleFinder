@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} else {
 			Map<String,String> errore = new HashMap<String,String>();
-			errore.put("login", "email o password errate");
+			errore.put("login", "Email o password errate");
 			session.setAttribute("ERRORE", errore);
 			response.sendRedirect("./index.jsp?#ERRORE");
 		}

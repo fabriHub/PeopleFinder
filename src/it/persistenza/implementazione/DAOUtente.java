@@ -218,6 +218,35 @@ public class DAOUtente implements IDAOUtente {
 		return utenteTmp;
 	}
 
+	@Override
+	public boolean verificaPwd (Utente utente) throws DAOException {
+		
+		Utente utenteTmp = null;
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		boolean risultato = false;
+		
+		try {
+			statement = connection.prepareStatement("SELECT * FROM UTENTE WHERE ID = ? AND PASSWORD = ?");
+			statement.setLong(1, utente.getId());
+			statement.setString(2, utente.getPassword());
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				risultato = true;
+			}
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE verificaPwd utente" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return risultato;
+	}
 	
 	private boolean writePassword(Utente utente) throws DAOException {
 		

@@ -52,7 +52,7 @@ public class FiltroDuePassword implements Filter {
 		
 		if (!errore.isEmpty()) {
 			session.setAttribute("ERRORE", errore);
-			httpResponse.sendRedirect("./registrati.jsp?#ERRORE");
+			httpResponse.sendRedirect("./accountUtente?#ERRORE");
 		} else {
 			chain.doFilter(request, response);
 		}

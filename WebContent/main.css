@@ -753,6 +753,7 @@ img {
 	justify-self: center;
 	width: 40%;
 	font-size: 0.5vw;
+	z-index: -1;
 }
 
 .cancellati.button {

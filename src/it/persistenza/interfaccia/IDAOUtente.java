@@ -17,5 +17,6 @@ public interface IDAOUtente {
 	public boolean updatePassword (Utente oldPwd, Utente newPwd) throws DAOException;
 	public Utente loginUtente (Utente utente) throws DAOException;
 	public boolean existsUtente (Utente utente) throws DAOException;
+	public boolean verificaPwd (Utente utente) throws DAOException;
 	
 }

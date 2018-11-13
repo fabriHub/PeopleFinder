@@ -1,6 +1,8 @@
 package it.controllo.utente;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,9 +44,26 @@ public class UpdatePasswordServlet extends HttpServlet {
 		IDAOUtente daoUtente = new DAOUtente();
 		Utente oldPwd = new Utente();
 		Utente newPwd = new Utente();
+		Map<String,String> errore = new HashMap<String,String>();
+		
+		if(session.getAttribute("ERRORE") != null) {
+			errore = (HashMap<String,String>) session.getAttribute("ERRORE");
+		}
 		
 		oldPwd.setId((Long) session.getAttribute("idUtente"));
 		oldPwd.hashPassword(request.getParameter("password"));
+		
+		try {
+			if(!daoUtente.verificaPwd(oldPwd)) {
+				errore.put("password", "La vecchia password non è corretta");
+				session.setAttribute("ERRORE", errore);
+				response.sendRedirect("./accountUtente?#ERRORE");
+			}
+		} catch (DAOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		newPwd.setId(oldPwd.getId());
 		newPwd.hashPassword(request.getParameter("password1"));
 
@@ -56,7 +75,9 @@ public class UpdatePasswordServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("populateHomeUtente");
+		if(!response.isCommitted()) {
+			response.sendRedirect("populateHomeUtente");
+		}
 	}
 
 }
