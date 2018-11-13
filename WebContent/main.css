@@ -638,7 +638,7 @@ img {
 
 .tabellaRighe5Col {
 	display: grid;
-	grid-template-columns: repeat(5, 33%);
+	grid-template-columns: repeat(5, 20%);
 	grid-template-rows: 100%;
 	width: 100%;
 	align-items: center;
