@@ -12,6 +12,7 @@ public interface IDAOIscrizioneGruppo {
 	public IscrizioneGruppo findById(Long id) throws DAOException;
 	public List<IscrizioneGruppo> findGruppiByIdUtente(Long id) throws DAOException;
 	public List<String[]> findGruppiHomeByIdUtente(Long id) throws DAOException;
+	public List<String[]> findAllAggiungiti() throws DAOException;
 	public List<IscrizioneGruppo> findUtentiByIdGruppo(Long id) throws DAOException;
 	public void update(IscrizioneGruppo iscrizioneGruppo) throws DAOException;
 	public void delete (Long id) throws DAOException;

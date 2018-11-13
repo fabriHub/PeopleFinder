@@ -11,13 +11,13 @@ public class ProvaIscrizioneGruppo {
 
 	public static void main(String[] args) {
 		
-//		addIscrizioneGruppo();
+		addIscrizioneGruppo();
 //		findAllIscrizioneGruppo();
 //		findByIdIscrizioneGruppo(1L);
 //		updateIscrizioneGruppo(2L);
 //		deleteIscrizioneGruppo(2L);
 //		findGruppiByIdUtenteIscrizioneGruppo(22L);
-		findUtentiByIdGruppoIscrizioneGruppo(22L);
+//		findUtentiByIdGruppoIscrizioneGruppo(22L);
 		
 
 	}
@@ -27,8 +27,8 @@ public class ProvaIscrizioneGruppo {
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
 		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo();
 		
-		iscrizioneGruppo.setIdUtente(1L);
-		iscrizioneGruppo.setIdGruppo(1L);
+		iscrizioneGruppo.setIdUtente(340L);
+		iscrizioneGruppo.setIdGruppo(22L);
 		
 		try {
 			daoIscrizioneGruppo.add(iscrizioneGruppo);
