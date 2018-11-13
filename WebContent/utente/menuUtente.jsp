@@ -15,9 +15,9 @@
 
 <div class="containerMenu" onmouseover="mOver()" onmouseout="mOut()">
 	<div class="elementiMenu sinistra">
-		<div class="linkMenu">
+		<a class="linkMenu" href="./gestioneGruppi">
 			Gestione gruppi
-		</div>
+		</a>
 		<div class="linkMenu">
 			Unisciti a un gruppo
 		</div>

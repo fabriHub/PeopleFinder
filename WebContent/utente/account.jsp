@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.HashMap, java.util.Map, java.util.Map.Entry" %>
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,9 +6,9 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	
-	<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="./main.css">
 	
 	<title>People Finder</title>
 	
@@ -19,7 +17,7 @@
 	<body>
 		<div class="limiter">
 		
-			
+			<%@ include file="menuUtente.jsp" %>
 					
 			<div class="container2">
 			
@@ -35,8 +33,8 @@
 					String[] datiUtente = (String[]) request.getAttribute("datiUtente");
 				%>
 
-				<form class="sinistra_1" action="updateUtente" method="POST">
-					<div class="containerFormAccount">
+				<div class="centro">
+					<form class="sinistra_1 containerFormAccount" action="updateUtente" method="POST">
 						<div class="containerInput"
 							style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
 							<input type="text" name="mail" placeholder="Email" value="<% out.println(datiUtente[1]); %>" required>
@@ -48,7 +46,7 @@
 	
 						<div class="containerInput"
 							style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
-							<input type="text" name="nickname" placeholder="Nickname" required>
+							<input type="text" name="nickname" placeholder="Nickname" value="<% out.println(datiUtente[2]); %>" required>
 						</div>
 						<div class="containerSymbol"
 							style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3;">
@@ -57,38 +55,41 @@
 	
 						<div class="containerInput"
 							style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 3; grid-row-end: 4;">
-							<input type="text" name="telefono" placeholder="Telefono" required>
+							<input type="text" name="telefono" placeholder="Telefono" value="<% out.println(datiUtente[3]); %>" required>
 						</div>
 						<div class="containerSymbol"
 							style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 3; grid-row-end: 4;">
 							<i class="fa fa-phone"></i>
 						</div>
-						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 3; grid-row-end: 4;">
+						
+						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 4; grid-row-end: 5;">
 							<button class="">MODIFICA DATI</button>
 						</div>
-					</div>
-				</form>
-	
-				<form class="destra_1" action="updatePassword" method="POST">
-					<div class="containerFormAccount">
+					</form>
+		
+					<form class="destra_1 containerFormAccount" action="updatePassword" method="POST">
 						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
 							<input type="password" name="password" placeholder="Vecchia password" required>
-						</div>
-						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 1; grid-row-end: 2;">
-							<input type="password" name="password1" placeholder="Nuova password" required>
 						</div>
 						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; grid-row-end: 2;">
 							<i class="fa fa-lock"></i>
 						</div>
-	
-						<div class="containerInput"	style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
-							<input type="password" name="password2"	placeholder="Conferma password" required>
+						
+						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 2; grid-row-end: 3;">
+							<input type="password" name="password1" placeholder="Nuova password" required>
 						</div>
 						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3;">
 							<i class="fa fa-lock"></i>
 						</div>
 	
-						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 3; grid-row-end: 4;">
+						<div class="containerInput"	style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 3; grid-row-end: 4;">
+							<input type="password" name="password2"	placeholder="Conferma password" required>
+						</div>
+						<div class="containerSymbol" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 3; grid-row-end: 4;">
+							<i class="fa fa-lock"></i>
+						</div>
+	
+						<div class="containerInput" style="grid-column-start: 1; grid-column-end: -1; grid-row-start: 4; grid-row-end: 5;">
 							<button class="">AGGIORNA PASSWORD</button>
 							
 							<div id="ERRORE" class="overlay">
@@ -112,8 +113,8 @@
 							</div>
 							
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 
 			<!-- </div> -->
 

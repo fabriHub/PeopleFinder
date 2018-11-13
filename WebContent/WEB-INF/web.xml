@@ -228,6 +228,7 @@
     <servlet-name>GestioneGruppiServlet</servlet-name>
     <url-pattern>/gestioneGruppi</url-pattern>
   </servlet-mapping>
+  <!-- FILTRIIIIIIIIIIIIIIIIIIIIIIIIIIi -->
   <filter>
     <filter-name>FiltroLogin</filter-name>
     <filter-class>it.controllo.filtri.FiltroLogin</filter-class>
