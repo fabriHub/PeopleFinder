@@ -17,8 +17,8 @@
 
 <div class="containerMenu" onmouseover="mOver()" onmouseout="mOut()">
 	<div class="elementiMenu sinistra">
-		<div class="linkMenu">
-			admin
+		<a href="./populateHomeUtente" class="linkMenu">
+			Entra come utente
 		</div>
 		<div class="linkMenu">
 			prova
@@ -42,9 +42,7 @@
 		<div class="linkMenu">
 			prova
 		</div>
-		<div class="linkMenu">
-			prova
-		</div>
+		
 	</div>
 </div>
 
