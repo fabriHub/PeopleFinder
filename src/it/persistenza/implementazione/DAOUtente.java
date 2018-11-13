@@ -336,9 +336,9 @@ public class DAOUtente implements IDAOUtente {
 		return utente.getNickname();
 	}
 
-	private static final Pattern pattern = Pattern.compile("^[+]{0,1}[0-9]{8,15}$");
 	
 	public static boolean validateTelefono(String telefono) {
+		Pattern pattern = Pattern.compile("^[+]{0,1}[0-9]{8,15}$");
 	    return pattern.matcher(telefono).matches();
 	}
 	

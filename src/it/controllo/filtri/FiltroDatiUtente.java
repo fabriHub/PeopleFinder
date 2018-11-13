@@ -45,7 +45,7 @@ public class FiltroDatiUtente implements Filter {
 		Map<String,String> errore = new HashMap<String,String>();
 		
 		if(session.getAttribute("ERRORE") != null) {
-			errore = (HashMap<String,String>) session.getAttribute("ERRORE");
+			session.removeAttribute("ERRORE");
 		}
 		
 		if (httpRequest.getParameter("mail").isEmpty()) {
@@ -66,7 +66,7 @@ public class FiltroDatiUtente implements Filter {
 		
 		if (!errore.isEmpty()) {
 			session.setAttribute("ERRORE", errore);
-			httpResponse.sendRedirect("./registrati.jsp?#ERRORE");
+			httpResponse.sendRedirect("./accountUtente?#ERRORE");
 		} else {
 			chain.doFilter(request, response);
 		}
