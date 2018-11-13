@@ -35,7 +35,7 @@
 		<a class="linkMenu" href="./accountUtente">
 				Account
 		</a>
-		<% if((Integer)session.getAttribute("isAmministratore").equals(1)) {%>
+		<% if( ((Integer) session.getAttribute("isAmministratore")).equals(1) ) {%>
 			<a class="linkMenu" href="./accountUtente">
 					Entra come amministratore
 			</a>

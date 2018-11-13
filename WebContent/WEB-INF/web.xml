@@ -228,6 +228,14 @@
     <servlet-name>GestioneGruppiServlet</servlet-name>
     <url-pattern>/gestioneGruppi</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>UniscitiAgruppoServlet</servlet-name>
+    <servlet-class>it.controllo.utente.UniscitiAgruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UniscitiAgruppoServlet</servlet-name>
+    <url-pattern>/uniscitiGruppo</url-pattern>
+  </servlet-mapping>
   <!-- FILTRIIIIIIIIIIIIIIIIIIIIIIIIIIi -->
   <filter>
     <filter-name>FiltroLogin</filter-name>
