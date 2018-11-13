@@ -19,7 +19,7 @@
 	<div class="elementiMenu sinistra">
 		<a href="./populateHomeUtente" class="linkMenu">
 			Entra come utente
-		</div>
+		</a>
 		<div class="linkMenu">
 			prova
 		</div>

@@ -660,6 +660,14 @@ img {
 	align-items: center;
 }
 
+.tabellaRighe6ColG {
+	display: grid;
+	grid-template-columns: repeat(4, 22.5%) 5% 5%;
+	grid-template-rows: 100%;
+	width: 100%;
+	align-items: center;
+}
+
 .header {
 	grid-row-start: 1;
 	grid-row-end: span 1;

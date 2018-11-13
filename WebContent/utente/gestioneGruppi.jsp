@@ -24,7 +24,7 @@
 
 				<div class="containerTabella">
 					
-					<div class="tabellaRighe6Col header">
+					<div class="tabellaRighe6ColG header">
 						<div class="col1 ">
 							Nickname
 						</div>
@@ -50,7 +50,7 @@
 							gruppi.toString();
 							for(String[] gruppo : gruppi) {
 						%>	
-							<div class="tabellaRighe6Col riga <% if (gruppo[3].equals("1")) out.println("eventoPassato"); %>">
+							<div class="tabellaRighe6ColG riga <% if (gruppo[3].equals("1")) out.println("eventoPassato"); %>">
 								<div class="col1">
 									<% out.println(gruppo[1]); %>
 								</div>
@@ -64,10 +64,10 @@
 									<% out.println(gruppo[4]); %>
 								</div>
 								<div class="col5">
-									<input type = "button" value = "Modifica" onclick="location.href=''">
+									<i class="fa fa-edit"></i>
 								</div>
 								<div class="col6">
-									<input type = "button" value = "Cancella" onclick="location.href=''">
+									<i class="fa fa-close"></i>
 								</div>
 							</div>
 						<%		

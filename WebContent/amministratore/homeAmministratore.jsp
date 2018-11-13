@@ -21,12 +21,40 @@
 			<%@ include file="menuAmministratore.jsp" %>
 			
 			<div class="container" id="contenitore">
-<!--				<div class="containerMenu">
-					<div class="menu">
-					<i class="fa fa-navicon" style="color: white"></i>
-					</div>
-				</div>-->
 
+				<div class="containerTabella">
+					
+					<div class="tabellaRighe3Col header">
+						<div class="col1 ">
+							Attività
+						</div>
+						<div class="col2 ">
+							Data
+						</div>
+						<div class="col3 ">
+							Completato
+						</div>
+					</div>
+					
+					<div class="body">
+					
+						<a href="####?idGruppo=">	
+							<div class="tabellaRighe3Col riga">
+								<div class="col1">
+									out.println(stringa[1])
+								</div>
+								<div class="col2">
+									out.println(stringa[3])
+								</div>
+								<div class="col3">
+									out.println(stringa[2])
+								</div>
+							</div>
+						</a>
+						
+					</div>
+					
+				</div>
 				
 			</div>
 			
