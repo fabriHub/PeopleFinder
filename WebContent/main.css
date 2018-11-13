@@ -652,6 +652,14 @@ img {
 	align-items: center;
 }
 
+.tabellaRighe6Col {
+	display: grid;
+	grid-template-columns: repeat(6, 16.66%);
+	grid-template-rows: 100%;
+	width: 100%;
+	align-items: center;
+}
+
 .header {
 	grid-row-start: 1;
 	grid-row-end: span 1;
@@ -706,6 +714,11 @@ img {
 	grid-column-end: span 1;
 }
 
+.col6{
+	grid-column-start: 6;
+	grid-column-end: span 1;
+}
+
 .riga:last-child{
 	border-radius: 0 0 10px 10px;
 }
@@ -742,7 +755,7 @@ img {
 	font-size: 0.5vw;
 }
 
-.cancellati .button {
+.cancellati.button {
 	height: 3vw;
 }
 

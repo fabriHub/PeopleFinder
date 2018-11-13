@@ -56,7 +56,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("provaServlet.jsp?id="+newPwd.getId().toString());
+		response.sendRedirect("populateHomeUtente");
 	}
 
 }

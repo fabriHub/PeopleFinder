@@ -53,7 +53,7 @@ public class UpdateUtenteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("provaServlet.jsp?id=22");
+		response.sendRedirect("populateHomeUtente");
 	}
 
 }

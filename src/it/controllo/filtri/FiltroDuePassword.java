@@ -10,12 +10,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import it.persistenza.implementazione.DAOUtente;
 
 /**
  * Servlet Filter implementation class FiltroDuePassword
@@ -50,7 +47,7 @@ public class FiltroDuePassword implements Filter {
 		}
 		
 		if (!httpRequest.getParameter("password1").equals(httpRequest.getParameter("password2"))) {
-			errore.put("password", "le due password devono coincidere");
+			errore.put("password", "Le due password devono coincidere");
 		}
 		
 		if (!errore.isEmpty()) {

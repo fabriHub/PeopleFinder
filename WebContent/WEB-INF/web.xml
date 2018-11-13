@@ -271,6 +271,14 @@
   </filter>
   <filter-mapping>
     <filter-name>FiltroDuePassword</filter-name>
-    <url-pattern>/registrati</url-pattern>
+    <url-pattern>/updatePassword</url-pattern>
+  </filter-mapping>
+    <filter>
+    <filter-name>FiltroDatiUtente</filter-name>
+    <filter-class>it.controllo.filtri.FiltroDatiUtente</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FiltroDatiUtente</filter-name>
+    <url-pattern>/updateUtente</url-pattern>
   </filter-mapping>
 </web-app>

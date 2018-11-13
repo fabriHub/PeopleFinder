@@ -49,19 +49,23 @@ public class FiltroRegistrazione implements Filter {
 		}
 		
 		if (httpRequest.getParameter("mail").isEmpty()) {
-			errore.put("mail", "inserire la mail");
+			errore.put("mail", "Inserire la mail");
 		} else if(!DAOUtente.validateMail(httpRequest.getParameter("mail"))) {
-			errore.put("mail", "inserire una mail valida");
+			errore.put("mail", "Inserire una mail valida");
 		}
 		
 		if (httpRequest.getParameter("telefono").isEmpty()) {
-			errore.put("telefono", "inserire il numero di telefono");
+			errore.put("telefono", "Inserire il numero di telefono");
 		} else if(!DAOUtente.validateTelefono(httpRequest.getParameter("telefono"))) {
-			errore.put("telefono", "inserire un numero di telefono valido");
+			errore.put("telefono", "Inserire un numero di telefono valido");
 		}
 		
 		if (httpRequest.getParameter("nickname").isEmpty()) {
-			errore.put("nickname", "inserire il nickname");
+			errore.put("nickname", "Inserire il nickname");
+		}
+		
+		if (!httpRequest.getParameter("password1").equals(httpRequest.getParameter("password2"))) {
+			errore.put("password", "Le due password devono coincidere");
 		}
 		
 		if (!errore.isEmpty()) {
