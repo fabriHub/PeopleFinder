@@ -32,7 +32,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if(!request.getParameter("newPwd").equals(request.getParameter("newPwd1"))) {
+		if(!request.getParameter("password1").equals(request.getParameter("password2"))) {
 			request.getRequestDispatcher("#").forward(request, response);
 			return;
 		}
@@ -43,10 +43,9 @@ public class UpdatePasswordServlet extends HttpServlet {
 		Utente newPwd1 = new Utente();
 		
 		oldPwd.setId(Long.parseLong(request.getParameter("id")));
-		oldPwd.hashPassword(request.getParameter("oldPwd"));
+		oldPwd.hashPassword(request.getParameter("password"));
 		newPwd.setId(oldPwd.getId());
-		newPwd.hashPassword(request.getParameter("newPwd"));
-		newPwd1.hashPassword(request.getParameter("newPwd1"));
+		newPwd.hashPassword(request.getParameter("password1"));
 
 		
 		try {
