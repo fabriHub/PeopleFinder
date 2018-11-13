@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("idUtente", utente.getId());
 			session.setAttribute("isAmministratore", utente.getAmministratore());
 			if (utente.getAmministratore() == 1) {
-				response.sendRedirect("./amministratore/homeAmministratore.jsp");
+				response.sendRedirect("statistiche");
 			} else {
 				response.sendRedirect("populateHomeUtente");
 			}

@@ -37,10 +37,10 @@ public class StatisticheServlet extends HttpServlet {
 	
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
 		
+		int gruppiCreati = 0;
 		int utentiRegistrati = 0;
 		Double percentualeUtentiAbilitati = 0.0;
 		Double percentualeUtentiDisabilitati = 0.0;
-		int gruppiCreati = 0;
 		Double percentualeGruppiCompletati = 0.0;
 		Double percentualeGruppiNonCompletati = 0.0;
 		Map<Attivita, Double> popolaritaAttivitaGruppiCompletati = new LinkedHashMap<Attivita, Double>();
@@ -72,7 +72,7 @@ public class StatisticheServlet extends HttpServlet {
 		request.setAttribute("partecipazioneUtentiAiGruppi", partecipazioneUtentiAiGruppi);	
 		
 		
-		request.getRequestDispatcher("provaServlet.jsp?xxx=1").forward(request, response);
+		request.getRequestDispatcher("/amministratore/homeAmministratore.jsp").forward(request, response);
 
 	}
 }
