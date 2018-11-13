@@ -38,9 +38,8 @@
 					
 					<div class="body">
 					
-						<%
+						<% 
 							List<String[]> listaGruppi = (List<String[]>) request.getAttribute("listaGruppi");
-							listaGruppi.toString();
 							for(String[] stringa : listaGruppi){
 						%>	
 						<a href="####?idGruppo=<% out.println(stringa[0]); %>">	
@@ -68,7 +67,7 @@
 			
 			
 			<div class="logout">
-				<button class="" onclick="location.href='../logout'">
+				<button class="" onclick="location.href='./logout'">
 					LOGOUT
 				</button>
 			</div>	

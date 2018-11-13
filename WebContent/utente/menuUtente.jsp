@@ -16,14 +16,12 @@
 <div class="containerMenu" onmouseover="mOver()" onmouseout="mOut()">
 	<div class="elementiMenu sinistra">
 		<div class="linkMenu">
-			prova
+			Gestione gruppi
 		</div>
 		<div class="linkMenu">
-			prova
+			Unisciti a un gruppo
 		</div>
-		<div class="linkMenu">
-			prova
-		</div>
+		
 	</div>
 	
 	<div class="menu" id="bottoneMenu">
@@ -32,17 +30,12 @@
 	
 	<div class="elementiMenu destra">
 		<div class="linkMenu">
-			prova
+			I tuoi gruppi
 		</div>
-		<div class="linkMenu">
-			prova
-		</div>
-		<div class="linkMenu">
-			prova
-		</div>
-		<div class="linkMenu">
-			prova
-		</div>
+		<a class="linkMenu" href="./accountUtente">
+				Account
+		</a>
+		
 	</div>
 </div>
 

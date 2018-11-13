@@ -693,3 +693,18 @@ img {
 }
 
 /*#################################### TABELLA ####################################*/
+
+/*#################################### ACCOUNT ####################################*/
+
+.containerFormAccount{
+	width: 85%;
+	display: grid;
+	grid-template-columns: 20% 80%;
+	grid-template-rows: repeat(4, 1fr);
+	justify-items: stretch;
+	align-items: center;
+	grid-column-gap: 10px;
+	grid-row-gap: 15px;
+}
+
+/*#################################### ACCOUNT ####################################*/
