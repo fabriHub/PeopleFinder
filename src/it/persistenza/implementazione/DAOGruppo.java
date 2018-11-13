@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -89,7 +90,7 @@ public class DAOGruppo implements IDAOGruppo {
 
 
 		try {
-			statement = connection.prepareStatement("SELECT GRUPPO.ID, NICKNAME, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE, COMPLETO FROM GRUPPO JOIN UTENTE ON UTENTE.ID = GRUPPO.ID_UTENTE JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA; ");
+			statement = connection.prepareStatement("SELECT GRUPPO.ID, NICKNAME, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE, COMPLETO FROM GRUPPO JOIN UTENTE ON UTENTE.ID = GRUPPO.ID_UTENTE JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE COMPLETO = 0");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				String[] gruppo = new String[5];
@@ -97,16 +98,13 @@ public class DAOGruppo implements IDAOGruppo {
 				gruppo[1] = resultSet.getString("NICKNAME");
 				gruppo[2] = resultSet.getString("NOME");
 				Date data = new Date(resultSet.getLong("DATA_EVENTO"));
+				gruppo[3] = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(data);
 				gruppo[4] = resultSet.getString("DESCRIZIONE");
-				gruppo[5] = String.valueOf(resultSet.getInt("COMPLETO"));
 				
-				if(data.before(new Date())) {
-					gruppo[3] = "1";
-				} else {
-					gruppo[3] = "0";
+				if(data.after(new Date())) {
+					gruppi.add(gruppo);						
 				}
 				
-				gruppi.add(gruppo);						
 			}
 
 		} catch (SQLException e) {

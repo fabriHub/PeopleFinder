@@ -24,7 +24,7 @@
 
 				<div class="containerTabella">
 					
-					<div class="tabellaRighe3Col header">
+					<div class="tabellaRighe6Col header">
 						<div class="col1 ">
 							Nickname
 						</div>
@@ -38,7 +38,8 @@
 							Descrizione
 						</div>
 						<div class="col5 ">
-							Completo
+						</div>
+						<div class="col6 ">
 						</div>
 					</div>
 					
@@ -49,7 +50,7 @@
 							gruppi.toString();
 							for(String[] gruppo : gruppi) {
 						%>	
-							<div class="tabellaRighe5Col riga <% if (gruppo[3].equals("1")) out.println("eventoPassato"); %>">
+							<div class="tabellaRighe6Col riga <% if (gruppo[3].equals("1")) out.println("eventoPassato"); %>">
 								<div class="col1">
 									<% out.println(gruppo[1]); %>
 								</div>
@@ -63,17 +64,18 @@
 									<% out.println(gruppo[4]); %>
 								</div>
 								<div class="col5">
-									<% out.println(gruppo[5]); %>
+									<input type = "button" value = "Modifica" onclick="location.href=''">
+								</div>
+								<div class="col6">
+									<input type = "button" value = "Cancella" onclick="location.href=''">
 								</div>
 							</div>
 						<%		
 							}
 						%>
-						
 					</div>
-					
 				</div>
-				
+					<input type = "button" value = "Crea nuovo gruppo" onclick="location.href=''">
 			</div>
 			
 			
