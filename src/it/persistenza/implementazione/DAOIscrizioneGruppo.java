@@ -285,4 +285,43 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		return gruppi;
 	}
 
+
+	@Override
+	public List<String[]> findAllAggiungiti(Long id) throws DAOException {
+		List <String[]> gruppi = new ArrayList<String[]>(0);
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+
+
+		try {
+			statement = connection.prepareStatement("SELECT GRUPPO.ID, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE GRUPPO.ID IN (SELECT ID_GRUPPO FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE <> ?) AND COMPLETO = 0");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				String[] gruppo = new String[4];
+				gruppo[0] = String.valueOf(resultSet.getLong("ID"));
+				gruppo[1] = resultSet.getString("NOME");
+				Date data = new Date(resultSet.getLong("DATA_EVENTO"));
+				gruppo[2] = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(data);
+				gruppo[3] = resultSet.getString("DESCRIZIONE");
+				
+				if(data.after(new Date())) {
+					gruppi.add(gruppo);						
+				}
+				
+			}
+
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE findAll gruppo" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return gruppi;
+	}
+
 }
