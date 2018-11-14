@@ -17,14 +17,11 @@
 
 <div class="containerMenu" onmouseover="mOver()" onmouseout="mOut()">
 	<div class="elementiMenu sinistra">
-		<a href="./populateHomeUtente" class="linkMenu">
-			Entra come utente
+		<a class="linkMenu" href="./findAllUtenti">
+			Utenti
 		</a>
 		<div class="linkMenu">
-			prova
-		</div>
-		<div class="linkMenu">
-			prova
+			Attività
 		</div>
 	</div>
 	
@@ -34,14 +31,11 @@
 	
 	<div class="elementiMenu destra">
 		<div class="linkMenu">
-			prova
+			Gruppi
 		</div>
-		<div class="linkMenu">
-			prova
-		</div>
-		<div class="linkMenu">
-			prova
-		</div>
+		<a href="./populateHomeUtente" class="linkMenu">
+			Entra come utente
+		</a>
 		
 	</div>
 </div>

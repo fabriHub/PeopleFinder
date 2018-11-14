@@ -44,7 +44,7 @@ public class FindAllUtentiServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("listaUtenti", utenti);
-		request.getRequestDispatcher("provaServlet.jsp?xxx=1").forward(request, response);
+		request.getRequestDispatcher("/amministratore/gestioneUtenti.jsp").forward(request, response);
 	}
 		
 	}
