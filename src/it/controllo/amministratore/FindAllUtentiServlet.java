@@ -36,13 +36,15 @@ public class FindAllUtentiServlet extends HttpServlet {
 		
 		IDAOUtente daoUtente = new DAOUtente();
 		List<Utente> utenti = new ArrayList<Utente>();
-		
+
 		try {
 			utenti = daoUtente.findAll();
+			
 			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
+		
 		request.setAttribute("listaUtenti", utenti);
 		request.getRequestDispatcher("/amministratore/gestioneUtenti.jsp").forward(request, response);
 	}

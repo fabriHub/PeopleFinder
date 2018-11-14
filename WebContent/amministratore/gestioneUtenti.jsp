@@ -39,39 +39,30 @@
 							Abilitato
 						</div>
 						<div class="col5 ">
-							Amministratore	
+							Admin	
 						</div>
 					</div>
 					
 					<div class="body">
 						<%
 							List<Utente> utenti = (List<Utente>) request.getAttribute("listaUtenti");
-							utenti.toString();
-							for(Utente utente1 : utenti) {
+							for (Utente utente1 : utenti) {
 						%>	
 						<div class="tabellaRighe5Col riga">
-							<div class="col1">
+							<div class="col1 ">
 								<%= utente1.getNickname() %>
 							</div>
-							<div class="col2">
-								<%= utente1.getMail()%>
+							<div class="col2 ">
+								<%= utente1.getMail() %>
 							</div>
-							<div class="col3">
+							<div class="col3 ">
 								<%= utente1.getTelefono() %>
 							</div>
-							<div class="col4">
-								<% if (utente1.getAbilitato()==1){%>
-								<i class="fa fa-circle" style="color: green" ></i>
-								<%} else { %>
-								<i class="fa fa-circle" style="color: red;"></i>
-								<% } %>
+							<div class="col4 ">
+								<i class="fa fa-circle <% if(utente1.getAbilitato().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>"></i>
 							</div>
-							<div class="col5">
-								<% if (utente1.getAmministratore()==1){%>
-								<i class="fa fa-circle" style="color: green" ></i>
-								<%} else { %>
-								<i class="fa fa-circle" style="color: red;"></i>
-								<% } %>
+							<div class="col5 ">
+								<i class="fa fa-circle <% if(utente1.getAmministratore().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>"></i>
 							</div>
 						</div>
 						<%		
@@ -79,6 +70,8 @@
 						%>
 					</div>
 				</div>
+				
+			</div>
 			
 			<div class="logout">
 				<button class="" onclick="location.href='../logout'">
