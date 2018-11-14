@@ -34,10 +34,10 @@ public class GestioneGruppiServlet extends HttpServlet {
 		
 		IDAOGruppo daoGruppo = new DAOGruppo();
 		List<String[]> gruppi = new ArrayList<String[]>();
-		
+		Long id = (Long) request.getSession().getAttribute("idUtente");
 		
 		try {
-			gruppi = daoGruppo.findAllGestioneGruppi();
+			gruppi = daoGruppo.findAllGestioneGruppi(id);
 			
 		} catch (DAOException e) {
 			e.printStackTrace();

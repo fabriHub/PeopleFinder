@@ -82,7 +82,7 @@ public class DAOGruppo implements IDAOGruppo {
 	}
 	
 	@Override 
-	public List<String[]> findAllGestioneGruppi() throws DAOException {
+	public List<String[]> findAllGestioneGruppi(Long id) throws DAOException {
 		List <String[]> gruppi = new ArrayList<String[]>(0);
 		Connection connection = DataSource.getInstance().getConnection();
 		PreparedStatement statement = null;
@@ -90,16 +90,16 @@ public class DAOGruppo implements IDAOGruppo {
 
 
 		try {
-			statement = connection.prepareStatement("SELECT GRUPPO.ID, NICKNAME, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE, COMPLETO FROM GRUPPO JOIN UTENTE ON UTENTE.ID = GRUPPO.ID_UTENTE JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE COMPLETO = 0");
+			statement = connection.prepareStatement("SELECT GRUPPO.ID, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE FROM GRUPPO JOIN UTENTE ON UTENTE.ID = GRUPPO.ID_UTENTE JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE UTENTE.ID = ? AND COMPLETO = 0");
+			statement.setLong(1, id);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				String[] gruppo = new String[5];
+				String[] gruppo = new String[4];
 				gruppo[0] = String.valueOf(resultSet.getLong("ID"));
-				gruppo[1] = resultSet.getString("NICKNAME");
-				gruppo[2] = resultSet.getString("NOME");
+				gruppo[1] = resultSet.getString("NOME");
 				Date data = new Date(resultSet.getLong("DATA_EVENTO"));
-				gruppo[3] = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(data);
-				gruppo[4] = resultSet.getString("DESCRIZIONE");
+				gruppo[2] = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(data);
+				gruppo[3] = resultSet.getString("DESCRIZIONE");
 				
 				if(data.after(new Date())) {
 					gruppi.add(gruppo);						
