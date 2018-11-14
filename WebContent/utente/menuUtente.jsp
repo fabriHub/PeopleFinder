@@ -1,7 +1,7 @@
 <%@ page import="it.persistenza.implementazione.DAOUtente" %>
 
 <div class="utente">
-	<i class="fa fa-user-circle" style="color: #FDF5E6">
+	<i class="fa fa-address-book-o" style="color: #FDF5E6">
 		<span style="color: #FDF5E6; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-family: Courgette;">
 			<%
 			DAOUtente utente = new DAOUtente();
@@ -16,7 +16,7 @@
 <div class="containerMenu" onmouseover="mOver()" onmouseout="mOut()">
 	<div class="elementiMenu sinistra">
 		<a class="linkMenu" href="./gestioneGruppi">
-			Gestione gruppi
+			Gestisci gruppi
 		</a>
 		<a class="linkMenu" href="./uniscitiGruppo">
 			Unisciti a un gruppo
@@ -29,11 +29,11 @@
 	</div>
 	
 	<div class="elementiMenu destra">
-		<div class="linkMenu">
-			I tuoi gruppi
-		</div>
+		<a class="linkMenu" href="./prossimiEventi">
+			Prossimi eventi
+		</a>
 		<a class="linkMenu" href="./accountUtente">
-				Account
+			<i class="fa fa-address-book-o"></i>
 		</a>
 		<% if( ((Integer) session.getAttribute("isAmministratore")).equals(1) ) {%>
 			<a class="linkMenu" href="./statistiche">

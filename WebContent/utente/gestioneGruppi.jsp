@@ -58,10 +58,10 @@
 									<% out.println(gruppo[3]); %>
 								</div>
 								<div class="col4">
-									<i class="fa fa-edit"></i>
+									<i class="fa fa-edit" style="color: #002f7d;"></i>
 								</div>
 								<div class="col5">
-									<i class="fa fa-close"></i>
+									<i class="fa fa-trash" style="color: red;"></i>
 								</div>
 							</div>
 						<%		

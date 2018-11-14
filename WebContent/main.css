@@ -38,15 +38,16 @@ body,html {
  }
  
 a {
-	color: #033d4d;
+	color: white;
+	text-decoration: none;
 }
 
 a:link, a:visited{
-    color: #033d4d;
+    color: white;
 }
 
 a:hover{
-	color: white;
+	color: #033d4d;
 }
 
 a:hover > .fa {
