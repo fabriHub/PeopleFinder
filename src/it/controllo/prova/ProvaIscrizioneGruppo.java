@@ -27,8 +27,8 @@ public class ProvaIscrizioneGruppo {
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
 		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo();
 		
-		iscrizioneGruppo.setIdUtente(340L);
-		iscrizioneGruppo.setIdGruppo(22L);
+		iscrizioneGruppo.setIdUtente(121L);
+		iscrizioneGruppo.setIdGruppo(25L);
 		
 		try {
 			daoIscrizioneGruppo.add(iscrizioneGruppo);
