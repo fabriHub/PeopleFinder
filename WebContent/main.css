@@ -6,6 +6,8 @@
 @import url(https://fonts.googleapis.com/css?family=Courgette);
 @import url(https://fonts.googleapis.com/css?family=Questrial);
 @import url(https://fonts.googleapis.com/css?family=Satisfy);
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Rajdhani);
 
 
 /*#################################### FONT ####################################*/
@@ -38,16 +40,17 @@ body,html {
  }
  
 a {
-	color: white;
+	color: #033d4d;
 	text-decoration: none;
 }
 
 a:link, a:visited{
-    color: white;
+    color: #033d4d;
 }
 
 a:hover{
-	color: #033d4d;
+	color: white;
+	text-decoration: none;
 }
 
 a:hover > .fa {
@@ -68,8 +71,8 @@ a .fa{
   height: 100%;
   margin: 0 0;
   display: grid;
-  grid-template-columns: 15% auto 15%;
-  grid-template-rows: 15% auto 15%;
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: 15% 70% 15%;
   grid-template-areas: 
     ". menu utente"
     ". centro ."
@@ -131,8 +134,6 @@ input:focus, textarea:focus{
 input:hover, textarea:hover, button:hover{
 	box-shadow: 0px 0px 10px 1px #00748d;
 	border: 1px solid #00748d;
-
-
 }
 
 
@@ -194,6 +195,10 @@ img {
 .fa {
 	color: #6b82a8;
 	font-size: 2vw;
+}
+
+.eventoPassato{
+	color: gray;
 }
 
 /*#################################### GENERAL ####################################*/
@@ -478,6 +483,7 @@ img {
 .linkMenu{
 	grid-row-start: 1;
 	grid-row-end: 2;
+	font-family: "Rajdhani" bold;
 }
 
 .sinistra .linkMenu:nth-child(n){
@@ -538,6 +544,32 @@ img {
 	0% {border-radius: 25px;}
 	/*75%{border-radius: 25px;}*/
 	100%{border-radius: 0px 0px 25px 25px;}
+}
+
+.elementiMenu a{
+	color: white;
+}
+
+.elementiMenu a .fa{
+	color: white;
+	font-size: 1.8vw;
+}
+
+.elementiMenu a:link, .elementiMenu a:visited{
+    color: white;
+}
+
+.elementiMenu a:hover{
+	color: #033d4d;
+	text-decoration: none;
+}
+
+.elementiMenu a:hover > .fa {
+	color: #033d4d;
+}
+
+.elementiMenu a:active{
+    color: white;
 }
 
 /*#################################### MENU ####################################*/
@@ -671,7 +703,7 @@ img {
 
 .tabellaRighe5ColG {
 	display: grid;
-	grid-template-columns: repeat(3, 30%) 5% 5%;
+	grid-template-columns: 35% 20% 35% 5% 5%;
 	grid-template-rows: 100%;
 	width: 100%;
 	align-items: center;
@@ -686,6 +718,7 @@ img {
 	font-size: 2.1vw;
 	color: white;
 	border-radius: 10px 10px 0 0;
+	font-family: "Righteous";
 }
 
 .body {
@@ -746,6 +779,30 @@ img {
 
 .riga:nth-child(odd){
 	background-color: rgba(222, 227, 233, 0.7);
+}
+
+.riga:hover{
+	background-color: rgba(7, 255, 0, 0.33);
+}
+
+.riga.eventoPassato:hover{
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.fa.pallozzoRosso{
+	color: red;
+}
+
+.eventoPassato .pallozzoRosso{
+	color: #a55656;
+}
+
+.fa.pallozzoVerde{
+	color: #03ab03;
+}
+
+.eventoPassato .pallozzoVerde{
+	color: #a2d6a2;
 }
 
 /*#################################### TABELLA ####################################*/

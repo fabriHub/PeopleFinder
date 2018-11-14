@@ -35,6 +35,9 @@
 		<a class="linkMenu" href="./accountUtente">
 			<i class="fa fa-address-book-o"></i>
 		</a>
+		<a class="linkMenu" href="./populateHomeUtente">
+			<i class="fa fa-home"></i>
+		</a>
 		<% if( ((Integer) session.getAttribute("isAmministratore")).equals(1) ) {%>
 			<a class="linkMenu" href="./statistiche">
 					Entra come amministratore

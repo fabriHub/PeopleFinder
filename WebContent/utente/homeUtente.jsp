@@ -32,7 +32,7 @@
 							Data
 						</div>
 						<div class="col3 ">
-							Completato
+							Posti liberi
 						</div>
 					</div>
 					
@@ -41,20 +41,21 @@
 						<% 
 							List<String[]> listaGruppi = (List<String[]>) request.getAttribute("listaGruppi");
 							for(String[] stringa : listaGruppi){
+								String onclick = "onclick=\"window.location='####?idGruppo=" + stringa[0] + "'\"";
 						%>	
-						<a href="####?idGruppo=<% out.println(stringa[0]); %>">	
-							<div class="tabellaRighe3Col riga <% if (stringa[4].equals("1")) out.println("eventoPassato"); %>">
-								<div class="col1">
-									<% out.println(stringa[1]); %>
-								</div>
-								<div class="col2">
-									<% out.println(stringa[3]); %>
-								</div>
-								<div class="col3">
-									<% out.println(stringa[2]); %>
-								</div>
+						
+						<div class="tabellaRighe3Col riga <% if (stringa[4].equals("1")) out.println("eventoPassato"); %>" <% if (!stringa[4].equals("1")) out.println(onclick); %>>
+							<div class="col1">
+								<% out.println(stringa[1]); %>
 							</div>
-						</a>
+							<div class="col2">
+								<% out.println(stringa[3]); %>
+							</div>
+							<div class="col3">
+								<i class="fa fa-circle <% if(stringa[2].equals("1")) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>"></i>
+							</div>
+						</div>
+					
 						<%		
 							}
 						%>
