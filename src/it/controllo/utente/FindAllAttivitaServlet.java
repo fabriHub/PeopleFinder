@@ -45,7 +45,7 @@ public class FindAllAttivitaServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("listaAttivita", allAttivita);
-		request.getRequestDispatcher("provaServlet.jsp?xxx=1").forward(request, response);
+		request.getRequestDispatcher("/amministratore/gestioneAttivita.jsp").forward(request, response);
 	}
 
 

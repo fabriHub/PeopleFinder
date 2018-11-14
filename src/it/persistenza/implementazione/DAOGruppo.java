@@ -314,4 +314,41 @@ public class DAOGruppo implements IDAOGruppo {
 		
 		return risultato;
 	}
+
+	@Override
+	public List<String[]> panoramicaGruppi() throws DAOException {
+		
+		List <String[]> gruppi = new ArrayList<String[]>(0);
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+
+
+		try {
+			statement = connection.prepareStatement("SELECT GRUPPO.ID, UTENTE.NICKNAME, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE, COMPLETO FROM GRUPPO JOIN UTENTE ON UTENTE.ID = GRUPPO.ID_UTENTE JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA ORDER BY COMPLETO DESC");
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				String[] gruppo = new String[6];
+				gruppo[0] = String.valueOf(resultSet.getLong("ID"));
+				gruppo[1] = resultSet.getString("NICKNAME");
+				gruppo[2] = resultSet.getString("NOME");
+				Date data = new Date(resultSet.getLong("DATA_EVENTO"));
+				gruppo[3] = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(data);
+				gruppo[4] = resultSet.getString("DESCRIZIONE");
+				gruppo[5] = String.valueOf(resultSet.getInt("COMPLETO"));
+				
+				gruppi.add(gruppo);						
+			}
+
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE findAll gruppo" + e.getMessage(), e);
+			
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return gruppi;
+	}
 }

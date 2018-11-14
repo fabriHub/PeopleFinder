@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List, java.util.ArrayList" %>
-<%@ page import="it.modello.Utente" %>
+<%@ page import="it.modello.Attivita" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,44 +25,32 @@
 
 				<div class="containerTabella">
 					
-					<div class="tabellaRighe5Col header">
+					<div class="tabellaRighe3Col header">
 						<div class="col1 ">
-							Nickname
+							Nome
 						</div>
 						<div class="col2 ">
-							Mail
+							Numero Partecipanti
 						</div>
 						<div class="col3 ">
-							Telefono
-						</div>
-						<div class="col4 ">
-							Abilitato
-						</div>
-						<div class="col5 ">
-							Admin	
+							Abilitata
 						</div>
 					</div>
 					
 					<div class="body">
 						<%
-							List<Utente> utenti = (List<Utente>) request.getAttribute("listaUtenti");
-							for (Utente utente1 : utenti) {
+							List<Attivita> allAttivita = (List<Attivita>) request.getAttribute("listaAttivita");
+							for (Attivita attivita : allAttivita) {
 						%>	
-						<div class="tabellaRighe5Col riga">
+						<div class="tabellaRighe3Col riga">
 							<div class="col1 ">
-								<%= utente1.getNickname() %>
+								<%= attivita.getNome() %>
 							</div>
 							<div class="col2 ">
-								<%= utente1.getMail() %>
+								<%= attivita.getNumeroPartecipanti() %>
 							</div>
 							<div class="col3 ">
-								<%= utente1.getTelefono() %>
-							</div>
-							<div class="col4 ">
-								<i class="fa fa-circle <% if(utente1.getAbilitato().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>" onclick="location.href='./abilitazioneUtente?idUtente=<% out.print(utente1.getId()); %>'"></i>
-							</div>
-							<div class="col5 ">
-								<i class="fa fa-circle <% if(utente1.getAmministratore().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>" onclick="location.href='./privilegioAmministratore?idUtente=<% out.print(utente1.getId()); %>'"></i>
+								<i class="fa fa-circle <% if(attivita.getAbilitata().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>" onclick="location.href='./abilitazioneAttivita?idAttivita=<% out.print(attivita.getId()); %>'"></i>
 							</div>
 						</div>
 						<%		

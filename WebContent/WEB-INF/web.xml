@@ -93,38 +93,6 @@
     <url-pattern>/findUtentiByIdGruppo</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>AbilitaUtenteServlet</servlet-name>
-    <servlet-class>it.controllo.amministratore.AbilitaUtenteServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AbilitaUtenteServlet</servlet-name>
-    <url-pattern>/abilitaUtente</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>DisabilitaUtenteServlet</servlet-name>
-    <servlet-class>it.controllo.amministratore.DisabilitaUtenteServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DisabilitaUtenteServlet</servlet-name>
-    <url-pattern>/disabilitaUtente</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>RendiAmministratoreServlet</servlet-name>
-    <servlet-class>it.controllo.amministratore.RendiAmministratoreServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RendiAmministratoreServlet</servlet-name>
-    <url-pattern>/rendiAmministratore</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>EscludiAmministratoreServlet</servlet-name>
-    <servlet-class>it.controllo.amministratore.EscludiAmministratoreServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EscludiAmministratoreServlet</servlet-name>
-    <url-pattern>/escludiAmministratore</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>DeleteIscrizioneGruppoServlet</servlet-name>
     <servlet-class>it.controllo.utente.DeleteIscrizioneGruppoServlet</servlet-class>
   </servlet>
@@ -147,22 +115,6 @@
   <servlet-mapping>
     <servlet-name>UpdateUtenteServlet</servlet-name>
     <url-pattern>/updateUtente</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>AbilitaAttivitaServlet</servlet-name>
-    <servlet-class>it.controllo.amministratore.AbilitaAttivitaServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AbilitaAttivitaServlet</servlet-name>
-    <url-pattern>/abilitaAttivita</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>DisabilitaAttivitaServlet</servlet-name>
-    <servlet-class>it.controllo.amministratore.DisabilitaAttivitaServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DisabilitaAttivitaServlet</servlet-name>
-    <url-pattern>/disabilitaAttivita</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>AggiungiIscrizioneGruppoServlet</servlet-name>
@@ -244,7 +196,38 @@
     <servlet-name>ProssimiEventiServlet</servlet-name>
     <url-pattern>/prossimiEventi</url-pattern>
   </servlet-mapping>
-  <!-- FILTRIIIIIIIIIIIIIIIIIIIIIIIIIIi -->
+  <servlet>
+    <servlet-name>AbilitazioneUtenteServlet</servlet-name>
+    <servlet-class>it.controllo.amministratore.AbilitazioneUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AbilitazioneUtenteServlet</servlet-name>
+    <url-pattern>/abilitazioneUtente</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PrivilegioAmministratoreServlet</servlet-name>
+    <servlet-class>it.controllo.amministratore.PrivilegioAmministratoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrivilegioAmministratoreServlet</servlet-name>
+    <url-pattern>/privilegioAmministratore</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PanoramicaGruppiServlet</servlet-name>
+    <servlet-class>it.controllo.amministratore.PanoramicaGruppiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PanoramicaGruppiServlet</servlet-name>
+    <url-pattern>/panoramicaGruppi</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>AbilitazioneAttivitaServlet</servlet-name>
+    <servlet-class>it.controllo.amministratore.AbilitazioneAttivitaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AbilitazioneAttivitaServlet</servlet-name>
+    <url-pattern>/abilitazioneAttivita</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>FiltroLogin</filter-name>
     <filter-class>it.controllo.filtri.FiltroLogin</filter-class>
@@ -289,7 +272,7 @@
     <filter-name>FiltroDuePassword</filter-name>
     <url-pattern>/updatePassword</url-pattern>
   </filter-mapping>
-    <filter>
+  <filter>
     <filter-name>FiltroDatiUtente</filter-name>
     <filter-class>it.controllo.filtri.FiltroDatiUtente</filter-class>
   </filter>

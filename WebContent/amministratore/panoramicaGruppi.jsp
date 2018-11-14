@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List, java.util.ArrayList" %>
-<%@ page import="it.modello.Utente" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,51 +26,51 @@
 					
 					<div class="tabellaRighe5Col header">
 						<div class="col1 ">
-							Nickname
+							Creatore
 						</div>
 						<div class="col2 ">
-							Mail
+							Attività
 						</div>
 						<div class="col3 ">
-							Telefono
+							Data
 						</div>
 						<div class="col4 ">
-							Abilitato
+							Descrizione
 						</div>
 						<div class="col5 ">
-							Admin	
+							Posti liberi
 						</div>
 					</div>
 					
 					<div class="body">
+					
 						<%
-							List<Utente> utenti = (List<Utente>) request.getAttribute("listaUtenti");
-							for (Utente utente1 : utenti) {
+							List<String[]> gruppi = (List<String[]>) request.getAttribute("panoramicaGruppi");
+							gruppi.toString();
+							for(String[] gruppo : gruppi) {
 						%>	
-						<div class="tabellaRighe5Col riga">
-							<div class="col1 ">
-								<%= utente1.getNickname() %>
+							<div class="tabellaRighe5Col riga">
+								<div class="col1">
+									<% out.println(gruppo[1]); %>
+								</div>
+								<div class="col2">
+									<% out.println(gruppo[2]); %>
+								</div>
+								<div class="col3">
+									<% out.println(gruppo[3]); %>
+								</div>
+								<div class="col4">
+									<% out.println(gruppo[4]); %>
+								</div>
+								<div class="col5">
+									<i class="fa fa-circle <% if(gruppo[5].equals("1")) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>"></i>
+								</div>
 							</div>
-							<div class="col2 ">
-								<%= utente1.getMail() %>
-							</div>
-							<div class="col3 ">
-								<%= utente1.getTelefono() %>
-							</div>
-							<div class="col4 ">
-								<i class="fa fa-circle <% if(utente1.getAbilitato().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>" onclick="location.href='./abilitazioneUtente?idUtente=<% out.print(utente1.getId()); %>'"></i>
-							</div>
-							<div class="col5 ">
-								<i class="fa fa-circle <% if(utente1.getAmministratore().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>" onclick="location.href='./privilegioAmministratore?idUtente=<% out.print(utente1.getId()); %>'"></i>
-							</div>
-						</div>
 						<%		
 							}
 						%>
 					</div>
-				</div>
-				
-			</div>
+			
 			
 			<div class="logout">
 				<button class="" onclick="location.href='../logout'">

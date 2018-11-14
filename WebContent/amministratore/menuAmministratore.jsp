@@ -20,9 +20,9 @@
 		<a class="linkMenu" href="./findAllUtenti">
 			Utenti
 		</a>
-		<div class="linkMenu">
+		<a class="linkMenu"  href="./findAllAttivita">
 			Attività
-		</div>
+		</a>
 	</div>
 	
 	<div class="menu" id="bottoneMenu">
@@ -30,9 +30,9 @@
 	</div>
 	
 	<div class="elementiMenu destra">
-		<div class="linkMenu">
+		<a class="linkMenu" href="./panoramicaGruppi">
 			Gruppi
-		</div>
+		</a>
 		<a href="./populateHomeUtente" class="linkMenu">
 			Entra come utente
 		</a>

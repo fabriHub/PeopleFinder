@@ -1,25 +1,30 @@
 package it.controllo.amministratore;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.modello.Gruppo;
 import it.persistenza.implementazione.DAOException;
-import it.persistenza.implementazione.DAOUtenteAdmin;
+import it.persistenza.implementazione.DAOGruppo;
+import it.persistenza.interfaccia.IDAOGruppo;
 
 /**
- * Servlet implementation class DisabilitaAttivitaServlet
+ * Servlet implementation class FindAllUtentiServlet
  */
-public class DisabilitaAttivitaServlet extends HttpServlet {
+
+public class PanoramicaGruppiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DisabilitaAttivitaServlet() {
+    public PanoramicaGruppiServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +34,20 @@ public class DisabilitaAttivitaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		List<String[]> gruppi = new ArrayList<String[]>();
 
-    	Long id = Long.parseLong(request.getParameter("id_attivita"));
-    	
-    	try {
-			daoUtenteAdmin.disabilitaAttivita(id);
+		try {
+			gruppi = daoGruppo.panoramicaGruppi();
+			
+			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-    	
-    	response.sendRedirect("provaServlet.jsp?xxx=1");
-    }
+		
+		request.setAttribute("panoramicaGruppi", gruppi);
+		request.getRequestDispatcher("/amministratore/panoramicaGruppi.jsp").forward(request, response);
+	}
+		
+	}
 
-}
