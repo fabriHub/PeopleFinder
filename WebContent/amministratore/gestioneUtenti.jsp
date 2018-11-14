@@ -59,10 +59,10 @@
 								<%= utente1.getTelefono() %>
 							</div>
 							<div class="col4 ">
-								<i class="fa fa-circle <% if(utente1.getAbilitato().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>"></i>
+								<i class="fa fa-circle <% if(utente1.getAbilitato().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %> onclick="location.href='./logout'"></i>
 							</div>
 							<div class="col5 ">
-								<i class="fa fa-circle <% if(utente1.getAmministratore().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %>"></i>
+								<i class="fa fa-circle <% if(utente1.getAmministratore().equals(0)) { out.println("pallozzoRosso"); } else { out.println("pallozzoVerde"); } %> onclick="location.href='./logout'"></i>
 							</div>
 						</div>
 						<%		
