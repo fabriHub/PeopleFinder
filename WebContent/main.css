@@ -668,6 +668,14 @@ img {
 	align-items: center;
 }
 
+.tabellaRighe5ColG {
+	display: grid;
+	grid-template-columns: repeat(3, 30%) 5% 5%;
+	grid-template-rows: 100%;
+	width: 100%;
+	align-items: center;
+}
+
 .header {
 	grid-row-start: 1;
 	grid-row-end: span 1;
