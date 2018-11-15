@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.modello.Attivita;
@@ -421,97 +423,32 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 	
 	
 	/**
-	 * Il metodo restituisce la percentuale di gruppi non completati.
-	 * @return int numeroGruppiNonCompletati
-	 * @throws DAOException
-	 */
-	@Override
-	public double percentualeGruppiNonCompletati () throws DAOException{
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		double numeroGruppiNonCompletati = 0.0;
-		try {
-			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (GRUPPO.ID)*100/(SELECT COUNT(ID) FROM GRUPPO) FROM GRUPPO WHERE COMPLETO = 0 GROUP BY(GRUPPO.COMPLETO)");
-			resultSet = statement.executeQuery();
-			if (resultSet.next()) {
-				numeroGruppiNonCompletati = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
-			}
-		} catch (SQLException | DAOException e) {
-			throw new DAOException("ERRORE contaGruppiNonCompletati utenteAdmin" + e.getMessage(), e);
-		} finally {
-			DataSource.getInstance().close(resultSet);
-			DataSource.getInstance().close(statement);
-			DataSource.getInstance().close(connection);
-		}
-		return numeroGruppiNonCompletati;
-	}
-	
-	
-	/**
-	 * Il metodo restituisce, in ordine decrescente, la percentuale di gruppi non completati per ogni attivita correlandogli il nome e l'ID dell'attivita. 
-	 * @return Map<Integer, Attivita> risultato
-	 * @throws DAOException
-	 */
-	@Override
-	public Map<Attivita, Double> popolaritaAttivitaNonCompleto() throws DAOException{
-		
-		Map<Attivita,Double> risultato = null;
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		Attivita attivita = null;
-		
-		try {
-			risultato = new LinkedHashMap<Attivita,Double>();
-			attivita = null;
-			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID)*100/(SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 0) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 0  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME) ORDER BY POPOLARITA DESC");
-			resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				attivita = new Attivita();
-				attivita.setId(resultSet.getLong(3));    // scrive nella variabile ID dell'oggetto attivita quello che viene letto dalla query
-				attivita.setNome(resultSet.getString(2));   // scrive nella variabile nome dell'oggetto attivita quello che viene letto dalla query
-				risultato.put(attivita, BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue());   // dato che la mappa è caratterizzata dal meccanismo chiave-valore, come chiave si usa il conteggio mentre come valore si usa l'oggetto attivita. 
-			}                                                   // il numero 1 indica che è il primo dato richiesto dalla query. Lo stesso discorso vale per i numeri 2 e 3. L'oggetto attivita contiene al suo interno il nome e l'ID dell'attivita 
-		} catch (SQLException | DAOException e) {
-			throw new DAOException("ERRORE popolaritaAttivitaNonCompleto utenteAdmin" + e.getMessage(), e);
-		} finally {
-			DataSource.getInstance().close(resultSet);
-			DataSource.getInstance().close(statement);
-			DataSource.getInstance().close(connection);
-		}
-		return risultato;
-	}
-	
-	
-	/**
 	 * Il metodo restituisce, in ordine decrescente, la percentuale di gruppi completati per ogni attivita correlandogli il nome e l'ID dell'attivita. 
-	 * @return Map<Integer, Attivita> risultato
+	 * @return List<String[]> stringa[0]=id stringa[1]=nome stringa[2]=perc partecipanti stringa[3]=perc non partecipanti
 	 * @throws DAOException
 	 */
 	@Override
-	public Map<Attivita, Double> popolaritaAttivitaCompleto() throws DAOException{
+	public List<String[]> popolaritaAttivitaCompleto() throws DAOException{
 		
-		Map<Attivita, Double> risultato = null;
+		List<String[]> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		Attivita attivita = null;
+		String[] stringa = null;
 		
 		try {
-			risultato = new LinkedHashMap<Attivita, Double>();
-			attivita = null;
+			risultato = new ArrayList<String[]>();
 			connection = DataSource.getInstance().getConnection();
 			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID)*100/(SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 1) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID, NUMERO_PARTECIPANTI FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME, NUMERO_PARTECIPANTI) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				attivita = new Attivita();
-				attivita.setId(resultSet.getLong(3));
-				attivita.setNome(resultSet.getString(2));
-				attivita.setNumeroPartecipanti(resultSet.getInt(3));
-				risultato.put(attivita, BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue());
+				stringa = new String[5];
+				stringa[0] = String.valueOf(resultSet.getLong(3));
+				stringa[1] = resultSet.getString(2);
+				Double perc = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+				stringa[2] = String.valueOf(perc);
+				stringa[4] = String.valueOf(100-perc);
+				risultato.add(stringa);
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE popolaritaAttivitaCompleto utenteAdmin" + e.getMessage(), e);
@@ -528,23 +465,31 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 	
 	/**
 	 * Il metodo restituisce la percentuale di utenti iscritti ad ogni gruppo.
-	 * @return Map<Integer, Long> risultato
+	 * @return List<String[]> stringa[0]=id stringa[1]=nome stringa[2]=perc partecipanti stringa[3]=perc non partecipanti
 	 * @throws DAOException
 	 */
 	@Override
-	public Map<Long,Double> partecipazioneUtentiAiGruppi() throws DAOException{
+	public List<String[]> partecipazioneUtentiAiGruppi() throws DAOException{
 		
-		Map<Long,Double> risultato = null;
+		List<String[]> risultato = null;
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
+		String[] stringa = null;
+		
 		try {
-			risultato = new LinkedHashMap<Long,Double>();
+			risultato = new ArrayList<String[]>();
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE)*100/ATTIVITA.NUMERO_PARTECIPANTI AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO FROM ISCRIZIONE_GRUPPO JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.ID_ATTIVITA, ATTIVITA.NUMERO_PARTECIPANTI) ORDER BY PARTECIPAZIONE DESC");
+			statement = connection.prepareStatement("SELECT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE)*100/ATTIVITA.NUMERO_PARTECIPANTI AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.DESCRIZIONE FROM ISCRIZIONE_GRUPPO JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.ID_ATTIVITA, ATTIVITA.NUMERO_PARTECIPANTI) ORDER BY PARTECIPAZIONE DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				risultato.put(resultSet.getLong(2), BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue());
+				stringa = new String[4];
+				Double perc = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+				stringa[0] = String.valueOf(resultSet.getLong(2));
+				stringa[1] = resultSet.getString(3);
+				stringa[2] = String.valueOf(perc);
+				stringa[3] = String.valueOf(100-perc);
+				risultato.add(stringa);
 			}
 		} catch (SQLException | DAOException e) {
 			throw new DAOException("ERRORE partecipazioneUtentiAiGruppi utenteAdmin" + e.getMessage(), e);

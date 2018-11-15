@@ -1,5 +1,6 @@
 package it.persistenza.interfaccia;
 
+import java.util.List;
 import java.util.Map;
 
 import it.modello.Attivita;
@@ -21,9 +22,7 @@ public interface IDAOUtenteAdmin extends IDAOUtente {
 	public double percentualeUtentiDisabilitati () throws DAOException;
 	public int contaGruppi () throws DAOException;
 	public double percentualeGruppiCompletati () throws DAOException;
-	public double percentualeGruppiNonCompletati () throws DAOException;
-	public Map<Attivita, Double> popolaritaAttivitaNonCompleto() throws DAOException;
-	public Map<Attivita, Double> popolaritaAttivitaCompleto() throws DAOException;
-	public Map<Long,Double> partecipazioneUtentiAiGruppi() throws DAOException;
+	public List<String[]> popolaritaAttivitaCompleto() throws DAOException;
+	public List<String[]> partecipazioneUtentiAiGruppi() throws DAOException;
 	
 }

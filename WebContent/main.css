@@ -141,6 +141,8 @@ a .fa{
   z-index: 2;
 }
 
+
+
 input:focus, textarea:focus{
 	box-shadow: 0px 0px 10px 1px #003b41;
 	border: 1px solid #003b41;
@@ -227,6 +229,18 @@ img {
   grid-template-rows: 100%;
   font-family: "Montserrat";
  }
+ 
+ .containerFormCreaAttivita{
+  width: 100%;
+  max-height: 100%;
+  min-height: fit-content;
+  grid-column-start: 2; grid-column-end: 3; grid-row-start: 1; grid-row-end: 2;
+  display: grid;
+  grid-template-columns: 0 30% 50% 20%;
+  grid-template-rows: 100%;
+  font-family: "Montserrat";
+ }
+ 
 
 /*#################################### GENERAL ####################################*/
 
@@ -270,7 +284,6 @@ img {
 .containerLogin button{
 	width: 50%;
 }
-
 
 
 .containerTitolo{
@@ -973,6 +986,48 @@ img {
 }
 
 .containerFormCreaGruppo button {
+	height: 100%;
+	border-radius: 10px;
+}
+
+/*valutare*/
+
+.containerFormCreaAttivita select {
+   position: relative;
+   background: #d7d5d5;
+   border-radius: 10px;
+   font-size: 1.5vw;
+   height: 100%;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 90%;
+   border-style: solid;
+   border-color: #B6B5B5;
+   border-width: 0.5px;
+   font-family: "Montserrat";
+}
+
+.containerFormCreaAttivita input {
+   border-radius: 10px;
+   width: 90%;
+   padding: 5px;
+}
+
+.containerFormCreaAttivita input:focus, .containerFormCreaAttivita textarea:focus, .containerFormCreaAttivita select:focus {
+	box-shadow: 0px 0px 10px 1px #003b41;
+	border: 1px solid #003b41;
+	
+}
+
+.containerFormCreaAttivita input:hover, .containerFormCreaAttivita textarea:hover, .containerFormCreaAttivita button:hover, .containerFormCreaAttivita select:hover {
+	box-shadow: 0px 0px 10px 1px #00748d;
+	border: 1px solid #00748d;
+}
+
+.containerFormCreaAttivita select:focus {
+	outline: none;
+}
+
+.containerFormCreaAttivita button {
 	height: 100%;
 	border-radius: 10px;
 }

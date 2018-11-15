@@ -21,22 +21,22 @@
 		
 			<%@ include file="menuAmministratore.jsp" %>
 		
-			<div class="container" id="contenitore">
+			<div class="container3" id="contenitore">
 			
-			<form class="containerFormCreaGruppo" action="aggiungiAttivita" method="POST">
+			<form class="containerFormCreaAttivita" action="aggiungiAttivita" method="POST">
 					
 					<div class="col2">
-						<input type="text"  name="nome" placeholder="Nome">
+						<input type="text"  name="nome" placeholder="Nome" required>
 					</div>
 					<div class="col3">
-						<input type="text" name="numeroPartecipanti" placeholder="Numero partecipanti">
+						<input type="text" name="numeroPartecipanti" placeholder="Numero partecipanti" required>
 					</div>
 					<div class="col4">
 						<button class=""> AGGIUNGI </button>
 					</div>
 				</form>
 
-				<div class="containerTabella">
+				<div class="containerTabella2">
 					
 					<div class="tabellaRighe3Col header">
 						<div class="col1 ">

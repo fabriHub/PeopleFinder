@@ -23,7 +23,7 @@ public class ProvaUtenteAdmin {
 //		disabilitaUtente(22L);
 //		daoUtenteAdmin.contaGruppiAttivita(2L);
 //		statistiche1();
-		statistiche2();
+
 //		isAbilitatoUtente();
 //		isAmministratore1();
 //		rendiAmministratore1(22L);
@@ -156,22 +156,8 @@ public class ProvaUtenteAdmin {
 		
 	}
 	
-	public static void statistiche2() {
-		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
-		Map<Long, Double> mappa;
-		try {
-			mappa = daoUtenteAdmin.partecipazioneUtentiAiGruppi();
-			for(Entry<Long, Double> e : mappa.entrySet()) {
-				System.out.println(e.getKey() + " - " + BigDecimal.valueOf(e.getValue()).setScale(2, RoundingMode.HALF_UP).doubleValue() + "%");
-				
-				
-			}
-		} catch (DAOException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		
-	}
+
+
 	
 
 }

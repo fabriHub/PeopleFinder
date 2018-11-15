@@ -68,6 +68,8 @@
 					
 					<div class="body">
 					
+					
+						
 						<div class="tab3HA riga">
 							<div class="col1">
 							ciao
@@ -96,6 +98,7 @@
 					
 					<div class="body">
 					
+						
 						<div class="tab2HA riga">
 							<div class="col1">
 							ciao
@@ -111,11 +114,7 @@
 					</div>
 				</div>
 				
-				<% 
-					//List<String[]> listaGruppi = (List<String[]>) request.getAttribute("listaGruppi");
-					//for(String[] stringa : listaGruppi){
-					//	String onclick = "onclick=\"window.location='####?idGruppo=" + stringa[0] + "'\"";
-				%>	
+				
 				
 			</div>
 			
