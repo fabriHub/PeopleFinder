@@ -42,6 +42,7 @@ public class AggiungiIscrizioneGruppoServlet extends HttpServlet {
 		
 		try {
 			
+			System.out.println("servlet aggiungi iscrizione "+String.valueOf(idUtente)+" "+String.valueOf(idGruppo));
 			daoIscrizioneGruppo.iscrivitiGruppo(idUtente, idGruppo);
 			
 		} catch (DAOException e) {

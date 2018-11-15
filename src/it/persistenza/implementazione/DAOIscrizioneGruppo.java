@@ -295,7 +295,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 
 
 		try {
-			statement = connection.prepareStatement("SELECT GRUPPO.ID, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE GRUPPO.ID IN (SELECT ID_GRUPPO FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE <> ?) AND COMPLETO = 0 ORDER BY DATA_EVENTO ASC");
+			statement = connection.prepareStatement("SELECT DISTINCT GRUPPO.ID, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE FROM GRUPPO LEFT JOIN ISCRIZIONE_GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE GRUPPO.COMPLETO = 0 AND ATTIVITA.ABILITATA = 1 AND GRUPPO.ID_UTENTE <> ?");
 			statement.setLong(1, id);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
@@ -379,15 +379,17 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 			resultSet = statement.executeQuery();
 			
 			if (resultSet.next()) {
-				
+				System.out.println("dao iscrizione gruppo "+ resultSet.getInt(1)+" "+ resultSet.getInt(2));
 				if(resultSet.getInt(1) < resultSet.getInt(2)) {
 					IscrizioneGruppo iscrizione = new IscrizioneGruppo();
 					iscrizione.setIdGruppo(idGruppo);
 					iscrizione.setIdUtente(idUtente);
 					
 					this.add(iscrizione);
+					System.out.println("dao iscrizione gruppo aggiunto");
 
 				} else {
+					System.out.println("dao iscrizione gruppo non aggiunto");
 					throw new DAOException("Gruppo pieno");
 				}
 				
