@@ -351,4 +351,54 @@ public class DAOGruppo implements IDAOGruppo {
 		}
 		return gruppi;
 	}
+
+	@Override
+	public int maxPartecipantiGruppo(Long id) throws DAOException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		int risultato = 0;
+		
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT ATTIVITA.NUMERO_PARTECIPANTI FROM ATTIVITA JOIN GRUPPO ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE GRUPPO.ID = ?");
+			statement.setLong(1, id);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				risultato = resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE maxPartecipantiGruppo gruppo" + e.getMessage(), e);
+		}
+		finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return risultato;
+	}
+
+	@Override
+	public void completaGruppo(Long id) throws DAOException {
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		
+		try {
+			
+			statement = connection.prepareStatement("UPDATE GRUPPO SET COMPLETO = 1 WHERE ID = ?");
+			
+			statement.setLong(1, id);
+			statement.executeUpdate();
+						
+		} catch (SQLException e) {
+			
+			throw new DAOException("ERRORE completaGruppo gruppo" + e.getMessage(), e);
+			
+		} finally {
+			
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+	}
 }

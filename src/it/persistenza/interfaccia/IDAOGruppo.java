@@ -17,6 +17,8 @@ public interface IDAOGruppo {
 		public void delete (Long id) throws DAOException;
 		public boolean isScaduto (Long id) throws DAOException;
 		public boolean isCompleto (Long id) throws DAOException;
+		public int maxPartecipantiGruppo(Long id) throws DAOException;
+		public void completaGruppo (Long id) throws DAOException;
 		
 
 }

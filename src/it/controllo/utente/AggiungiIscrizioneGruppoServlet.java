@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.modello.IscrizioneGruppo;
 import it.persistenza.implementazione.DAOException;
+import it.persistenza.implementazione.DAOGruppo;
 import it.persistenza.implementazione.DAOIscrizioneGruppo;
+import it.persistenza.interfaccia.IDAOGruppo;
 import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
 
 /**
@@ -34,6 +36,8 @@ public class AggiungiIscrizioneGruppoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
+		IDAOGruppo daoGruppo = new DAOGruppo();
+		
 		Long idUtente = (Long) request.getSession().getAttribute("idUtente");
 		Long idGruppo = Long.parseLong(request.getParameter("idGruppo"));
 		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo();
@@ -43,7 +47,20 @@ public class AggiungiIscrizioneGruppoServlet extends HttpServlet {
 		try {
 			
 			System.out.println("servlet aggiungi iscrizione "+String.valueOf(idUtente)+" "+String.valueOf(idGruppo));
-			daoIscrizioneGruppo.iscrivitiGruppo(idUtente, idGruppo);
+			
+			int iscrittiAttuali = daoIscrizioneGruppo.countIscrittiGruppoById(idGruppo);
+			int iscrittiMassimi = daoGruppo.maxPartecipantiGruppo(idGruppo);
+			
+			if(iscrittiAttuali+1 >= iscrittiMassimi) {
+				daoGruppo.completaGruppo(idGruppo);
+			}
+			
+			if(iscrittiAttuali < iscrittiMassimi) {
+				daoIscrizioneGruppo.add(iscrizioneGruppo);
+			} else {
+				throw new DAOException("gruppo pieno");
+			}
+			
 			
 		} catch (DAOException e) {
 			e.printStackTrace();

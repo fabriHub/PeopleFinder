@@ -295,8 +295,9 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 
 
 		try {
-			statement = connection.prepareStatement("SELECT DISTINCT GRUPPO.ID, ATTIVITA.NOME, DATA_EVENTO, DESCRIZIONE FROM GRUPPO LEFT JOIN ISCRIZIONE_GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE GRUPPO.COMPLETO = 0 AND ATTIVITA.ABILITATA = 1 AND GRUPPO.ID_UTENTE <> ?");
+			statement = connection.prepareStatement("SELECT GRUPPO.ID, DATA_EVENTO, DESCRIZIONE, ATTIVITA.NOME FROM GRUPPO JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID WHERE GRUPPO.ID_UTENTE <> ? AND GRUPPO.COMPLETO = 0 AND GRUPPO.ID NOT IN (SELECT ID_GRUPPO FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE = ?)");
 			statement.setLong(1, id);
+			statement.setLong(2, id);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				String[] gruppo = new String[4];
@@ -362,47 +363,33 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		}
 		return gruppi;
 	}
-	
-	@Override
-	public void iscrivitiGruppo(Long idUtente, Long idGruppo) throws DAOException {
 
+
+	@Override
+	public int countIscrittiGruppoById(Long id) throws DAOException {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
+		int risultato = 0;
 		
 		try {
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT(ISCRIZIONE_GRUPPO.ID)+1, ATTIVITA.NUMERO_PARTECIPANTI FROM ISCRIZIONE_GRUPPO JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID WHERE ISCRIZIONE_GRUPPO.ID_GRUPPO = ? AND ISCRIZIONE_GRUPPO.ID_GRUPPO NOT IN (SELECT ID_GRUPPO FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE = ?) AND GRUPPO.ID_UTENTE <> ? GROUP BY ATTIVITA.NUMERO_PARTECIPANTI");
-			statement.setLong(1, idGruppo);
-			statement.setLong(2, idUtente);
-			statement.setLong(3, idUtente);
+			statement = connection.prepareStatement("SELECT COUNT(*)+1 FROM ISCRIZIONE_GRUPPO WHERE ISCRIZIONE_GRUPPO.ID = ?");
+			statement.setLong(1, id);
 			resultSet = statement.executeQuery();
 			
 			if (resultSet.next()) {
-				System.out.println("dao iscrizione gruppo "+ resultSet.getInt(1)+" "+ resultSet.getInt(2));
-				if(resultSet.getInt(1) < resultSet.getInt(2)) {
-					IscrizioneGruppo iscrizione = new IscrizioneGruppo();
-					iscrizione.setIdGruppo(idGruppo);
-					iscrizione.setIdUtente(idUtente);
-					
-					this.add(iscrizione);
-					System.out.println("dao iscrizione gruppo aggiunto");
-
-				} else {
-					System.out.println("dao iscrizione gruppo non aggiunto");
-					throw new DAOException("Gruppo pieno");
-				}
-				
+				risultato = resultSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			throw new DAOException("ERRORE findUtentiByIdGruppo iscrizioneGruppo" + e.getMessage(), e);
+			throw new DAOException("ERRORE findById iscrizioneGruppo" + e.getMessage(), e);
 		}
 		finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
 		}
-		return;
+		return risultato;
 	}
 
 }

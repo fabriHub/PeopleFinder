@@ -128,7 +128,7 @@
 				<button class="" onclick="location.href='./logout'">
 					LOGOUT
 				</button>
-			</div>
+			</div>	
 			
 		</div>
 				
