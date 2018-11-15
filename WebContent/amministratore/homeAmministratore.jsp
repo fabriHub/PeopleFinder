@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List, java.util.ArrayList, java.util.Map, java.util.HashMap" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,41 +21,45 @@
 		
 			<%@ include file="menuAmministratore.jsp" %>
 			
-			<div class="container" id="contenitore">
+			<div class="containerHomeAdmin" id="contenitore">
 
-				<div class="containerTabella">
-					
-					<div class="tabellaRighe3Col header">
-						<div class="col1 ">
-							Attività
-						</div>
-						<div class="col2 ">
-							Data
-						</div>
-						<div class="col3 ">
-							Completato
-						</div>
+				<div class="tab1HA">
+				
+					<div class="rig2 col2">
+						Utenti registrati
+					</div>
+					<div class="rig2 col3">
+						<% out.print((int) request.getAttribute("utentiRegistrati")); %>
 					</div>
 					
-					<div class="body">
-					
-						<a href="####?idGruppo=">	
-							<div class="tabellaRighe3Col riga">
-								<div class="col1">
-									out.println(stringa[1])
-								</div>
-								<div class="col2">
-									out.println(stringa[3])
-								</div>
-								<div class="col3">
-									out.println(stringa[2])
-								</div>
-							</div>
-						</a>
-						
+					<div class="rig3 col2">
+						Utenti abilitati
+					</div>
+					<div class="rig3 col3">
+						<% out.print((Double) request.getAttribute("percentualeUtentiAbilitati")); %>
+					</div>
+				
+					<div class="rig4 col2">
+						Gruppi creati
+					</div>
+					<div class="rig4 col3">
+						<% out.print((int) request.getAttribute("gruppiCreati")); %>
+					</div>
+				
+					<div class="rig5 col2">
+						Gruppi completati
+					</div>
+					<div class="rig5 col3">
+						<% out.print((Double) request.getAttribute("percentualeGruppiCompletati")); %>
 					</div>
 					
 				</div>
+				
+				<% 
+					//List<String[]> listaGruppi = (List<String[]>) request.getAttribute("listaGruppi");
+					//for(String[] stringa : listaGruppi){
+					//	String onclick = "onclick=\"window.location='####?idGruppo=" + stringa[0] + "'\"";
+				%>	
 				
 			</div>
 			

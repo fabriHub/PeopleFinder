@@ -84,10 +84,6 @@ a .fa{
  }
  
 .container {
-  /*max-width: 100%;
-  max-height: 100%;
-  min-width: fit-content;
-  min-height: fit-content;*/
   grid-area: centro;
   min-height: fit-content;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 4%, rgba(255, 255, 255, 0.8), rgba(150, 150, 150, 1) 90%);
@@ -722,7 +718,7 @@ img {
 
 .tabellaRighe5Col {
 	display: grid;
-	grid-template-columns: repeat(5, 20%);
+	grid-template-columns: 20% 30% 23% 15% 12%;
 	grid-template-rows: 100%;
 	width: 100%;
 	align-items: center;
@@ -971,3 +967,66 @@ img {
 }
 
 /*#################################### SELECT FORM ####################################*/
+
+/*#################################### HOME ADMIN ####################################*/
+
+.containerHomeAdmin {
+  grid-area: centro;
+  min-height: fit-content;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 4%, rgba(255, 255, 255, 0.8), rgba(150, 150, 150, 1) 90%);
+  border-radius: 25px;
+  margin: 0 0;
+  align-items: center;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-rows: 70% 30%;
+  z-index: 2;
+}
+
+.tab1HA {
+	grid-row-start: 1; grid-row-end: 3;	grid-column-start: 1; grid-column-end: 2;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	word-break: break-word;
+	font-size: 2.1vw;
+	border-radius: 10px;
+	display: grid;
+	grid-template-columns: 10% 60% 30%;
+	grid-template-rows: 10% 20% 20% 20% 20% 10%;
+	justify-items: left;
+	align-items: center;
+}
+
+.rig1{
+	grid-row-start: 1;
+	grid-row-end: span 1;
+}
+
+.rig2{
+	grid-row-start: 2;
+	grid-row-end: span 1;
+}
+
+.rig3{
+	grid-row-start: 3;
+	grid-row-end: span 1;
+}
+
+.rig4{
+	grid-row-start: 4;
+	grid-row-end: span 1;
+}
+
+.rig5{
+	grid-row-start: 5;
+	grid-row-end: span 1;
+}
+
+.rig6{
+	grid-row-start: 6;
+	grid-row-end: span 1;
+}
+
+/*#################################### HOME ADMIN ####################################*/

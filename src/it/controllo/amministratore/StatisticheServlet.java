@@ -40,9 +40,7 @@ public class StatisticheServlet extends HttpServlet {
 		int gruppiCreati = 0;
 		int utentiRegistrati = 0;
 		Double percentualeUtentiAbilitati = 0.0;
-		Double percentualeUtentiDisabilitati = 0.0;
 		Double percentualeGruppiCompletati = 0.0;
-		Double percentualeGruppiNonCompletati = 0.0;
 		Map<Attivita, Double> popolaritaAttivitaGruppiCompletati = new LinkedHashMap<Attivita, Double>();
 		Map<Attivita, Double> popolaritaAttivitaGruppiNonCompletati = new LinkedHashMap<Attivita, Double>();
 		Map<Long, Double> partecipazioneUtentiAiGruppi = new LinkedHashMap<Long, Double>();
@@ -50,10 +48,8 @@ public class StatisticheServlet extends HttpServlet {
 		try {	
 			utentiRegistrati = daoUtenteAdmin.contaUtenti();
 			percentualeUtentiAbilitati = daoUtenteAdmin.percentualeUtentiAbilitati();
-			percentualeUtentiDisabilitati = daoUtenteAdmin.percentualeUtentiDisabilitati();
 			gruppiCreati = daoUtenteAdmin.contaGruppi();
 			percentualeGruppiCompletati = daoUtenteAdmin.percentualeGruppiCompletati();
-			percentualeGruppiNonCompletati = daoUtenteAdmin.percentualeGruppiNonCompletati();
 			popolaritaAttivitaGruppiCompletati = daoUtenteAdmin.popolaritaAttivitaCompleto();
 			popolaritaAttivitaGruppiNonCompletati = daoUtenteAdmin.popolaritaAttivitaNonCompleto();
 			partecipazioneUtentiAiGruppi = daoUtenteAdmin.partecipazioneUtentiAiGruppi();
@@ -63,14 +59,11 @@ public class StatisticheServlet extends HttpServlet {
 		
 		request.setAttribute("utentiRegistrati", utentiRegistrati);	
 		request.setAttribute("percentualeUtentiAbilitati", percentualeUtentiAbilitati);	
-		request.setAttribute("percentualeUtentiDisabilitati", percentualeUtentiDisabilitati);	
 		request.setAttribute("gruppiCreati", gruppiCreati);	
 		request.setAttribute("percentualeGruppiCompletati", percentualeGruppiCompletati);	
-		request.setAttribute("percentualeGruppiNonCompletati", percentualeGruppiNonCompletati);	
 		request.setAttribute("popolaritaAttivitaGruppiCompletati", popolaritaAttivitaGruppiCompletati);	
 		request.setAttribute("popolaritaAttivitaGruppiNonCompletati", popolaritaAttivitaGruppiNonCompletati);	
 		request.setAttribute("partecipazioneUtentiAiGruppi", partecipazioneUtentiAiGruppi);	
-		
 		
 		request.getRequestDispatcher("/amministratore/homeAmministratore.jsp").forward(request, response);
 
