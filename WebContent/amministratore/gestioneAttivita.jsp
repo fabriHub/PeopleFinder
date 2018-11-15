@@ -22,6 +22,19 @@
 			<%@ include file="menuAmministratore.jsp" %>
 		
 			<div class="container" id="contenitore">
+			
+			<form class="containerFormCreaGruppo" action="aggiungiAttivita" method="POST">
+					
+					<div class="col2">
+						<input type="text"  name="nome" placeholder="Nome">
+					</div>
+					<div class="col3">
+						<input type="text" name="numeroPartecipanti" placeholder="Numero partecipanti">
+					</div>
+					<div class="col4">
+						<button class=""> AGGIUNGI </button>
+					</div>
+				</form>
 
 				<div class="containerTabella">
 					

@@ -220,7 +220,7 @@
     <servlet-name>PanoramicaGruppiServlet</servlet-name>
     <url-pattern>/panoramicaGruppi</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>AbilitazioneAttivitaServlet</servlet-name>
     <servlet-class>it.controllo.amministratore.AbilitazioneAttivitaServlet</servlet-class>
   </servlet>

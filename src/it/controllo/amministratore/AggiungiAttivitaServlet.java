@@ -42,7 +42,7 @@ public class AggiungiAttivitaServlet extends HttpServlet {
 
     	Attivita attivita = new Attivita();
     	attivita.setNome(request.getParameter("nome"));
-    	attivita.setNumeroPartecipanti(Integer.parseInt(request.getParameter("numero_partecipanti")));
+    	attivita.setNumeroPartecipanti(Integer.parseInt(request.getParameter("numeroPartecipanti")));
 
     	try {
     		daoAttivita.add(attivita);
@@ -51,7 +51,7 @@ public class AggiungiAttivitaServlet extends HttpServlet {
     		e.printStackTrace();
     	}
 
-    	response.sendRedirect("./provaServlet.jsp");
+    	response.sendRedirect("./findAllAttivita");
     }
 
 }
