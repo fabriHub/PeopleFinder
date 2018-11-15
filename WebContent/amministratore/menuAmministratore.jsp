@@ -36,7 +36,7 @@
 		<a href="./populateHomeUtente" class="linkMenu">
 			Entra come utente
 		</a>
-		<a class="linkMenu" href="">
+		<a class="linkMenu" href="./statistiche">
 			<i class="fa fa-home"></i>
 		</a>
 		

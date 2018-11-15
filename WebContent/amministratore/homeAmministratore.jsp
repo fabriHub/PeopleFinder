@@ -36,11 +36,11 @@
 						Utenti abilitati
 					</div>
 					<div class="rig3 col3">
-						<% out.print((Double) request.getAttribute("percentualeUtentiAbilitati")); %>
+						<% out.print((Double) request.getAttribute("percentualeUtentiAbilitati")); %>%
 					</div>
 				
 					<div class="rig4 col2">
-						Gruppi creati
+						Gruppi<br>creati
 					</div>
 					<div class="rig4 col3">
 						<% out.print((int) request.getAttribute("gruppiCreati")); %>
@@ -50,9 +50,65 @@
 						Gruppi completati
 					</div>
 					<div class="rig5 col3">
-						<% out.print((Double) request.getAttribute("percentualeGruppiCompletati")); %>
+						<% out.print((Double) request.getAttribute("percentualeGruppiCompletati")); %>%
 					</div>
 					
+				</div>
+				
+				<div class="containerTabella rig2 col2" style="justify-self: center; width: 80%;">
+					<div class="tab3HA header">
+						<div class="col1">
+							Gruppo
+						</div>
+						<div class="col2">
+							Partecipazione [%]
+						</div>
+					
+					</div>
+					
+					<div class="body">
+					
+						<div class="tab3HA riga">
+							<div class="col1">
+							ciao
+							</div>
+							<div class="col2">
+							ciao9
+							</div>
+						</div>
+					
+					</div>
+				</div>
+				
+					<div class="containerTabella rig1 col2" style="justify-self: center; width: 90%; height: 80%">
+					<div class="tab2HA header">
+						<div class="col1">
+							Attività
+						</div>
+						<div class="col2">
+							Gruppi completi [%]
+						</div>
+						<div class="col3">
+							Gruppi incompleti [%]
+						</div>
+					
+					</div>
+					
+					<div class="body">
+					
+						<div class="tab2HA riga">
+							<div class="col1">
+							ciao
+							</div>
+							<div class="col2">
+							ciao9
+							</div>
+							<div class="col3">
+							ciao9
+							</div>
+						</div>
+					
+					</div>
 				</div>
 				
 				<% 

@@ -8,6 +8,8 @@
 @import url(https://fonts.googleapis.com/css?family=Satisfy);
 @import url(https://fonts.googleapis.com/css?family=Changa);
 @import url(https://fonts.googleapis.com/css?family=Rajdhani);
+@import url(https://fonts.googleapis.com/css?family=Allerta+Stencil);
+
 
 
 /*#################################### FONT ####################################*/
@@ -724,6 +726,15 @@ img {
 	align-items: center;
 }
 
+.tabellaPanoramicaGruppi {
+	display: grid;
+	grid-template-columns: 15% 20% 15% 30% 20%;
+	grid-template-rows: 100%;
+	width: 100%;
+	align-items: center;
+}
+
+
 .tabellaRighe6Col {
 	display: grid;
 	grid-template-columns: repeat(6, 16.66%);
@@ -980,7 +991,7 @@ img {
   justify-items: center;
   display: grid;
   grid-template-columns: 35% 65%;
-  grid-template-rows: 70% 30%;
+  grid-template-rows: 60% 40%;
   z-index: 2;
 }
 
@@ -990,13 +1001,41 @@ img {
 	height: 100%;
 	overflow: hidden;
 	word-break: break-word;
-	font-size: 2.1vw;
-	border-radius: 10px;
+	font-size: 2vw;
 	display: grid;
-	grid-template-columns: 10% 60% 30%;
+	grid-template-columns: 10% 50% 40%;
 	grid-template-rows: 10% 20% 20% 20% 20% 10%;
-	justify-items: left;
+	justify-items: center;
 	align-items: center;
+	font-family: "Allerta Stencil";
+	color: #000066;
+}
+
+.tab2HA {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	word-break: break-word;
+	font-size: 1.5vw;
+	justify-items: center;
+	align-items: center;
+	display: grid;
+	grid-template-columns: 20% 40% 40%;
+	grid-template-rows: 100%;
+}
+
+.tab3HA {
+	justify-self: center;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	word-break: break-word;
+	font-size: 1.5vw;
+	justify-items: center;
+	align-items: center;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 100%;
 }
 
 .rig1{

@@ -24,7 +24,7 @@
 
 				<div class="containerTabella">
 					
-					<div class="tabellaRighe5Col header">
+					<div class="tabellaPanoramicaGruppi header">
 						<div class="col1 ">
 							Creatore
 						</div>
@@ -49,7 +49,7 @@
 							gruppi.toString();
 							for(String[] gruppo : gruppi) {
 						%>	
-							<div class="tabellaRighe5Col riga">
+							<div class="tabellaPanoramicaGruppi riga">
 								<div class="col1">
 									<% out.println(gruppo[1]); %>
 								</div>
