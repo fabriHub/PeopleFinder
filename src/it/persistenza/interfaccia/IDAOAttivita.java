@@ -12,5 +12,6 @@ public interface IDAOAttivita {
 	public Attivita findById(Long id) throws DAOException;
 	public void update(Attivita attivita) throws DAOException;
 	public void delete (Long id) throws DAOException;
+	public List<Attivita> findAllAbilitate() throws DAOException;
 
 }

@@ -70,6 +70,33 @@ public class DAOAttivita implements IDAOAttivita {
 		}
 		return allAttivita;
 	}
+	
+	@Override
+	public List<Attivita> findAllAbilitate() throws DAOException {
+		List <Attivita> allAttivita = new ArrayList<Attivita>(0);
+		Connection connection = DataSource.getInstance().getConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			statement = connection.prepareStatement("SELECT * FROM ATTIVITA WHERE ABILITATA = 1 ORDER BY ID");
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Attivita attivita = new Attivita();
+				attivita.setId(resultSet.getLong("ID"));
+				attivita.setNome(resultSet.getString("NOME"));
+				attivita.setNumeroPartecipanti(resultSet.getInt("NUMERO_PARTECIPANTI"));
+				attivita.setAbilitata(resultSet.getInt("ABILITATA"));
+				allAttivita.add(attivita);						
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE findAllAbilitate attività" + e.getMessage(), e);
+		} finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return allAttivita;
+	}
 
 	@Override
 	public Attivita findById(Long id) throws DAOException {

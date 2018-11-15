@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List, java.util.ArrayList" %>
+<%@ page import="java.util.List, java.util.ArrayList, it.modello.Attivita" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="it">
@@ -24,16 +24,17 @@
 			
 				<form class="containerFormCreaGruppo">
 					
-					<select name="cars">
-					  <option value="volvo">Volvo</option>
-					  <option value="saab">Saab</option>
-					  <option value="fiat">Fiat</option>
-					  <option value="audi">Audi</option>
+					<select name="attivita">
+						<%
+							List<Attivita> attivita = (List<Attivita>) request.getAttribute("attivita");
+							for(Attivita att : attivita) {
+						%>	
+					 		<option value="<% out.print(att.getId()); %>"><% out.print(att.getNome()+" - "+ String.valueOf(att.getNumeroPartecipanti())); %></option>
+						<% } %>
 					</select>
 					
 					<div class="col2">
-						<!--<input type="datetime-local" name="mydatetime">-->
-						<datetime-input locale="it" datetime="{{datetime}}" hour12-format="[[hour24]]"></datetime-input>
+						<input type="datetime-local" name="data">
 					</div>
 					<div class="col3">
 						<input type="textarea" name="descrizione" placeholder="Descrizione">
@@ -67,7 +68,6 @@
 					
 						<%
 							List<String[]> gruppi = (List<String[]>) request.getAttribute("gruppi");
-							gruppi.toString();
 							for(String[] gruppo : gruppi) {
 						%>	
 							<div class="tabellaRighe5ColG riga <% if (gruppo[2].equals("1")) out.println("eventoPassato"); %>">
