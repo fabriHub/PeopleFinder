@@ -752,6 +752,14 @@ img {
 	align-items: center;
 }
 
+.tabellaProva {
+	display: grid;
+	grid-template-columns: 20% 20% 50% 5% 5%;
+	grid-template-rows: 100%;
+	width: 100%;
+	align-items: center;
+}
+
 .header {
 	grid-row-start: 1;
 	grid-row-end: span 1;
@@ -847,6 +855,12 @@ img {
 .eventoPassato .pallozzoVerde{
 	color: #a2d6a2;
 }
+
+.scritteTabella {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
 
 /*#################################### TABELLA ####################################*/
 
