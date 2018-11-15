@@ -67,18 +67,23 @@
 					</div>
 					
 					<div class="body">
-					
+						<%
+							List<String[]> partecipazione = (List<String[]>) request.getAttribute("partecipazioneUtentiAiGruppi");
+							for (String[] part : partecipazione) {
+						%>	
 					
 						
 						<div class="tab3HA riga">
 							<div class="col1">
-							ciao
+								<% out.println(part[1]); %>
 							</div>
 							<div class="col2">
-							ciao9
+								<% out.println(part[2]); %>
 							</div>
 						</div>
-					
+					<%		
+							}
+						%>
 					</div>
 				</div>
 				
@@ -97,20 +102,25 @@
 					</div>
 					
 					<div class="body">
-					
+						<%
+							List<String[]> gruppiCompl = (List<String[]>) request.getAttribute("popolaritaAttivitaGruppiCompletati");
+							for (String[] gruppoC : gruppiCompl) {
+						%>	
 						
-						<div class="tab2HA riga">
-							<div class="col1">
-							ciao
+							<div class="tab2HA riga">
+								<div class="col1">
+									<% out.println(gruppoC[1]); %>
+								</div>
+								<div class="col2">
+									<% out.println(gruppoC[2]); %>
+								</div>
+								<div class="col3">
+									<% out.println(gruppoC[4]); %>
+								</div>
 							</div>
-							<div class="col2">
-							ciao9
-							</div>
-							<div class="col3">
-							ciao9
-							</div>
-						</div>
-					
+						<%		
+							}
+						%>
 					</div>
 				</div>
 				
