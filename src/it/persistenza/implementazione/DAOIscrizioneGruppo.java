@@ -392,4 +392,24 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		return risultato;
 	}
 
+
+	@Override
+	public void disiscriviti(IscrizioneGruppo iscrizioneGruppo) throws DAOException {
+		Connection connection = null;
+		PreparedStatement statement = null;		
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("DELETE FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE = ? AND ID_GRUPPO = ?");
+			statement.setLong(1, iscrizioneGruppo.getIdUtente());
+			statement.setLong(2, iscrizioneGruppo.getIdGruppo());
+			statement.executeUpdate();  
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE disiscriviti iscrizioneGruppo" + e.getMessage(), e);
+		}
+		finally {
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}			
+	}
+
 }

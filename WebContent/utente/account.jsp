@@ -120,7 +120,7 @@
 			<!-- </div> -->
 
 				<div class="cancellati containerInput" style="">
-					<button class="">CANCELLATI</button>	
+					<button class="" onclick="location.href='./deleteUtente'">CANCELLATI</button>	
 				</div>
 			</div>
 			

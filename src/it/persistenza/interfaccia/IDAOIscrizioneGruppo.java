@@ -18,5 +18,6 @@ public interface IDAOIscrizioneGruppo {
 	public void update(IscrizioneGruppo iscrizioneGruppo) throws DAOException;
 	public void delete (Long id) throws DAOException;
 	public int countIscrittiGruppoById (Long id) throws DAOException;
+	public void disiscriviti(IscrizioneGruppo iscrizioneGruppo) throws DAOException;
 
 }

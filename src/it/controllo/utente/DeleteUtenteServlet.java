@@ -31,17 +31,16 @@ public class DeleteUtenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOUtente daoUtente = new DAOUtente();
-		Long id = Long.parseLong(request.getParameter("id"));
-		
+		Long idUtente = (Long) request.getSession().getAttribute("idUtente");
 		
 		try {
-			daoUtente.delete(id);
+			daoUtente.delete(idUtente);
 			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("provaServlet.jsp?xxx=1");
+		response.sendRedirect("./logout");
 	}
 
 	

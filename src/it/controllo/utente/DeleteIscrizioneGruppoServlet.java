@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.modello.IscrizioneGruppo;
 import it.persistenza.implementazione.DAOException;
 import it.persistenza.implementazione.DAOIscrizioneGruppo;
 import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
@@ -32,17 +33,22 @@ public class DeleteIscrizioneGruppoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
-		Long id = Long.parseLong(request.getParameter("id"));
+		Long idGruppo = Long.parseLong(request.getParameter("idGruppo"));
+		Long idUtente = (Long) request.getSession().getAttribute("idUtente");
 		
+		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo();
+		
+		iscrizioneGruppo.setIdGruppo(idGruppo);
+		iscrizioneGruppo.setIdUtente(idUtente);
 		
 		try {
-			daoIscrizioneGruppo.delete(id);
+			daoIscrizioneGruppo.disiscriviti(iscrizioneGruppo);
 			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("provaServlet.jsp?xxx=1");
+		response.sendRedirect("./prossimiEventi");
 	}
 
 }

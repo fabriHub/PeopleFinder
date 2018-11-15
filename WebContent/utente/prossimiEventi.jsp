@@ -57,7 +57,7 @@
 								</div>
 								
 								<div class="col4">
-									<input type = "button" value = "Cancellati" onclick="location.href=''">
+									<input type = "button" value = "Cancellati" onclick="location.href='./deleteIscrizioneGruppo?idGruppo=<% out.print(gruppo[0]); %>'">
 								</div>
 							</div>
 						<%		
@@ -69,7 +69,7 @@
 			
 			
 			<div class="logout">
-				<button class="" onclick="location.href='../logout'">
+				<button class="" onclick="location.href='./logout'">
 					LOGOUT
 				</button>
 			</div>	
