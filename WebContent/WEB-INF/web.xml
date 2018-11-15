@@ -280,4 +280,12 @@
     <filter-name>FiltroDatiUtente</filter-name>
     <url-pattern>/updateUtente</url-pattern>
   </filter-mapping>
+   <filter>
+    <filter-name>FiltroAggiungiGruppo</filter-name>
+    <filter-class>it.controllo.filtri.FiltroAggiungiGruppo</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FiltroAggiungiGruppo</filter-name>
+    <url-pattern>/aggiungiGruppo</url-pattern>
+  </filter-mapping>
 </web-app>

@@ -50,9 +50,9 @@ public class AggiungiGruppoServlet extends HttpServlet {
 		
 		Long id = (Long) request.getSession().getAttribute("idUtente");  // abbiamo recuperato l'ID dell'utente dalla sessione che viene creata con il login
     	gruppo.setIdUtente(id);
-    	gruppo.setIdAttivita(Long.parseLong(request.getParameter("id_attivita")));
+    	gruppo.setIdAttivita(Long.parseLong(request.getParameter("attivita")));
     	try {
-			gruppo.setData(new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getParameter("data")+" "+request.getParameter("ora")));
+			gruppo.setData(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(request.getParameter("data")));
 			
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
@@ -67,7 +67,7 @@ public class AggiungiGruppoServlet extends HttpServlet {
     		e.printStackTrace();
     	}
 
-    	response.sendRedirect("./provaServlet.jsp");
+    	response.sendRedirect("./gestioneGruppi");
     }
 
 }

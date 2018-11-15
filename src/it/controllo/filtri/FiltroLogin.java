@@ -46,7 +46,7 @@ public class FiltroLogin implements Filter {
 		Map<String,String> errore = new HashMap<String,String>();
 
 		if(session.getAttribute("ERRORE") != null) {
-			errore = (HashMap<String,String>) session.getAttribute("ERRORE");
+			session.removeAttribute("ERRORE");
 		}
 		
 		if (httpRequest.getParameter("mail").isEmpty()) {
