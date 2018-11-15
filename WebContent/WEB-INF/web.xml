@@ -101,6 +101,14 @@
     <url-pattern>/deleteIscrizioneGruppo</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>CaricaUpdateGruppoServlet</servlet-name>
+    <servlet-class>it.controllo.utente.CaricaUpdateGruppoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CaricaUpdateGruppoServlet</servlet-name>
+    <url-pattern>/caricaUpdateGruppo</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>UpdateGruppoServlet</servlet-name>
     <servlet-class>it.controllo.utente.UpdateGruppoServlet</servlet-class>
   </servlet>
@@ -280,7 +288,7 @@
     <filter-name>FiltroDatiUtente</filter-name>
     <url-pattern>/updateUtente</url-pattern>
   </filter-mapping>
-   <filter>
+  <filter>
     <filter-name>FiltroAggiungiGruppo</filter-name>
     <filter-class>it.controllo.filtri.FiltroAggiungiGruppo</filter-class>
   </filter>

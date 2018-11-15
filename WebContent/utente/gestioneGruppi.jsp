@@ -88,10 +88,10 @@
 									</div>
 								</div>
 								<div class="col4">
-									<i class="fa fa-edit" style="color: #002f7d;"></i>
+									<i class="fa fa-edit" style="color: #002f7d;" onclick="location.href='./caricaUpdateGruppo?idGruppo=<% out.print(gruppo[0]); %>'"></i>
 								</div>
 								<div class="col5">
-									<i class="fa fa-trash" style="color: red;"></i>
+									<i class="fa fa-trash" style="color: red;" onclick="location.href='./deleteGruppo?idGruppo=<% out.print(gruppo[0]); %>'"></i>
 								</div>
 							</div>
 						<%		

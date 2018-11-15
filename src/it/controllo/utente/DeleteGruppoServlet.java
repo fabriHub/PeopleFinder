@@ -31,7 +31,7 @@ public class DeleteGruppoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOGruppo daoGruppo = new DAOGruppo();
-		Long id = Long.parseLong(request.getParameter("id"));
+		Long id = Long.parseLong(request.getParameter("idGruppo"));
 		
 		
 		try {
@@ -41,7 +41,7 @@ public class DeleteGruppoServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("provaServlet.jsp?xxx=1");
+		response.sendRedirect("./gestioneGruppi");
 	}
 
 	
