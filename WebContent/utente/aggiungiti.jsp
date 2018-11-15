@@ -57,7 +57,7 @@
 								</div>
 								
 								<div class="col4">
-									<input type = "button" value = "Iscriviti" onclick="location.href=''">
+									<input type = "button" value = "Iscriviti" onclick="location.href='./aggiungiIscrizioneGruppo?idGruppo=<% out.print(gruppo[0]); %>'">
 								</div>
 							</div>
 						<%		

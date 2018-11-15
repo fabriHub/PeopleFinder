@@ -40,7 +40,7 @@ public class FiltroAccessoUtente implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpSession session = httpRequest.getSession();
 		
-		if(session.getAttribute("idUtente") == null) {
+		if(session.getAttribute("idUtente") == null || session.getAttribute("idUtente").equals("") ) {
 			httpResponse.sendRedirect("../errore.html");
 		}
 		

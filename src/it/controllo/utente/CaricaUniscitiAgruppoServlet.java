@@ -16,13 +16,13 @@ import it.persistenza.interfaccia.IDAOIscrizioneGruppo;
 /**
  * Servlet implementation class GestioneGruppiServlet
  */
-public class UniscitiAgruppoServlet extends HttpServlet {
+public class CaricaUniscitiAgruppoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UniscitiAgruppoServlet() {
+    public CaricaUniscitiAgruppoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -18,7 +18,7 @@
 		<a class="linkMenu" href="./gestioneGruppi">
 			Gestisci gruppi
 		</a>
-		<a class="linkMenu" href="./uniscitiGruppo">
+		<a class="linkMenu" href="./caricaUniscitiGruppo">
 			Unisciti a un gruppo
 		</a>
 		

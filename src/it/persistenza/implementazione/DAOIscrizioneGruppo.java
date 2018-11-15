@@ -362,5 +362,45 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 		}
 		return gruppi;
 	}
+	
+	@Override
+	public void iscrivitiGruppo(Long idUtente, Long idGruppo) throws DAOException {
+
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = DataSource.getInstance().getConnection();
+			statement = connection.prepareStatement("SELECT COUNT(ISCRIZIONE_GRUPPO.ID)+1, ATTIVITA.NUMERO_PARTECIPANTI FROM ISCRIZIONE_GRUPPO JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID WHERE ISCRIZIONE_GRUPPO.ID_GRUPPO = ? AND ISCRIZIONE_GRUPPO.ID_GRUPPO NOT IN (SELECT ID_GRUPPO FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE = ?) AND GRUPPO.ID_UTENTE <> ? GROUP BY ATTIVITA.NUMERO_PARTECIPANTI");
+			statement.setLong(1, idGruppo);
+			statement.setLong(2, idUtente);
+			statement.setLong(3, idUtente);
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				
+				if(resultSet.getInt(1) < resultSet.getInt(2)) {
+					IscrizioneGruppo iscrizione = new IscrizioneGruppo();
+					iscrizione.setIdGruppo(idGruppo);
+					iscrizione.setIdUtente(idUtente);
+					
+					this.add(iscrizione);
+
+				} else {
+					throw new DAOException("Gruppo pieno");
+				}
+				
+			}
+		} catch (SQLException e) {
+			throw new DAOException("ERRORE findUtentiByIdGruppo iscrizioneGruppo" + e.getMessage(), e);
+		}
+		finally {
+			DataSource.getInstance().close(resultSet);
+			DataSource.getInstance().close(statement);
+			DataSource.getInstance().close(connection);
+		}
+		return;
+	}
 
 }

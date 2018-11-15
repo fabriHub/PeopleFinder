@@ -189,12 +189,12 @@
     <url-pattern>/gestioneGruppi</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>UniscitiAgruppoServlet</servlet-name>
-    <servlet-class>it.controllo.utente.UniscitiAgruppoServlet</servlet-class>
+    <servlet-name>CaricaUniscitiAgruppoServlet</servlet-name>
+    <servlet-class>it.controllo.utente.CaricaUniscitiAgruppoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UniscitiAgruppoServlet</servlet-name>
-    <url-pattern>/uniscitiGruppo</url-pattern>
+    <servlet-name>CaricaUniscitiAgruppoServlet</servlet-name>
+    <url-pattern>/caricaUniscitiGruppo</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>ProssimiEventiServlet</servlet-name>
@@ -295,5 +295,9 @@
   <filter-mapping>
     <filter-name>FiltroAggiungiGruppo</filter-name>
     <url-pattern>/aggiungiGruppo</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>FiltroAggiungiGruppo</filter-name>
+    <url-pattern>/updateGruppo</url-pattern>
   </filter-mapping>
 </web-app>

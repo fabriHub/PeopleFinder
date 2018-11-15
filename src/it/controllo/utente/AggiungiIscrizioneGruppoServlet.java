@@ -34,21 +34,21 @@ public class AggiungiIscrizioneGruppoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		IDAOIscrizioneGruppo daoIscrizioneGruppo = new DAOIscrizioneGruppo();
-		Long idUtente = Long.parseLong(request.getParameter("id_utente"));
-		Long idGruppo = Long.parseLong(request.getParameter("id_gruppo"));
+		Long idUtente = (Long) request.getSession().getAttribute("idUtente");
+		Long idGruppo = Long.parseLong(request.getParameter("idGruppo"));
 		IscrizioneGruppo iscrizioneGruppo = new IscrizioneGruppo();
 		iscrizioneGruppo.setIdUtente(idUtente);
 		iscrizioneGruppo.setIdGruppo(idGruppo);
 		
 		try {
 			
-			daoIscrizioneGruppo.add(iscrizioneGruppo);
+			daoIscrizioneGruppo.iscrivitiGruppo(idUtente, idGruppo);
 			
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("provaServlet.jsp?xxx=1");
+		response.sendRedirect("./caricaUniscitiGruppo");
 	}
 
 }

@@ -20,15 +20,18 @@
 		
 			<%@ include file="menuUtente.jsp" %>
 		
+			<%
+				Gruppo gruppo = (Gruppo) request.getAttribute("gruppo");
+				List<Attivita> attivita = (List<Attivita>) request.getAttribute("attivita");
+			%>
+		
 			<div class="container3" id="contenitore">
 			
 				<form class="containerFormCreaGruppo" action="updateGruppo" method="POST">
-					
+					<input type="hidden" name="idGruppo" value="<% out.print(gruppo.getId()); %>">
 					<select name="attivita" required>
 						<option value="" disabled hidden>Attività</option>
 						<%
-							Gruppo gruppo = (Gruppo) request.getAttribute("gruppo");
-							List<Attivita> attivita = (List<Attivita>) request.getAttribute("attivita");
 							for(Attivita att : attivita) {
 						%>	
 					 		<option value="<% out.print(att.getId()); %>" <% if ( att.getId() == gruppo.getIdAttivita() ){ out.print("selected"); } %>><% out.print(att.getNome()+" - "+ String.valueOf(att.getNumeroPartecipanti())); %></option>

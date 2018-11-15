@@ -37,6 +37,8 @@ public class UpdateGruppoServlet extends HttpServlet {
 		Long id = (Long) request.getSession().getAttribute("idUtente");  // abbiamo recuperato l'ID dell'utente dalla sessione che viene creata con il login
 		
     	gruppo.setIdUtente(id);
+    	
+    	gruppo.setId(Long.parseLong(request.getParameter("idGruppo")));
     	gruppo.setIdAttivita(Long.parseLong(request.getParameter("attivita")));
     	try {
 			gruppo.setData(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(request.getParameter("data")));

@@ -3,22 +3,16 @@ package it.controllo.utente;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import it.modello.Gruppo;
-import it.modello.Utente;
 import it.persistenza.implementazione.DAOException;
 import it.persistenza.implementazione.DAOGruppo;
-import it.persistenza.implementazione.DAOUtente;
 import it.persistenza.interfaccia.IDAOGruppo;
-import it.persistenza.interfaccia.IDAOUtente;
 
 /**
  * Servlet implementation class AggiungiGruppoServlet

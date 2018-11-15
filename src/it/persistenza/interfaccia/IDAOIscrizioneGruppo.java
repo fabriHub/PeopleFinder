@@ -17,5 +17,6 @@ public interface IDAOIscrizioneGruppo {
 	public List<IscrizioneGruppo> findUtentiByIdGruppo(Long id) throws DAOException;
 	public void update(IscrizioneGruppo iscrizioneGruppo) throws DAOException;
 	public void delete (Long id) throws DAOException;
+	public void iscrivitiGruppo(Long idUtente, Long idGruppo) throws DAOException;
 
 }
