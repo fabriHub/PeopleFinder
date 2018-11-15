@@ -62,7 +62,7 @@
 			</div>
 			
 			<div class="logout">
-				<button class="" onclick="location.href='../logout'">
+				<button class="" onclick="location.href='./logout'">
 					LOGOUT
 				</button>
 			</div>	
