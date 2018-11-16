@@ -308,8 +308,4 @@
     <filter-name>FiltroAggiungiAttivita</filter-name>
     <url-pattern>/aggiungiAttivita</url-pattern>
   </filter-mapping>
-  <error-page>
-	<error-code>404</error-code>
-	<location>/errore.html</location>
-  </error-page>
 </web-app>
