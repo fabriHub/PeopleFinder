@@ -57,7 +57,7 @@
 								</div>
 								
 								<div class="col4">
-									<input type = "button" value = "Cancellati" onclick="location.href='./deleteIscrizioneGruppo?idGruppo=<% out.print(gruppo[0]); %>'">
+									<button type = "button" style="width: 80%; height: 3vw;" onclick="location.href='./deleteIscrizioneGruppo?idGruppo=<% out.print(gruppo[0]); %>'">Cancellati</button>
 								</div>
 							</div>
 						<%		
