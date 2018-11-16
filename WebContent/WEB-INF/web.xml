@@ -300,4 +300,12 @@
     <filter-name>FiltroAggiungiGruppo</filter-name>
     <url-pattern>/updateGruppo</url-pattern>
   </filter-mapping>
+  <filter>
+    <filter-name>FiltroAggiungiAttivita</filter-name>
+    <filter-class>it.controllo.filtri.FiltroAggiungiAttivita</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FiltroAggiungiAttivita</filter-name>
+    <url-pattern>/aggiungiAttivita</url-pattern>
+  </filter-mapping>
 </web-app>

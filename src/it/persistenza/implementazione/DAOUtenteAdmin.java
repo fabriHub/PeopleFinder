@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import it.modello.Attivita;
 import it.modello.Utente;
@@ -499,6 +500,11 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 			DataSource.getInstance().close(connection);
 		}
 		return risultato;
+	}
+	
+	public static boolean validateNumero(String numero) {
+		Pattern pattern = Pattern.compile("^[0-9]{1,3}$");
+	    return pattern.matcher(numero).matches();
 	}
 
 	
