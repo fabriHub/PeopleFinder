@@ -182,7 +182,7 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 				statement.executeUpdate();
 			}
 		} catch (SQLException e) {
-			throw new DAOException("ERRORE rendiAmministratore utenteAdmin" + e.getMessage(), e);
+			throw new DAOException("ERRORE escludiAmministratore utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(statement);
 			DataSource.getInstance().close(connection);
@@ -323,7 +323,7 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 				numeroUtenti = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 			}
 		} catch (SQLException | DAOException e) {
-			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
+			throw new DAOException("ERRORE percentualeUtentiAbilitati utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -354,7 +354,7 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 				System.out.println(numeroUtenti);
 			}
 		} catch (SQLException | DAOException e) {
-			throw new DAOException("ERRORE contaUtenti utenteAdmin" + e.getMessage(), e);
+			throw new DAOException("ERRORE percentualeUtentiAbilitati utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);
@@ -412,7 +412,7 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 				numeroGruppiCompletati = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 			}
 		} catch (SQLException | DAOException e) {
-			throw new DAOException("ERRORE contaGruppiCompletati utenteAdmin" + e.getMessage(), e);
+			throw new DAOException("ERRORE percentualeGruppiCompletati utenteAdmin" + e.getMessage(), e);
 		} finally {
 			DataSource.getInstance().close(resultSet);
 			DataSource.getInstance().close(statement);

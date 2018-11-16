@@ -109,7 +109,7 @@ public class DAOGruppo implements IDAOGruppo {
 
 		} catch (SQLException e) {
 			
-			throw new DAOException("ERRORE findAll gruppo" + e.getMessage(), e);
+			throw new DAOException("ERRORE findAllGestioneGruppi gruppo" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -185,7 +185,7 @@ public class DAOGruppo implements IDAOGruppo {
 
 		} catch (SQLException e) {
 			
-			throw new DAOException("ERRORE findAll gruppo" + e.getMessage(), e);
+			throw new DAOException("ERRORE findByIdUtente gruppo" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -342,7 +342,7 @@ public class DAOGruppo implements IDAOGruppo {
 
 		} catch (SQLException e) {
 			
-			throw new DAOException("ERRORE findAll gruppo" + e.getMessage(), e);
+			throw new DAOException("ERRORE panoramicaGruppi gruppo" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);

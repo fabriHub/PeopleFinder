@@ -298,7 +298,7 @@ public class DAOUtente implements IDAOUtente {
 			}
 		} catch (SQLException e) {
 			
-			throw new DAOException("ERRORE updateUtente utente" + e.getMessage(), e);
+			throw new DAOException("ERRORE updatePassword utente" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);
@@ -355,7 +355,7 @@ public class DAOUtente implements IDAOUtente {
 			}
 		} catch (SQLException e) {
 			
-			throw new DAOException("ERRORE findById utente" + e.getMessage(), e);
+			throw new DAOException("ERRORE getNicknameById utente" + e.getMessage(), e);
 			
 		} finally {
 			DataSource.getInstance().close(resultSet);

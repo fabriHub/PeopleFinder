@@ -382,7 +382,7 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 				risultato = resultSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			throw new DAOException("ERRORE findById iscrizioneGruppo" + e.getMessage(), e);
+			throw new DAOException("ERRORE countIscrittiGruppoById iscrizioneGruppo" + e.getMessage(), e);
 		}
 		finally {
 			DataSource.getInstance().close(resultSet);
