@@ -1,14 +1,15 @@
 package it.controllo.prova;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 import it.modello.Attivita;
+import it.modello.Gruppo;
 import it.modello.Utente;
 import it.persistenza.implementazione.DAOException;
+import it.persistenza.implementazione.DAOGruppo;
 import it.persistenza.implementazione.DAOUtenteAdmin;
+import it.persistenza.interfaccia.IDAOGruppo;
 
 public class ProvaUtenteAdmin {
 
@@ -22,7 +23,7 @@ public class ProvaUtenteAdmin {
 //		abilitaUtente(22L);
 //		disabilitaUtente(22L);
 //		daoUtenteAdmin.contaGruppiAttivita(2L);
-//		statistiche1();
+		statistiche1();
 
 //		isAbilitatoUtente();
 //		isAmministratore1();
@@ -149,15 +150,24 @@ public class ProvaUtenteAdmin {
 	
 	public static void statistiche1() {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
-		Map<Attivita, Integer> mappa = null;
-		
-		
-		
-		
+
+
+		try {
+			List<String[]> popolarita = daoUtenteAdmin.popolaritaAttivitaCompleto();
+			for (String[] pop : popolarita) {
+				for (String p : pop)
+				System.out.println(p);
+			}
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+
 	}
-	
-
-
-	
 
 }
+	
+
+
+	
+
+
