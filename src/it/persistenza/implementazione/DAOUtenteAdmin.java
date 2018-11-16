@@ -443,12 +443,12 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID)*100/(SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 1) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID, NUMERO_PARTECIPANTI FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME, NUMERO_PARTECIPANTI) ORDER BY POPOLARITA DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				stringa = new String[5];
+				stringa = new String[4];
 				stringa[0] = String.valueOf(resultSet.getLong(3));
 				stringa[1] = resultSet.getString(2);
 				Double perc = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
 				stringa[2] = String.valueOf(perc);
-				stringa[4] = String.valueOf(100-perc);
+				stringa[3] = String.valueOf(100-perc);
 				risultato.add(stringa);
 			}
 		} catch (SQLException | DAOException e) {
@@ -481,7 +481,7 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 		try {
 			risultato = new ArrayList<String[]>();
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE)*100/ATTIVITA.NUMERO_PARTECIPANTI AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.DESCRIZIONE FROM ISCRIZIONE_GRUPPO JOIN GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.ID_ATTIVITA, ATTIVITA.NUMERO_PARTECIPANTI) ORDER BY PARTECIPAZIONE DESC");
+			statement = connection.prepareStatement("SELECT DISTINCT COUNT (ISCRIZIONE_GRUPPO.ID_UTENTE)*100/ATTIVITA.NUMERO_PARTECIPANTI AS PARTECIPAZIONE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.DESCRIZIONE FROM GRUPPO INNER JOIN ISCRIZIONE_GRUPPO ON ISCRIZIONE_GRUPPO.ID_GRUPPO = GRUPPO.ID INNER JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID GROUP BY (ISCRIZIONE_GRUPPO.ID_UTENTE, ISCRIZIONE_GRUPPO.ID_GRUPPO, GRUPPO.ID_ATTIVITA, ATTIVITA.NUMERO_PARTECIPANTI, GRUPPO.DESCRIZIONE) ORDER BY PARTECIPAZIONE DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				stringa = new String[4];
