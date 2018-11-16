@@ -295,17 +295,18 @@ public class DAOIscrizioneGruppo implements IDAOIscrizioneGruppo {
 
 
 		try {
-			statement = connection.prepareStatement("SELECT GRUPPO.ID, DATA_EVENTO, DESCRIZIONE, ATTIVITA.NOME FROM GRUPPO JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID WHERE GRUPPO.ID_UTENTE <> ? AND GRUPPO.COMPLETO = 0 AND GRUPPO.ID NOT IN (SELECT ID_GRUPPO FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE = ?)");
+			statement = connection.prepareStatement("SELECT GRUPPO.ID, DATA_EVENTO, DESCRIZIONE, ATTIVITA.NOME, UTENTE.TELEFONO FROM GRUPPO JOIN ATTIVITA ON GRUPPO.ID_ATTIVITA = ATTIVITA.ID JOIN UTENTE ON GRUPPO.ID_UTENTE = UTENTE.ID WHERE GRUPPO.ID_UTENTE <> ? AND GRUPPO.COMPLETO = 0 AND GRUPPO.ID NOT IN (SELECT ID_GRUPPO FROM ISCRIZIONE_GRUPPO WHERE ID_UTENTE = ?)");
 			statement.setLong(1, id);
 			statement.setLong(2, id);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				String[] gruppo = new String[4];
+				String[] gruppo = new String[5];
 				gruppo[0] = String.valueOf(resultSet.getLong("ID"));
 				gruppo[1] = resultSet.getString("NOME");
 				Date data = new Date(resultSet.getLong("DATA_EVENTO"));
 				gruppo[2] = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(data);
 				gruppo[3] = resultSet.getString("DESCRIZIONE");
+				gruppo[4] = resultSet.getString("TELEFONO");
 				
 				if(data.after(new Date())) {
 					gruppi.add(gruppo);						

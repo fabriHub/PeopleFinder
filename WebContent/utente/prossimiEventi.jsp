@@ -53,7 +53,7 @@
 									<% out.println(gruppo[2]); %>
 								</div>
 								<div class="col3">
-									<% out.println(gruppo[3]); %>
+									<% out.println("( "+gruppo[4]+" ) "+gruppo[3]); %>
 								</div>
 								
 								<div class="col4">
