@@ -309,7 +309,7 @@
     <url-pattern>/aggiungiAttivita</url-pattern>
   </filter-mapping>
   <error-page>
-	<exception-type>java.lang.Throwable</exception-type>
+	<error-code>404</error-code>
 	<location>/errore.html</location>
   </error-page>
 </web-app>
