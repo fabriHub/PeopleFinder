@@ -115,7 +115,7 @@
 									<% out.println(gruppoC[2]); %>
 								</div>
 								<div class="col3">
-									<% out.println(gruppoC[4]); %>
+									<% out.println(gruppoC[3]); %>
 								</div>
 							</div>
 						<%		

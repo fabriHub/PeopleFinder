@@ -23,7 +23,8 @@ public class ProvaUtenteAdmin {
 //		abilitaUtente(22L);
 //		disabilitaUtente(22L);
 //		daoUtenteAdmin.contaGruppiAttivita(2L);
-		statistiche1();
+		popAttivita();
+//		partecipazioneUteGruppi();
 
 //		isAbilitatoUtente();
 //		isAmministratore1();
@@ -148,10 +149,8 @@ public class ProvaUtenteAdmin {
 		}
 	}
 	
-	public static void statistiche1() {
+	public static void popAttivita() {
 		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
-
-
 		try {
 			List<String[]> popolarita = daoUtenteAdmin.popolaritaAttivitaCompleto();
 			for (String[] pop : popolarita) {
@@ -161,7 +160,19 @@ public class ProvaUtenteAdmin {
 		} catch (DAOException e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	public static void partecipazioneUteGruppi() {
+		DAOUtenteAdmin daoUtenteAdmin = new DAOUtenteAdmin();
+		try {
+			List<String[]> partecipazione = daoUtenteAdmin.partecipazioneUtentiAiGruppi();
+			for (String[] part : partecipazione) {
+				for (String p : part)
+				System.out.println(p);
+			}
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
