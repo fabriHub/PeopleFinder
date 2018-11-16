@@ -58,7 +58,7 @@ public class RegistratiServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("./homeUtente.jsp");
+		response.sendRedirect("./index.jsp");
 		
 	}
 
