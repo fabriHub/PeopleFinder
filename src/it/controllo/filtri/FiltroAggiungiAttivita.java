@@ -63,13 +63,9 @@ public class FiltroAggiungiAttivita implements Filter {
 			}
 		}
 		
-		if (httpRequest.getParameter("descrizione") == null || httpRequest.getParameter("descrizione").isEmpty()) {
-			errore.put("descrizione", "Inserire una descrizione");
-		}
-		
 		if (!errore.isEmpty()) {
 			session.setAttribute("ERRORE", errore);
-			httpResponse.sendRedirect("./gestioneGruppi?#ERRORE");
+			httpResponse.sendRedirect("./findAllAttivita?#ERRORE");
 		} else {
 			chain.doFilter(request, response);
 		}

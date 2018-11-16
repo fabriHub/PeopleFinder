@@ -109,13 +109,13 @@
 						
 							<div class="tab2HA riga">
 								<div class="col1">
-									<% out.println(gruppoC[1]); %>
+									<% out.println(gruppoC[0]); %>
 								</div>
 								<div class="col2">
-									<% out.println(gruppoC[2]); %>
+									<% out.println(gruppoC[1]); %>
 								</div>
 								<div class="col3">
-									<% out.println(gruppoC[3]); %>
+									<% out.println(gruppoC[2]); %>
 								</div>
 							</div>
 						<%		

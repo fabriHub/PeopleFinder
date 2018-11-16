@@ -63,14 +63,12 @@ public class FiltroAggiungiGruppo implements Filter {
 					errore.put("data", "Inserire una data valida");
 				}
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
 		if (httpRequest.getParameter("descrizione") == null || httpRequest.getParameter("descrizione").isEmpty()) {
 			errore.put("descrizione", "Inserire una descrizione");
 		}
-		
 		if (!errore.isEmpty()) {
 			session.setAttribute("ERRORE", errore);
 			httpResponse.sendRedirect("./gestioneGruppi?#ERRORE");

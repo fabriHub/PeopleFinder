@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List, java.util.ArrayList" %>
-<%@ page import="it.modello.Attivita" %>
+<%@ page import="java.util.List, java.util.ArrayList, it.modello.Attivita, it.modello.Gruppo, java.util.Map, java.util.HashMap" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -69,6 +68,26 @@
 						<%		
 							}
 						%>
+					</div>
+				</div>
+				
+				<div id="ERRORE" class="overlay">
+					<div class="errore">
+						<h2>ERRORE!</h2>
+						<a class="close" href="#">&times;</a>
+						<div class="content">
+							
+							<%
+								if(session.getAttribute("ERRORE") != null){
+									Map<String,String> errore = (HashMap<String,String>) session.getAttribute("ERRORE");
+									out.println("<br>");
+									for(Map.Entry<String, String> entry : errore.entrySet()){
+										out.println(entry.getValue() + "<br>");
+									}
+									session.removeAttribute("ERRORE");
+								}
+							%>
+						</div>
 					</div>
 				</div>
 				

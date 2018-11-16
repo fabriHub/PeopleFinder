@@ -45,9 +45,33 @@
 						<input type="textarea" name="descrizione" placeholder="Descrizione" value="<% out.print(gruppo.getDescrizione()); %>" required>
 					</div>
 					<div class="col4">
-						<button class=""> MODIFICA </button>
+						<button class=""> <i class="fa fa-edit" style="color: white;"></i> </button>
 					</div>
 				</form>
+				
+				<div class="containerImgUpdateGruppo">
+					<img style="margin: 0; max-height: 41vh; object-fit: contain; border-radius:25px; box-shadow: 0 7px 10px 3px rgba(0,0,0,0.5);" src="images/sport.jpg" class="immagine">
+				</div>
+				
+				<div id="ERRORE" class="overlay">
+					<div class="errore">
+						<h2>ERRORE!</h2>
+						<a class="close" href="#">&times;</a>
+						<div class="content">
+							
+							<%
+								if(session.getAttribute("ERRORE") != null){
+									Map<String,String> errore = (HashMap<String,String>) session.getAttribute("ERRORE");
+									out.println("<br>");
+									for(Map.Entry<String, String> entry : errore.entrySet()){
+										out.println(entry.getValue() + "<br>");
+									}
+									session.removeAttribute("ERRORE");
+								}
+							%>
+						</div>
+					</div>
+				</div>
 				
 					
 			</div>

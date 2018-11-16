@@ -440,15 +440,14 @@ public class DAOUtenteAdmin extends DAOUtente implements IDAOUtenteAdmin {
 		try {
 			risultato = new ArrayList<String[]>();
 			connection = DataSource.getInstance().getConnection();
-			statement = connection.prepareStatement("SELECT COUNT (ATTIVITA.ID)*100/(SELECT COUNT(ID) FROM GRUPPO WHERE COMPLETO = 1) AS POPOLARITA, ATTIVITA.NOME, ATTIVITA.ID, NUMERO_PARTECIPANTI FROM GRUPPO JOIN ATTIVITA ON ATTIVITA.ID = GRUPPO.ID_ATTIVITA WHERE ATTIVITA.ABILITATA = 1 AND GRUPPO.COMPLETO = 1  GROUP BY(ATTIVITA.ID, ATTIVITA.NOME, NUMERO_PARTECIPANTI) ORDER BY POPOLARITA DESC");
+			statement = connection.prepareStatement("SELECT NOME, COUNT2/COUNT1*100 AS PERC FROM (SELECT COUNT(*) AS COUNT1, ID_ATTIVITA FROM GRUPPO GROUP BY ID_ATTIVITA) TAB1 INNER JOIN (SELECT COUNT(*) AS COUNT2, ID_ATTIVITA FROM GRUPPO WHERE COMPLETO = 1 GROUP BY ID_ATTIVITA) TAB2 ON TAB1.ID_ATTIVITA = TAB2.ID_ATTIVITA INNER JOIN ATTIVITA ON TAB2.ID_ATTIVITA = ATTIVITA.ID ORDER BY PERC DESC");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				stringa = new String[4];
-				stringa[0] = String.valueOf(resultSet.getLong(3));
-				stringa[1] = resultSet.getString(2);
-				Double perc = BigDecimal.valueOf(resultSet.getDouble(1)).setScale(2, RoundingMode.HALF_UP).doubleValue();
-				stringa[2] = String.valueOf(perc);
-				stringa[3] = String.valueOf(100-perc);
+				stringa = new String[3];
+				stringa[0] = String.valueOf(resultSet.getString(1));
+				stringa[1] = String.valueOf(BigDecimal.valueOf(resultSet.getDouble(2)).setScale(2, RoundingMode.HALF_UP).doubleValue());
+				stringa[2] = String.valueOf(BigDecimal.valueOf(100-resultSet.getDouble(2)).setScale(2, RoundingMode.HALF_UP).doubleValue());
+
 				risultato.add(stringa);
 			}
 		} catch (SQLException | DAOException e) {
